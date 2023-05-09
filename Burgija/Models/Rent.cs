@@ -17,18 +17,18 @@ namespace Burgija.Models
 
         #region Properties
 
-        public int Id { get =>  id; set => id = value; }  
-        public RegisteredUser user { get => user; set => user = value; }
-        public Tool tool { get => tool; set => tool = value; }
+        public int Id { get => id; set => id = value; }
+        public RegisteredUser User { get => user; set => user = value; }
+        public Tool Tool { get => tool; set => tool = value; }
         public DateTime StartOfRent { get => startOfRent; set => startOfRent = value; }
         public DateTime EndOfRent { get => endOfRent; set => endOfRent = value; }
-        public Discount discount { get => Discount; set => discount = value; }
+        public Discount Discount { get => Discount; set => discount = value; }
 
         #endregion
 
         #region Constructor
 
-        public Rent(int id, RegisteredUser user, Tool tool, DateTime startOfRent, DateTime endOfRent, Discount discount) 
+        public Rent(int id, RegisteredUser user, Tool tool, DateTime startOfRent, DateTime endOfRent, Discount discount)
         {
             Id = id;
             User = user;
@@ -46,3 +46,4 @@ namespace Burgija.Models
 
         #endregion
     }
+}
