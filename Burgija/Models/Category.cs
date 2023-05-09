@@ -2,7 +2,7 @@ using System;
 
 namespace Burgija.Models
 {
-    enum Category
+    public enum Category
     {
         House,
         Garden,

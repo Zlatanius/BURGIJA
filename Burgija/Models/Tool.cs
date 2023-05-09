@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Burgija.Models
 {
@@ -18,7 +19,7 @@ namespace Burgija.Models
 
         public int Id { get => id; set => id = value; }
         public ToolType ToolType { get => toolType; set => toolType = value; }
-        public List<Rent> ListRent { get => rentList; set => rentList = value; }
+        public List<Rent> RentList { get => rentList; set => rentList = value; }
         public Store Store { get => store; set => store = value; } 
         public double Price { get => price; set => price = value; }
 
@@ -26,7 +27,7 @@ namespace Burgija.Models
 
         #region Constructor
 
-        public Store(int id, ToolType toolType, List<Rent> rentList, Store store, double price)
+        public Tool(int id, ToolType toolType, List<Rent> rentList, Store store, double price)
         {
             Id= id;
             ToolType = toolType;

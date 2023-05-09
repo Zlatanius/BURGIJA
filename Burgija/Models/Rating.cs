@@ -7,23 +7,23 @@ namespace Burgija.Models
         #region Attributes
 
         private int id;
-        private double rating;
+        private double ratingValue;
 
         #endregion
 
         #region Properties
 
         public int Id { get => id; set => id = value; }
-        public double Rating { get => rating; set => rating = value; }
+        public double RatingValue { get => ratingValue; set => ratingValue = value; }
 
         #endregion
 
         #region Constructor
 
-        public Rating(int id, double rating)
+        public Rating(int id, double ratingValue)
         {
             Id = id;
-            Rating = rating;
+            RatingValue = ratingValue;
         }
 
         #endregion
