@@ -3,24 +3,16 @@ using System;
 namespace Burgija.Models
 {
     public class Location
-    {
-        #region Attributes
-
-        private int id;
-        private Tuple<double, double> coordinates;
-        private string address;
-
-        #endregion
-
+    { 
         #region Properties
 
-        public int Id { get => id; set => id = value; }
-        public Tuple<double, double> Coordinates { get => coordinates; set => coordinates = value; }
-        public string Address { get => address; set => address = value; }
+        public int Id { get; set; }
+        public Tuple<double, double> Coordinates { get; set; }
+        public string Address { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Location(int id, Tuple<double, double> coordinates, string address)
         {
@@ -28,6 +20,8 @@ namespace Burgija.Models
             Address = address;
             Coordinates = coordinates;
         }
+
+        public Location() { }
 
         #endregion
 

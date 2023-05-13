@@ -4,25 +4,16 @@ namespace Burgija.Models
 {
     public class Discount
     {
-        #region Attributes
-
-        private int id;
-        private DateTime startOfDiscount;
-        private DateTime endOfDiscount;
-        private double percent;
-
-        #endregion
-
         #region Properties
 
-        public int Id { get => id; set => id = value; } 
-        public DateTime StartOfDiscount { get => startOfDiscount; set => startOfDiscount = value; }
-        public DateTime EndOfDiscount { get => endOfDiscount; set => endOfDiscount = value; }
-        public double Percent { get => percent; set => percent = value; }
+        public int Id { get; set; }
+        public DateTime StartOfDiscount { get; set; }
+        public DateTime EndOfDiscount { get; set; }
+        public double Percent { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Discount(int id, DateTime startOfDiscount, DateTime endOfDiscount, double percent)
         {
@@ -31,6 +22,8 @@ namespace Burgija.Models
             EndOfDiscount=endOfDiscount;
             Percent=percent;
         }
+
+        public Discount() { }
 
         #endregion
 

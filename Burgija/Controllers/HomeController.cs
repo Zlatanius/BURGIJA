@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Burgija.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Burgija.Models;
 
 namespace Burgija.Controllers
 {
@@ -35,4 +35,3 @@ namespace Burgija.Controllers
         }
     }
 }
-

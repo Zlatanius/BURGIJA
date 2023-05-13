@@ -5,27 +5,17 @@ namespace Burgija.Models
 {
     public class Tool
     {
-        #region Attributes
-
-        private int id;
-        private ToolType toolType;
-        private List<Rent> rentList;
-        private Store store;
-        private double price;
-
-        #endregion
-
         #region Properties
 
-        public int Id { get => id; set => id = value; }
-        public ToolType ToolType { get => toolType; set => toolType = value; }
-        public List<Rent> RentList { get => rentList; set => rentList = value; }
-        public Store Store { get => store; set => store = value; } 
-        public double Price { get => price; set => price = value; }
+        public int Id { get; set; }
+        public ToolType ToolType { get; set; }
+        public List<Rent> RentList { get; set; }
+        public Store Store { get; set; }
+        public double Price { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Tool(int id, ToolType toolType, List<Rent> rentList, Store store, double price)
         {
@@ -35,6 +25,8 @@ namespace Burgija.Models
             Store = store;
             Price = price;
         }
+
+        public Tool() { }
 
         #endregion
 

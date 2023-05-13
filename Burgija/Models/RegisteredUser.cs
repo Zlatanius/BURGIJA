@@ -5,19 +5,13 @@ namespace Burgija.Models
 {
     public class RegisteredUser : User
     {
-        #region Attributes
-
-        private List<Rent> rentHistory;
-
-        #endregion
-
         #region Properties
 
-        public List<Rent> RentHistory { get=>rentHistory; set => rentHistory = value; }
+        public List<Rent> RentHistory { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public RegisteredUser(int id, string username, string name, string email, string password, List<Rent> rentHistory)
         {
@@ -28,6 +22,8 @@ namespace Burgija.Models
             Password = password;
             RentHistory = rentHistory;
         }
+
+        public RegisteredUser() { }
 
         #endregion
 

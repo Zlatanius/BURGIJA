@@ -4,27 +4,22 @@ namespace Burgija.Models
 {
     public class Store
     {
-        #region Attributes
-
-        private int id;
-        private Location storeLocation;
-
-        #endregion
-
         #region Properties
 
-        public int Id { get =>  id; set => id = value; } 
-        public Location StoreLocation { get => storeLocation; set => storeLocation = value; }
+        public int Id { get; set; }
+        public Location StoreLocation { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Store(int id, Location storeLocation) 
         { 
             Id = id;
             StoreLocation = storeLocation;
         }
+
+        public Store() { }
 
         #endregion
 

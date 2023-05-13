@@ -4,7 +4,7 @@ namespace Burgija.Models
 {
     public class Administrator : User
     {
-        #region Constructor
+        #region Constructors
 
         public Administrator(int id, string username, string name, string email, string password)
         { 
@@ -14,7 +14,8 @@ namespace Burgija.Models
             Email=email;
             Password=password;
         }
-
+        
+        public Administrator() { }
         #endregion
 
         #region Methods
