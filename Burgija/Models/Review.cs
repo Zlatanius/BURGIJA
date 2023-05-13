@@ -6,7 +6,7 @@ namespace Burgija.Models
     {
         #region Attributes
 
-        private int ID;
+        private int id;
         private RegisteredUser user;
         private Tool tool;
         private Rent rent;
