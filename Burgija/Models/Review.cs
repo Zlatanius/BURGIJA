@@ -4,31 +4,19 @@ namespace Burgija.Models
 {
     public class Review
     {
-        #region Attributes
-
-        private int id;
-        private RegisteredUser user;
-        private Tool tool;
-        private Rent rent;
-        private long timestamp;
-        private string text;
-        private Rating rating;
-
-        #endregion
-
         #region Properties
 
-        public int Id { get => id; set => id = value; } 
-        public RegisteredUser User { get => user; set => user = value; }
-        public Tool Tool { get => tool; set => tool = value; }
-        public Rent Rent { get => rent; set => rent = value; }
-        public long Timestamp { get => timestamp; set => timestamp = value; }
-        public string Text { get => text; set => text = value; }
-        public Rating Rating { get => rating; set => rating = value; }
+        public int Id { get; set; }
+        public RegisteredUser User { get; set; }
+        public Tool Tool { get; set; }
+        public Rent Rent { get; set; }
+        public long Timestamp { get; set; }
+        public string Text { get; set; }
+        public Rating Rating { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Review(int id, RegisteredUser user, Tool tool, Rent rent, long timestamp, string text, Rating rating)
         {
@@ -40,6 +28,8 @@ namespace Burgija.Models
             Text=text;
             Rating=rating;
         }
+
+        public Review() { }
 
         #endregion
 

@@ -4,29 +4,18 @@ namespace Burgija.Models
 {
     public class Rent
     {
-        #region Attributes
-
-        private int id;
-        private RegisteredUser user;
-        private Tool tool;
-        private DateTime startOfRent;
-        private DateTime endOfRent;
-        private Discount discount;
-
-        #endregion
-
         #region Properties
 
-        public int Id { get => id; set => id = value; }
-        public RegisteredUser User { get => user; set => user = value; }
-        public Tool Tool { get => tool; set => tool = value; }
-        public DateTime StartOfRent { get => startOfRent; set => startOfRent = value; }
-        public DateTime EndOfRent { get => endOfRent; set => endOfRent = value; }
-        public Discount Discount { get => Discount; set => discount = value; }
+        public int Id { get; set; }
+        public RegisteredUser User { get; set; }
+        public Tool Tool { get; set; }
+        public DateTime StartOfRent { get; set; }
+        public DateTime EndOfRent { get; set; }
+        public Discount Discount { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Rent(int id, RegisteredUser user, Tool tool, DateTime startOfRent, DateTime endOfRent, Discount discount)
         {
@@ -37,6 +26,8 @@ namespace Burgija.Models
             EndOfRent = endOfRent;
             Discount = discount;
         }
+
+        public Rent() { }
 
         #endregion
 

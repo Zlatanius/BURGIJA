@@ -4,27 +4,17 @@ namespace Burgija.Models
 {
     public class Delivery
     {
-        #region Attributes
-
-        private int id;
-        private Rent rent;
-        private Courier courier;
-        private string address;
-        private string userPhoneNumber;
-
-        #endregion
-
         #region Properties
 
-        public int Id { get => id; set => id = value; }
-        public Rent Rent { get => rent; set => rent = value; }
-        public Courier Courier { get => courier; set => courier = value; }
-        public string Address { get => address; set => address = value; }
-        public string UserPhoneNumber { get => userPhoneNumber; set => userPhoneNumber = value; }
+        public int Id { get; set; }
+        public Rent Rent { get; set; }
+        public Courier Courier { get; set; }
+        public string Address { get; set; }
+        public string UserPhoneNumber { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Delivery(int id, Rent rent, Courier courier, string address, string userPhoneNumber)
         {
@@ -34,6 +24,8 @@ namespace Burgija.Models
             Address = address;
             UserPhoneNumber = userPhoneNumber;
         }
+
+        public Delivery() { }
 
         #endregion
 

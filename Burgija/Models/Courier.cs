@@ -5,21 +5,14 @@ namespace Burgija.Models
 {
     public class Courier : User
     {
-        #region Attributes
-
-        private List<Delivery> deliveryRequests;
-        private List<Delivery> acceptedRequests;
-
-        #endregion
-
         #region Properties
 
-        public List<Delivery> DeliveryRequests { get => deliveryRequests; set => deliveryRequests = value; }
-        public List<Delivery> AcceptedRequests { get => acceptedRequests; set => acceptedRequests = value; }
+        public List<Delivery> DeliveryRequests { get; set; }
+        public List<Delivery> AcceptedRequests { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Courier(int id, string username, string name, string email, string password, List<Delivery> deliveryRequests, List<Delivery> acceptedRequests)
         {
@@ -31,6 +24,8 @@ namespace Burgija.Models
             DeliveryRequests = deliveryRequests;
             AcceptedRequests = acceptedRequests;
         }
+
+        public Courier() { }
 
         #endregion
 

@@ -4,27 +4,22 @@ namespace Burgija.Models
 {
     public class Rating
     {
-        #region Attributes
-
-        private int id;
-        private double ratingValue;
-
-        #endregion
-
         #region Properties
 
-        public int Id { get => id; set => id = value; }
-        public double RatingValue { get => ratingValue; set => ratingValue = value; }
+        public int Id { get; set; }
+        public double RatingValue { get; set; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Rating(int id, double ratingValue)
         {
             Id = id;
             RatingValue = ratingValue;
         }
+
+        public Rating() { }
 
         #endregion
 
