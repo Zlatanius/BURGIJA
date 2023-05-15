@@ -403,3 +403,8 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+/Burgija/obj/Debug/net5.0/Burgija.assets.cache
+/Burgija/obj/Debug/net5.0/Burgija.GeneratedMSBuildEditorConfig.editorconfig
+/Burgija/obj/Burgija.csproj.nuget.dgspec.json
+/Burgija/obj/project.assets.json
+/Burgija/obj/project.nuget.cache
