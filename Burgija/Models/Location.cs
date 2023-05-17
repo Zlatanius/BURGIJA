@@ -10,18 +10,20 @@ namespace Burgija.Models
 
         [Key]
         public int Id { get; set; }
-        public Tuple<double, double> Coordinates { get; set; }
+        public double XCoordinate { get; set; }
+        public double YCoordinate { get; set; }
         public string Address { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public Location(int id, Tuple<double, double> coordinates, string address)
+        public Location(int id, double xCoordinate, double yCoordinate, string address)
         {
             Id = id;
+            XCoordinate = xCoordinate;
+            YCoordinate = yCoordinate;
             Address = address;
-            Coordinates = coordinates;
         }
 
         public Location() { }
@@ -30,7 +32,7 @@ namespace Burgija.Models
 
         #region Methods
 
-            //TODO
+        //TODO
 
         #endregion
     }
