@@ -408,3 +408,5 @@ ASALocalRun/
 /Burgija/obj/Burgija.csproj.nuget.dgspec.json
 /Burgija/obj/project.assets.json
 /Burgija/obj/project.nuget.cache
+/Burgija/obj/Debug/net5.0/Burgija.csproj.AssemblyReference.cache
+/Burgija/obj/Burgija.csproj.nuget.g.props
