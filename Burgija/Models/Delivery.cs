@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Burgija.Models
 {
@@ -6,9 +8,13 @@ namespace Burgija.Models
     {
         #region Properties
 
+        [Key]
         public int Id { get; set; }
         public Rent Rent { get; set; }
         public Courier Courier { get; set; }
+
+        [ForeignKey("Courier")]
+        public int CourierId { get; set; }
         public string Address { get; set; }
         public string UserPhoneNumber { get; set; }
 
