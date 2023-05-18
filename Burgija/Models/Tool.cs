@@ -1,27 +1,33 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Burgija.Models
 {
     public class Tool
     {
         #region Properties
-
+        [Key] 
         public int Id { get; set; }
         public ToolType ToolType { get; set; }
-        public List<Rent> RentList { get; set; }
+
+        [ForeignKey("ToolType")]
+        public int ToolTypeId { get; set; }
         public Store Store { get; set; }
+
+        [ForeignKey("Store")]
+        public int StoreId{ get; set; }
         public double Price { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public Tool(int id, ToolType toolType, List<Rent> rentList, Store store, double price)
+        public Tool(int id, ToolType toolType, Store store, double price)
         {
             Id= id;
             ToolType = toolType;
-            RentList = rentList;
             Store = store;
             Price = price;
         }

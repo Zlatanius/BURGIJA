@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Burgija.Models
 {
@@ -6,6 +7,7 @@ namespace Burgija.Models
     {
         #region Properties
 
+        [Key]
         public int Id { get; set; }
         public DateTime StartOfDiscount { get; set; }
         public DateTime EndOfDiscount { get; set; }
