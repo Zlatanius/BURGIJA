@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-Burgija-8391f6aa-c9a0-4bbc-80b8-fef68ee44570</UserSecretsId>
