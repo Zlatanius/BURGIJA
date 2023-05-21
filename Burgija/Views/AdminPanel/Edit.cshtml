@@ -1,0 +1,44 @@
+﻿@model Burgija.Models.Tool
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Tool</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ToolTypeId" class="control-label"></label>
+                <select asp-for="ToolTypeId" class="form-control" asp-items="ViewBag.ToolTypeId"></select>
+                <span asp-validation-for="ToolTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StoreId" class="control-label"></label>
+                <select asp-for="StoreId" class="form-control" asp-items="ViewBag.StoreId"></select>
+                <span asp-validation-for="StoreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
