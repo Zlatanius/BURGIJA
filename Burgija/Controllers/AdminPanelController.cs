@@ -13,17 +13,30 @@ namespace Burgija.Controllers
     public class AdminPanelController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private List<Store> stores;
+        private List<ToolType> toolTypes;
 
         public AdminPanelController(ApplicationDbContext context)
         {
             _context = context;
+            stores = _context.Store.ToList();
+            foreach (Store store in stores)
+            {
+                store.StoreLocation =_context.Location.Find(store.LocationId);
+            }
+            toolTypes = _context.ToolType.ToList();
         }
 
         // GET: AdminPanel
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Tools.Include(t => t.Store).Include(t => t.ToolType);
-            return View(await applicationDbContext.ToListAsync());
+            var tools = await _context.Tools.ToListAsync();
+            foreach(var tool in tools)
+            {
+                tool.Store = stores.Find(store => store.Id == tool.StoreId);
+            }
+
+            return View(tools);
         }
 
         // GET: AdminPanel/Details/5
@@ -42,15 +55,16 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-
+            tool.Store = stores.Find(store => store.Id == tool.Store.Id);
+            tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
             return View(tool);
         }
 
         // GET: AdminPanel/AddTool
         public IActionResult AddTool()
         {
-            ViewData["StoreId"] = new SelectList(_context.Store, "Id", "Id");
-            ViewData["ToolTypeId"] = new SelectList(_context.ToolType, "Id", "Id");
+            ViewBag.Store = stores;
+            ViewBag.ToolType = toolTypes;
             return View();
         }
 
@@ -87,8 +101,8 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-            ViewData["StoreId"] = new SelectList(_context.Store, "Id", "Id", tool.StoreId);
-            ViewData["ToolTypeId"] = new SelectList(_context.ToolType, "Id", "Id", tool.ToolTypeId);
+            ViewBag.Store = stores;
+            ViewBag.ToolType = toolTypes;
             return View(tool);
         }
 
@@ -145,7 +159,8 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-
+            tool.Store = stores.Find(store => store.Id == tool.Store.Id);
+            tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
             return View(tool);
         }
 
