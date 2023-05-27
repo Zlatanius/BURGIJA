@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Burgija.Data;
 using Burgija.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Burgija.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminPanelController : Controller
     {
         private readonly ApplicationDbContext _context;
