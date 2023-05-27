@@ -85,7 +85,7 @@ namespace Burgija.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddTool([Bind("Id,ToolTypeId,StoreId,Price")] Tool tool)
+        public async Task<IActionResult> AddTool([Bind("Id,ToolTypeId,StoreId,Price,Image")] Tool tool)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +122,7 @@ namespace Burgija.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ToolTypeId,StoreId,Price")] Tool tool)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ToolTypeId,StoreId,Price,Image")] Tool tool)
         {
             if (id != tool.Id)
             {
