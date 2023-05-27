@@ -21,17 +21,23 @@ namespace Burgija.Controllers
         public AdminPanelController(ApplicationDbContext context)
         {
             _context = context;
-            stores = _context.Store.ToList();
+        }
+
+        private async Task InitializeLists()
+        {
+            stores = await _context.Store.ToListAsync();
+            List<Location> locations = await _context.Location.ToListAsync();
             foreach (Store store in stores)
             {
-                store.StoreLocation =_context.Location.Find(store.LocationId);
+                store.StoreLocation = locations.Find(location => location.Id == store.LocationId);
             }
-            toolTypes = _context.ToolType.ToList();
+            toolTypes = await _context.ToolType.ToListAsync();
         }
 
         // GET: AdminPanel
         public async Task<IActionResult> Index()
         {
+            await InitializeLists();
             var tools = await _context.Tools.ToListAsync();
             foreach(var tool in tools)
             {
@@ -57,14 +63,16 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
+            await InitializeLists();
             tool.Store = stores.Find(store => store.Id == tool.Store.Id);
             tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
             return View(tool);
         }
 
         // GET: AdminPanel/AddTool
-        public IActionResult AddTool()
+        public async Task<IActionResult> AddTool()
         {
+            await InitializeLists();
             ViewBag.Store = stores;
             ViewBag.ToolType = toolTypes;
             return View();
@@ -103,6 +111,7 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
+            await InitializeLists();
             ViewBag.Store = stores;
             ViewBag.ToolType = toolTypes;
             return View(tool);
@@ -145,7 +154,7 @@ namespace Burgija.Controllers
             return View(tool);
         }
 
-        // GET: AdminPanel/Delete/5
+        // GET: AdminPanel/Remove/5
         public async Task<IActionResult> Remove(int? id)
         {
             if (id == null)
@@ -161,12 +170,13 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
+            await InitializeLists();
             tool.Store = stores.Find(store => store.Id == tool.Store.Id);
             tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
             return View(tool);
         }
 
-        // POST: AdminPanel/Delete/5
+        // POST: AdminPanel/Remove/5
         [HttpPost, ActionName("Remove")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirmed(int id)
