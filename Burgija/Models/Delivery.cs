@@ -19,6 +19,7 @@ namespace Burgija.Models
         
         [ForeignKey("Courier")]
         public int? CourierId { get; set; }
+        [Required]
         public string Address { get; set; }
         public string UserPhoneNumber { get; set; }
 
