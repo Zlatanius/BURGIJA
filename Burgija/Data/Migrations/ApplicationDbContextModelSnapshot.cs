@@ -77,7 +77,7 @@ namespace Burgija.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CourierId")
+                    b.Property<int?>("CourierId")
                         .HasColumnType("int");
 
                     b.Property<int>("RentId")
@@ -192,7 +192,7 @@ namespace Burgija.Data.Migrations
                     b.Property<DateTime>("StartOfRent")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ToolId")
+                    b.Property<int>("ToolId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -514,9 +514,7 @@ namespace Burgija.Data.Migrations
                 {
                     b.HasOne("Burgija.Models.Courier", "Courier")
                         .WithMany()
-                        .HasForeignKey("CourierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CourierId");
 
                     b.HasOne("Burgija.Models.Rent", "Rent")
                         .WithMany()
@@ -539,7 +537,9 @@ namespace Burgija.Data.Migrations
 
                     b.HasOne("Burgija.Models.Tool", "Tool")
                         .WithMany()
-                        .HasForeignKey("ToolId");
+                        .HasForeignKey("ToolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Burgija.Models.RegisteredUser", "User")
                         .WithMany()

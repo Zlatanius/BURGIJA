@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Burgija.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230517195428_FirstMigration")]
+    [Migration("20230527124318_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,10 +79,10 @@ namespace Burgija.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CourierId")
+                    b.Property<int?>("CourierId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RentId")
+                    b.Property<int>("RentId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserPhoneNumber")
@@ -194,7 +194,7 @@ namespace Burgija.Data.Migrations
                     b.Property<DateTime>("StartOfRent")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ToolId")
+                    b.Property<int>("ToolId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -516,13 +516,13 @@ namespace Burgija.Data.Migrations
                 {
                     b.HasOne("Burgija.Models.Courier", "Courier")
                         .WithMany()
-                        .HasForeignKey("CourierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CourierId");
 
                     b.HasOne("Burgija.Models.Rent", "Rent")
                         .WithMany()
-                        .HasForeignKey("RentId");
+                        .HasForeignKey("RentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Courier");
 
@@ -539,7 +539,9 @@ namespace Burgija.Data.Migrations
 
                     b.HasOne("Burgija.Models.Tool", "Tool")
                         .WithMany()
-                        .HasForeignKey("ToolId");
+                        .HasForeignKey("ToolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Burgija.Models.RegisteredUser", "User")
                         .WithMany()
