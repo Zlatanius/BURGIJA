@@ -27,6 +27,7 @@ namespace Burgija.Data
         public DbSet<Store> Store { get; set; }
         public DbSet<Tool> Tools { get; set; }
         public DbSet<ToolType> ToolType { get; set; }
+        public DbSet<RentTool> RentTool { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -42,6 +43,7 @@ namespace Burgija.Data
             builder.Entity<Store>().ToTable(nameof(Store));
             builder.Entity<Tool>().ToTable(nameof(Tool));
             builder.Entity<ToolType>().ToTable(nameof(ToolType));
+            builder.Entity<RentTool>().ToTable(nameof(RentTool));
             base.OnModelCreating(builder);
         }
     }
