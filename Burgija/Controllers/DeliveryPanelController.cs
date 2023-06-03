@@ -7,22 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Burgija.Data;
 using Burgija.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Burgija.Controllers
 {
+    [Authorize(Roles = "Courier")]
     public class DeliveryPanelController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private int LoggedInCourier;
 
         public DeliveryPanelController(ApplicationDbContext context)
         {
             _context = context;
+            LoggedInCourier = 0; // dobiti trenutno ulogovanog usera 
         }
 
         // GET: DeliveryPanel
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Delivery.Include(d => d.Courier);
+            var applicationDbContext = _context.Delivery.Where(delivery => delivery.CourierId == null);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> SeeAcceptedDeliveries()
+        {
+            var applicationDbContext = _context.Delivery.Where(delivery => delivery.CourierId == null);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +46,6 @@ namespace Burgija.Controllers
             }
 
             var delivery = await _context.Delivery
-                .Include(d => d.Courier)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (delivery == null)
             {
@@ -45,85 +55,8 @@ namespace Burgija.Controllers
             return View(delivery);
         }
 
-        // GET: DeliveryPanel/Create
-        public IActionResult Create()
-        {
-            ViewData["CourierId"] = new SelectList(_context.Courier, "Id", "Id");
-            return View();
-        }
-
-        // POST: DeliveryPanel/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CourierId,Address,UserPhoneNumber")] Delivery delivery)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(delivery);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CourierId"] = new SelectList(_context.Courier, "Id", "Id", delivery.CourierId);
-            return View(delivery);
-        }
-
-        // GET: DeliveryPanel/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var delivery = await _context.Delivery.FindAsync(id);
-            if (delivery == null)
-            {
-                return NotFound();
-            }
-            ViewData["CourierId"] = new SelectList(_context.Courier, "Id", "Id", delivery.CourierId);
-            return View(delivery);
-        }
-
-        // POST: DeliveryPanel/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CourierId,Address,UserPhoneNumber")] Delivery delivery)
-        {
-            if (id != delivery.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(delivery);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DeliveryExists(delivery.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CourierId"] = new SelectList(_context.Courier, "Id", "Id", delivery.CourierId);
-            return View(delivery);
-        }
-
-        // GET: DeliveryPanel/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: DeliveryPanel/MarkAsDelivered/5
+        public async Task<IActionResult> MarkAsDelivered(int? id)
         {
             if (id == null)
             {
@@ -131,7 +64,6 @@ namespace Burgija.Controllers
             }
 
             var delivery = await _context.Delivery
-                .Include(d => d.Courier)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (delivery == null)
             {
@@ -142,12 +74,23 @@ namespace Burgija.Controllers
         }
 
         // POST: DeliveryPanel/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("MarkAsDelivered")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> MarkAsDeliveredConfirmed(int id)
         {
             var delivery = await _context.Delivery.FindAsync(id);
             _context.Delivery.Remove(delivery);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost, ActionName("MarkAsDelivered")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Accept(int id)
+        {
+            var delivery = await _context.Delivery.FindAsync(id);
+            delivery.CourierId = LoggedInCourier;
+            _context.Delivery.Update(delivery);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
