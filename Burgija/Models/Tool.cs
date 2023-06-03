@@ -30,12 +30,13 @@ namespace Burgija.Models
 
         #region Constructors
 
-        public Tool(int id, ToolType toolType, Store store, double price)
+        public Tool(int id, ToolType toolType, Store store, double price, string image)
         {
             Id= id;
             ToolType = toolType;
             Store = store;
             Price = price;
+            Image = image;
         }
 
         public Tool() { }
