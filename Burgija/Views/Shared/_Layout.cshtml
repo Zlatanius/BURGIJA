@@ -4,31 +4,171 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Burgija</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Burgija.styles.css" asp-append-version="true" />
+    
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+      <style>
+          
+          #main {
+              margin-bottom: 60px;
+          }
+      
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Burgija</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+        <div class="upper-container">
+            <div class="logo-container">
+                <div class="icon-container">
+                    <img src="https://static.vecteezy.com/system/resources/previews/016/415/344/original/electric-drill-illustration-in-minimal-style-png.png" alt="">
+
+                </div>
+                <div class="name-container">
+                    <p>BURGIJA</p>
                 </div>
             </div>
-        </nav>
+            <div class="search-bar-container">
+                <div class="wrap">
+                    <div class="search">
+                        <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                        <button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="login-container">
+                <button class="sign-up">Sign in</button>
+            </div>
+        </div>
+        <div class="nav-container">
+            <button class="hamburger">
+                <i class="fa-solid fa-bars fa-2xl"></i>
+            </button>
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+                </div>
+                <div class="nav-item-name">
+                    <p>BRUSILICE</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+                </div>
+                <div class="nav-item-name">
+                    <p>BUSILICE</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>PILE</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>POLIRKE</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>KOMPRESORI</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>GLODALICE</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>SJEKIRE</p>
+                </div>
+            </button>
+
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>KLIJESTA</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>CEKICI</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>KOFERI</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>SIGURNOST</p>
+                </div>
+            </button>
+
+            <button class="nav-item">
+                <div class="nav-item-img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
+
+                </div>
+                <div class="nav-item-name">
+                    <p>MINI ALATI</p>
+                </div>
+            </button>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
