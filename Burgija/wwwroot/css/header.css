@@ -1,0 +1,174 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+header {
+    width: 100%;
+    display: flex;
+    height: 150px;
+    //background-color: aqua;
+    //position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #fff;
+    z-index: 100;
+}
+header .upper-container {
+        width: 80%;
+        height: 50px;
+        display: flex;
+        //background-color: bisque;
+        justify-content: space-between;
+}
+    header .upper-container .logo-container {
+        width: 170px;
+        height: 100%;
+        // background-color: cadetblue;
+        display: flex;
+    }
+    header .upper-container .icon-container {
+        width: 50px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    header .upper-container .icon-container img {
+        width: 40px;
+        height: 40px;
+    }
+
+
+
+        header .upper-container  .name-container {
+            width: 120px;
+            height: 100%;
+        }
+            header .upper-container .name-container P {
+                margin-top: 12px;
+                //margin-left: px;
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+
+
+
+    header .upper-container .search-bar-container {
+        width: 550px;
+        height: 100%;
+        //background-color: cadetblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    header .upper-container .login-container {
+        width: 170px;
+        height: 100%;
+        //background-color: cadetblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+        header .upper-container .login-container .sign-up {
+            width: 120px;
+            height: 35px;
+            background-color: #bcbbf2;
+            border-radius: 10px;
+            border: 0px solid;
+        }
+
+
+
+
+    header .nav-container {
+        width: 80%;
+        height: 65px;
+        display: flex;
+        //background-color: bisque;
+        align-items: center
+    }
+        header .nav-container .hamburger {
+            width: 60px;
+            height: 60px;
+            border: 0px;
+            background: rgb(237, 238, 238);
+            margin-right: 23px;
+            border-radius: 50%;
+        }
+
+        header .nav-container .nav-item {
+            margin-right: 23px;
+            width: 60px;
+            height: 60px;
+            border: 0px;
+            display: flex;
+            background: none;
+            flex-direction: column;
+            align-items: center;
+        }
+            header .nav-container .nav-item .nav-item-img {
+                width: 45px;
+                height: 45px;
+            }
+            header .nav-container .nav-item .nav-item-img img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+
+
+
+            header .nav-container .nav-item .nav-item-name {
+                width: 100%;
+                height: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            header .nav-container .nav-item .nav-item-name p {
+                font-size: 11px;
+            }
+
+
+
+
+
+
+    header .upper-container .search-bar-container .wrap .search {
+        width: 100%;
+        position: relative;
+        display: flex;
+    }
+
+        header .upper-container .search-bar-container .wrap .search .searchTerm {
+            width: 100%;
+            border: 3px solid #00B4CC;
+            border-right: none;
+            padding: 5px;
+            height: 25px;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            color: #9DBFAF;
+        }
+
+            header .upper-container .search-bar-container .wrap .search .searchTerm:focus {
+                color: #00B4CC;
+            }
+
+        header .upper-container .search-bar-container .wrap .search .searchButton {
+            width: 40px;
+            height: 41px;
+            border: 1px solid #00B4CC;
+            background: #00B4CC;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+/*Resize the wrap to see the search bar change!*/
+        header .upper-container .search-bar-container .wrap {
+            width: 80%;
+        }
