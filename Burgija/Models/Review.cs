@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,9 +11,9 @@ namespace Burgija.Models
 
         [Key]
         public int Id { get; set; }
-        public RegisteredUser User { get; set; }
+        public IdentityUser<int> User { get; set; }
 
-        [ForeignKey("RegisteredUser")]
+        [ForeignKey("AspNetUsers")]
         public int UserId { get; set; } 
         public Tool Tool { get; set; }
 
@@ -33,7 +34,7 @@ namespace Burgija.Models
 
         #region Constructors
 
-        public Review(int id, RegisteredUser user, Tool tool, Rent rent, long timestamp, string text, Rating rating)
+        public Review(int id, IdentityUser<int> user, Tool tool, Rent rent, long timestamp, string text, Rating rating)
         {
             Id=id;
             User=user;

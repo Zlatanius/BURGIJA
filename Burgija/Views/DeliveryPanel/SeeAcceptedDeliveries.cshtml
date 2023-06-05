@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Burgija.Models.Delivery>
+
+@{
+    ViewData["Title"] = "Delivery Panel";
+}
+
+<h1>BURGIJA Delivery Panel</h1>
+
+<p>
+    <a asp-action="Index">See pending deliveries</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserPhoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rent.Tool)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserPhoneNumber)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="MarkAsDelivered" asp-route-id="@item.Id">Mark as delivered</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

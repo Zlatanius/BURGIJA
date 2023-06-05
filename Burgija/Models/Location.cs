@@ -10,8 +10,11 @@ namespace Burgija.Models
 
         [Key]
         public int Id { get; set; }
+        [Required]
         public double XCoordinate { get; set; }
+        [Required]
         public double YCoordinate { get; set; }
+        [Required]
         public string Address { get; set; }
 
         #endregion

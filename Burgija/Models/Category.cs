@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Burgija.Models
 {
@@ -7,6 +9,6 @@ namespace Burgija.Models
         House,
         Garden,
         Machines,
-        Contruction
+        Construction
     }
 } 

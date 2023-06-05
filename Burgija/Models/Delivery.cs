@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Burgija.Models
 {
@@ -11,10 +13,14 @@ namespace Burgija.Models
         [Key]
         public int Id { get; set; }
         public Rent Rent { get; set; }
-        public Courier Courier { get; set; }
 
-        [ForeignKey("Courier")]
-        public int CourierId { get; set; }
+        [ForeignKey("Rent")]
+        public int RentId { get; set; }
+        public IdentityUser<int> Courier { get; set; }
+        
+        [ForeignKey("AspNetUsers")]
+        public int? CourierId { get; set; }
+        [Required]
         public string Address { get; set; }
         public string UserPhoneNumber { get; set; }
 
@@ -22,7 +28,7 @@ namespace Burgija.Models
 
         #region Constructors
 
-        public Delivery(int id, Rent rent, Courier courier, string address, string userPhoneNumber)
+        public Delivery(int id, Rent rent, IdentityUser<int> courier, string address, string userPhoneNumber)
         {
             Id = id;
             Rent = rent;

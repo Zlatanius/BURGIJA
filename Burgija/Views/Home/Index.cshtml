@@ -1,10 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Homepage";
+@model IEnumerable<Burgija.Models.Tool>
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class  = "filter-box" >
-    <p>Filters:</p>
-</div>
-<div class = "items-container" >
-    <div class="item-box" ></div>
-</div>
+<h1>BURGIJA</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ToolType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToolType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">See Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
