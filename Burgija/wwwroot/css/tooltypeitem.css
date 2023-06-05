@@ -1,0 +1,83 @@
+﻿.tool-type-box {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    align-self: center;
+    justify-self: center;
+    flex-direction: column;
+}
+
+    .tool-type-box .item-img {
+        height: 120px;
+        width: 100%;
+        display: flex;
+    }
+
+        .tool-type-box .item-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+
+    .tool-type-box .item-info {
+        height: 80px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+
+        .tool-type-box .item-info .upper-part {
+            height: 22px;
+            width: 100%;
+            margin-left: 10px;
+        }
+
+            .tool-type-box .item-info .upper-part .item-title {
+                font-size: 18px;
+                margin-left: 10px;
+            }
+
+        .tool-type-box .item-info .middle-part {
+            height: 22px;
+            width: 100%;
+        }
+
+            .tool-type-box .item-info .middle-part .item-tag {
+                width: 40px;
+                height: 20px;
+                background-color: rgb(187, 159, 244);
+                margin-left: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid rgb(195, 110, 203);
+                border-radius: 4px;
+                color: rgb(255, 253, 248);
+            }
+
+                .tool-type-box .item-info .middle-part .item-tag P {
+                    font-size: 11px;
+                }
+
+        .tool-type-box .item-info .lower-part {
+            height: 22px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+            .tool-type-box .item-info .lower-part .time-added {
+                font-size: 13px;
+                margin-left: 10px;
+                color: rgb(93, 91, 93);
+            }
+
+            .tool-type-box .item-info .lower-part .price {
+                font-size: 16px;
+                margin-right: 10px;
+            }

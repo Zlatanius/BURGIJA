@@ -3,9 +3,48 @@
 @{
     ViewData["Title"] = "Home";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
 
-<h1>BURGIJA</h1>
+    <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    
+    <style>
 
+        #main {
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-content">
+        <div class="left-section">
+            <partial name="~/Views/Home/_Filter.cshtml" />
+        </div>
+        <div class="right-section">
+            <div class="tools-grid">
+                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
+                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
+                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
+                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
+                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
+                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
+                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
+                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
+
+
+            </div>
+        </div>
+    </div>
+    <!--<partial name="~/Views/Home/_Filter.cshtml" />-->
+</body>
+<!--
 <table class="table">
     <thead>
         <tr>
@@ -39,5 +78,5 @@
         </tr>
 }
     </tbody>
-</table>
+</table>-->
 

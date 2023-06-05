@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+
+    <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/filter.css" asp-append-version="true" />
+
+    <style>
+
+        #main {
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+<div class="filter-box" >
+<p class="title" >Filters</p>
+
+<p class="parametar">Price range</p>
+<form class="price">
+    <label class="pushleft" for="fname">Lowest price:</label>
+    <input style="margin-left: 22px;" type="number" id="lowprice" name="fname"><br>
+    <label class="pushleft" for="lname">Highest price:</label>
+    <input type="number" id="highprice" name="lname">
+</form>
+
+<p class="parametar">Time added</p>
+
+<p class="parametar">Location</p>
+<button class="apply">Apply</button>
+</div>
+</html>

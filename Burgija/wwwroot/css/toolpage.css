@@ -1,0 +1,124 @@
+﻿body {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+     .page-content {
+        display: flex;
+        width: 100%;
+        min-height: calc(100vh - 150px);
+        background-color: rgb(232, 235, 235);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /*
+          <div class="page-content">
+    <div class="path-container"></div>
+    <div class="item-container">
+      <div class="item-img"></div>
+      <div class="item-details">
+        <p class="item-id">Artikl #: 33245</p>
+        <p class="item-title">Schrack busilica 24A, 120mm</p>
+        <p class="item-price">BAM <span id="price-value" >120,50 </span>KM</p>
+        <div class="item-storage">
+          <i class="fa-solid fa-truck fa-lg"></i>
+          <p>13 Kom, Sarajevo</p>
+        </div>
+        <div class="item-input-form">
+          <p>Kolicina: </p>
+          <input type="number" name="" id="ammount">
+        </div>
+        <button class="rent-button"></button>
+      </div>
+    </div>
+  </div>*/
+    }
+
+         .page-content .path-container {
+            width: 80%;
+            height: 50px;
+            margin-top: 20px;
+            background-color: white;
+            border: 1px solid black;
+            display: flex;
+        }
+
+         .page-content .item-container {
+            display: flex;
+            margin-top: 20px;
+            width: 80%;
+            height: 480px;
+            background-color: rgb(255, 255, 255);
+            margin-bottom: 150px;
+        }
+
+             .page-content .item-container .item-img {
+                width: 480px;
+                height: 480px;
+                display: flex;
+                background-color: black;
+            }
+
+                 .page-content .item-container .item-img img {
+                    height: 100%;
+                    width: 100%;
+                }
+
+             .page-content .item-container .item-details {
+                width: calc(100% - 480px);
+                height: 480px;
+                display: flex;
+                padding-left: 20px;
+                flex-direction: column;
+                padding-top: 20px;
+            }
+
+                 .page-content .item-container .item-details .item-id {
+                    font-size: 20px;
+                }
+
+                .page-content .item-container .item-details .item-title {
+                    margin-top: 10px;
+                    font-size: 28px;
+                }
+
+                 .page-content .item-container .item-details .item-price {
+                    font-size: 35px;
+                    margin-top: 50px;
+                }
+
+                 .page-content .item-container .item-details .item-storage {
+                    margin-top: 10px;
+                    width: 300px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                }
+
+                     .page-content .item-container .item-details .item-storage p {
+                        margin-left: 15px;
+                    }
+
+                 .page-content .item-container .item-details .item-input-form {
+                    margin-top: 20px;
+                    width: 300px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                }
+
+                     .page-content .item-container .item-details .item-input-form input {
+                        margin-left: 15px;
+                        height: 100%;
+                    }
+
+                 .page-content .item-container .item-details .rent-button {
+                    margin-top: 100px;
+                    height: 50px;
+                    width: 140px;
+                    background-color: rgb(177, 80, 177);
+                    border: 0px;
+                    border-radius: 8px;
+                }
