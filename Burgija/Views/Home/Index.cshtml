@@ -30,20 +30,13 @@
         <div class="right-section">
             <!--<div class="filters-bar" ></div>-->
             <div class="tools-grid">
-                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
-                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
-                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
-                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
-                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
-                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
-                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
-                <partial name="~/Views/Home/_ToolTypeItem.cshtml" />
-                
-
-
+                @foreach(var item in Model){
+                    @Html.Partial("_ToolTypeItem",item)
+                }
 
             </div>
         </div>
     </div>
     <!--<partial name="~/Views/Home/_Filter.cshtml" />-->
 </body>
+</html>
