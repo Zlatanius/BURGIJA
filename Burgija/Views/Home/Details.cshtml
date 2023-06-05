@@ -1,4 +1,4 @@
-﻿@model Burgija.Models.Tool
+﻿@model Burgija.Models.ToolType
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>@Html.DisplayFor(model => model.ToolType.Name) @Html.DisplayFor(model =>model.Id)</h4>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -17,28 +17,16 @@
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ToolType)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ToolType.Name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ToolType.Category)
+            @Html.DisplayNameFor(model => model.Category)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ToolType.Category)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Store)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Store.StoreLocation.Address)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ToolType.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ToolType.Description)
+            @Html.DisplayFor(model => model.Category)
         </dd>
     </dl>
 </div>
