@@ -17,6 +17,7 @@ namespace Burgija.Controllers
         private List<ToolType> toolTypes;
         private List<Review> reviews;
         private List<Tool> tools;
+        private List<Location> locations;
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
@@ -54,8 +55,12 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-            
-
+            stores = await _context.Store.ToListAsync();
+            locations = await _context.Location.ToListAsync();
+            tools = await _context.Tool.ToListAsync();
+            ViewBag.Store = stores;
+            ViewBag.Location = locations;
+            ViewBag.Tool = tools;
             return View(toolType);
         }
 
