@@ -1,0 +1,6 @@
+﻿.page-content {
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+    background-color: rgb(232, 235, 235);
+}
