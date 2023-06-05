@@ -23,7 +23,10 @@
     margin-bottom: 10px;
 }
 .filter-box .price {
-    margin-bottom: 20px;
+    margin-left:30px;
+}
+.filter-box form {
+  margin-left:20px;
 }
 
 .filter-box .price input
@@ -43,7 +46,7 @@
     align-self: center;
     border-radius: 8px;
     border: 1px solid purple;
-    margin-top: 70px;
+   margin-top:50px;
 }
 
 

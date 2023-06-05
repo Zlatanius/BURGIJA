@@ -3,7 +3,7 @@
     height: 200px;
     display: flex;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     align-self: center;
     justify-self: center;
     flex-direction: column;
@@ -28,6 +28,7 @@
         align-items: center;
         justify-content: space-evenly;
         flex-direction: column;
+        //background-color:blue;
     }
 
         .tool-type-box .item-info .upper-part {
