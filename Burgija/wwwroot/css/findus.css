@@ -3,4 +3,21 @@
     display: flex;
     min-height: 100vh;
     background-color: rgb(232, 235, 235);
+    justify-content:center;
+    
 }
+    .page-content .store-info-section {
+        height: 500px;
+        width: 330px;
+        display: flex;
+        background-color: white;
+        margin-top: 80px;
+        margin-right:40px;
+    }
+    .page-content #map-section {
+        height: 500px;
+        width: 760px;
+        display: flex;
+        background-color: white;
+        margin-top: 80px;
+    }

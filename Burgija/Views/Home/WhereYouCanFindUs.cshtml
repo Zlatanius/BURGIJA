@@ -10,7 +10,43 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
+    <script type='text/javascript'
+    src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript'>
+        function pushpinClicked(e) {
+            if (e.target.metadata) {
+                infobox.setOptions({
+                    location: e.target.getLocation(),
+                    title: e.target.metadata.title,
+                    description: e.target.metadata.description,
+                    visible: true
+                });
+            }
+        }
+        function GetMap()
+        {
+            var map = new Microsoft.Maps.Map('#map-section', {
+                credentials: 'AouRje7qzQdE3XLvMgLBdXl4u5H5z1y0h5rr7AmhfDbzCVkV60x2AFzHxvKi4zSp',
+                center: new Microsoft.Maps.Location(43.8563, 18.4131),
+                mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+                zoom: 10
+            });
+            infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+                visible: false
+            });
+            infobox.setMap(map);
 
+            var burgija_sarajevo = = new Microsoft.Maps.Location(43.8563,18.3959);
+            var pin_sarajevo = new Microsoft.Maps.Pushpin(burgija_sarajevo);
+            pin_sarajevo.metadata = {
+                title: 'Burgija Store',
+                description: 'Radnja za iznajmljivanje alata'
+            };
+            Microsoft.Maps.Events.addHandler(pin_sarajevo, 'click', pushpinClicked);
+            map.entities.push(pin_sarajevo);
+        }
+        
+    </script>
     <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
     <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
     <link rel="stylesheet" href="~/css/findus.css" asp-append-version="true" />
@@ -26,7 +62,44 @@
 <body>
     <div class="page-content" >
         <div class="store-info-section"></div>
-        <div class="map-section" ></div>
+        <div id="map-section" ></div>
     </div>
+    <script type='text/javascript'
+    src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript'>
+        function pushpinClicked(e) {
+            if (e.target.metadata) {
+                infobox.setOptions({
+                    location: e.target.getLocation(),
+                    title: e.target.metadata.title,
+                    description: e.target.metadata.description,
+                    visible: true
+                });
+            }
+        }
+        function GetMap()
+        {
+            var map = new Microsoft.Maps.Map('#map-section', {
+                credentials: 'AouRje7qzQdE3XLvMgLBdXl4u5H5z1y0h5rr7AmhfDbzCVkV60x2AFzHxvKi4zSp',
+                center: new Microsoft.Maps.Location(43.8563, 18.4131),
+                mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+                zoom: 10
+            });
+            infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+                visible: false
+            });
+            infobox.setMap(map);
+
+            var burgija_sarajevo = = new Microsoft.Maps.Location(43.8563,18.3959);
+            var pin_sarajevo = new Microsoft.Maps.Pushpin(burgija_sarajevo);
+            pin_sarajevo.metadata = {
+                title: 'Burgija Store',
+                description: 'Radnja za iznajmljivanje alata'
+            };
+            Microsoft.Maps.Events.addHandler(pin_sarajevo, 'click', pushpinClicked);
+            map.entities.push(pin_sarajevo);
+        }
+        
+    </script>
 </body>
 
