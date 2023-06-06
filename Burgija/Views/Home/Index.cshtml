@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
-    <a asp-action="WhereYouCanFindUs">Where You Can Find Us</a>
+    
     <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
     <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
@@ -28,7 +28,19 @@
             <partial name="~/Views/Home/_Filter.cshtml" />
         </div>
         <div class="right-section">
-            <!--<div class="filters-bar" ></div>-->
+            <div class="filters-bar" >
+                <p class="results">Results for: </p>
+                <div class="filter-tag">
+                    <p class="tag-name">Max-price: </p>
+                    <p class="tag-value"> 500 KM</p>
+
+                </div>
+                <div class="filter-tag">
+                    <p class="tag-name">Location: </p>
+                    <p class="tag-value"> Sarajevo</p>
+
+                </div>
+            </div>
             <div class="tools-grid">
                 @foreach(var item in Model){
                     @Html.Partial("_ToolTypeItem",item)
