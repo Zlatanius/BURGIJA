@@ -1,4 +1,4 @@
-@model IEnumerable<Burgija.Models.ToolType>
+@model Burgija.Models.ToolType
 
 @{
     ViewData["Title"] = "ToolDetails";
@@ -25,8 +25,8 @@
             </div>
             <div class="item-details">
                 
-                <p class="item-title">Schrack busilica 24A, 120mm</p>
-                <p class="item-price">BAM <span id="price-value">120,50 </span>KM</p>
+                <p class="item-title">@Model.Name</p>
+                <p class="item-price">BAM <span id="price-value">@Model.Price</span>KM</p>
                 <div class="item-storage">
                     <i class="fa-solid fa-truck fa-lg"></i>
                     <p>13 Kom, Sarajevo</p>

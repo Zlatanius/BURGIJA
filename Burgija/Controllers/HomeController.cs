@@ -65,8 +65,12 @@ namespace Burgija.Controllers
         }
 
         // GET: Home/Create
-        public IActionResult Create()
+        public async Task<IActionResult> WhereYouCanFIndUs()
         {
+            stores = await _context.Store.ToListAsync();
+            locations = await _context.Location.ToListAsync();
+            ViewBag.Store = stores;
+            ViewBag.Location = locations;
             return View();
         }
 
