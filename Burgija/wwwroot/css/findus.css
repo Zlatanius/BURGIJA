@@ -13,11 +13,24 @@
         background-color: white;
         margin-top: 80px;
         margin-right:40px;
+        flex-direction:column;
+        
     }
-    .page-content #map-section {
-        height: 500px;
-        width: 760px;
-        display: flex;
-        background-color: white;
-        margin-top: 80px;
-    }
+        .page-content .store-info-section .title {
+            align-self:center;
+            font-size:26px;
+            margin-top:10px;
+        }
+        .page-content .store-info-section .opis {
+            font-size:15px;
+            margin-top:10px;
+            margin-left:8px;
+            margin-right:8px;
+        }
+        .page-content #myMap {
+            height: 500px;
+            width: 760px;
+            display: flex;
+            background-color: white;
+            margin-top: 80px;
+        }
