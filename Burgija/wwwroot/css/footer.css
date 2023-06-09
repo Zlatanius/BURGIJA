@@ -1,1 +1,108 @@
-﻿
+﻿footer {
+    width: 100%;
+    height: 220px;
+    background-color: rgb(129, 92, 133);
+    display: flex;
+    flex-direction: column;
+}
+
+    footer .upper-footer {
+        height: 170px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+        footer .upper-footer .links-container {
+            width: 200px;
+            height: 130px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+            footer .upper-footer .links-container .title {
+                color: #fff;
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 30px;
+            }
+
+            footer .upper-footer .links-container a {
+                font-size: 16px;
+                color: #d3cfaa;
+                text-decoration: none;
+            }
+
+        footer .upper-footer .social-container {
+            width: 250px;
+            height: 130px;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+            footer .upper-footer .social-container .title {
+                color: #fff;
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 30px;
+            }
+
+            footer .upper-footer .social-container .social-items {
+                display: flex;
+                width: 100%;
+                height: 60px;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+
+                footer .upper-footer .social-container .social-items a {
+                    color: white;
+                }
+
+        footer .upper-footer .contact-container {
+            width: 200px;
+            height: 130px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+            footer .upper-footer .contact-container .title {
+                color: #fff;
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 30px;
+            }
+
+            footer .upper-footer .contact-container .contact-item {
+                width: 200px;
+                align-items: center;
+                margin-bottom: 7px;
+                display: flex;
+            }
+
+                footer .upper-footer .contact-container .contact-item i {
+                    margin-right: 10px;
+                    color: rgb(240, 196, 241);
+                }
+
+                footer .upper-footer .contact-container .contact-item p {
+                    font-size: 16px;
+                    color: #d3cfaa;
+                }
+
+    footer .lower-footer {
+        display: flex;
+        height: 50px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+        footer .lower-footer p {
+            font-size: 18px;
+            color: white;
+        }

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Burgija.Models.Rent>
+
+@{
+    ViewData["Title"] = "Rent";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
+    <link rel="stylesheet" href="~/css/rent.css" asp-append-version="true" />
+
+</head>
+
+<body>
+    <div class="page-content">
+        <div class="path-container"></div>
+        <div class="item-container">
+            <div class="item-img">
+                <img src="https://c4.wallpaperflare.com/wallpaper/384/997/106/bosch-drill-tools-brand-wallpaper-preview.jpg" alt="">
+            </div>
+            <div class="rent-details">
+                
+                <p class="item-title">Schrack busilica 24A, 120mm</p>
+                <form class="rent-form" >
+                    <label for="rent-start">Start of rent:</label>
+                    <input type="date" id="rent-start" name="rent-start"><br>
+                    <label for="rent-start">End of rent:</label>
+                    <input type="date" id="rent-end" name="rent-end"><br>
+                    
+                    <input type="checkbox" id="delivery-bool" name="delivery-bool" value="delivery-option">
+                    <label for="delivery-bool"> Do you want delivery?</label><br>
+                    <label for="adress">Your adress: </label>
+                    <input type="text" id="adress" name="adress" value="">
+                </form>
+                <button class="rent-button">Rent</button>
+            </div>
+        </div>
+    </div>
+    <!--<partial name="~/Views/Home/_Filter.cshtml" />-->
+</body>
+</html>
+<!--
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tool)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartOfRent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndOfRent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tool.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartOfRent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndOfRent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+-->

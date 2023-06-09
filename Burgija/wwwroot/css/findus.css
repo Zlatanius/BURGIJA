@@ -1,0 +1,36 @@
+﻿.page-content {
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+    background-color: rgb(232, 235, 235);
+    justify-content:center;
+    
+}
+    .page-content .store-info-section {
+        height: 500px;
+        width: 330px;
+        display: flex;
+        background-color: white;
+        margin-top: 80px;
+        margin-right:40px;
+        flex-direction:column;
+        
+    }
+        .page-content .store-info-section .title {
+            align-self:center;
+            font-size:26px;
+            margin-top:10px;
+        }
+        .page-content .store-info-section .opis {
+            font-size:15px;
+            margin-top:10px;
+            margin-left:8px;
+            margin-right:8px;
+        }
+        .page-content #myMap {
+            height: 500px;
+            width: 760px;
+            display: flex;
+            background-color: white;
+            margin-top: 80px;
+        }

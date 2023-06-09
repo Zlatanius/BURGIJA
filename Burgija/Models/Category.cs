@@ -6,9 +6,22 @@ namespace Burgija.Models
 {
     public enum Category
     {
-        House,
-        Garden,
-        Machines,
-        Construction
+        Fasteners,       
+        FloorCare,
+        GeneralConstruction,
+        LaddersAndScaffolding,
+        LawnCare,
+        MaterialHandling,
+        PaintAndDryWall,
+        PlumbingAndPumps,
+        PortablePower,
+        PowerTools,
+        PressureWashers,
+        RotaryOrDemolition,
+        TileSaws,
+        Trailers,
+        TreeCare,
+        Trenchers,
+        Welding
     }
 } 

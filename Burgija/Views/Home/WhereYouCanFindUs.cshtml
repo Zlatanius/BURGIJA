@@ -1,0 +1,155 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    
+    <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
+    <link rel="stylesheet" href="~/css/findus.css" asp-append-version="true" />
+    
+    <style>
+
+        #main {
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-content" >
+        <div class="store-info-section">
+            <p class="title">BURGIJA STORE</p>
+            <p class="opis">
+                Bilo gdje da ste u Bosni i Hercegovini dođite u naš Store gdje Vas očekuje 1500 brižno odabranih artikala, stalno spremnih u svim Store-ovima za otpremu u dovoljnim količinama.
+
+Naši suradnici će Vam rado uživo pokazati proizvod.
+
+Ako je pak prošlo radno vrijeme, možete iskoristiti priliku i iznajmiti robu u našoj Internet trgovini!
+            </p>
+        </div>
+        <div id="myMap" ></div>
+    </div>
+    <script type='text/javascript'
+    src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    
+</body>
+<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+
+<script type='text/javascript'>
+    function GetMap() {
+        var map = new Microsoft.Maps.Map('#myMap', {
+            credentials: 'AouRje7qzQdE3XLvMgLBdXl4u5H5z1y0h5rr7AmhfDbzCVkV60x2AFzHxvKi4zSp',
+            center: new Microsoft.Maps.Location(43.856430, 18.413029),
+            mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+            zoom: 7
+        });
+
+        infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+            visible: false
+        });
+
+        infobox.setMap(map);
+
+        var storeSarajevo = new Microsoft.Maps.Location(43.8563, 18.4131);
+        var storeKladusa = new Microsoft.Maps.Location(45.1841, 15.8068);
+        var storeSjenica = new Microsoft.Maps.Location(43.2722, 20.006);
+        var storeTravnik = new Microsoft.Maps.Location(44.2294, 17.643);
+        var storeBugojno = new Microsoft.Maps.Location(44.0562, 17.4498);
+        
+
+        var pinSarajevo = new Microsoft.Maps.Pushpin(storeSarajevo);
+        var pinKladusa = new Microsoft.Maps.Pushpin(storeKladusa);
+        var pinSjenica = new Microsoft.Maps.Pushpin(storeSjenica);
+        var pinTravnik = new Microsoft.Maps.Pushpin(storeTravnik);
+        var pinBugojno = new Microsoft.Maps.Pushpin(storeBugojno);
+        
+
+        pinSarajevo.metadata = {
+            title: 'Store Sarajevo',
+            description: ''
+        };
+
+        pinKladusa.metadata = {
+            title: 'Store Velika Kladusa',
+            description: ''
+        };
+
+        pinSjenica.metadata = {
+            title: 'Store Sjenica',
+            description: 'Glavna poslovnica'
+        };
+
+        pinTravnik.metadata = {
+            title: 'Store Travnik',
+            description: ''
+        };
+
+        pinBugojno.metadata = {
+            title: 'Store Bugojno',
+            description: ''
+        };
+
+       
+
+        Microsoft.Maps.Events.addHandler(pinSarajevo, 'click', pushpinClicked);
+        Microsoft.Maps.Events.addHandler(pinKladusa, 'click', pushpinClicked);
+        Microsoft.Maps.Events.addHandler(pinSjenica, 'click', pushpinClicked);
+        Microsoft.Maps.Events.addHandler(pinTravnik, 'click', pushpinClicked);
+        Microsoft.Maps.Events.addHandler(pinBugojno, 'click', pushpinClicked);
+        
+
+        map.entities.push(pinSarajevo);
+        map.entities.push(pinKladusa);
+        map.entities.push(pinSjenica);
+        map.entities.push(pinTravnik);
+        map.entities.push(pinBugojno);
+        
+
+        
+    }
+
+    function pushpinClicked(e) {
+        if (e.target.metadata) {
+            infobox.setOptions({
+                location: e.target.getLocation(),
+                title: e.target.metadata.title,
+                description: e.target.metadata.description,
+                visible: true
+            });
+        }
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(convertCoordinates);
+        }
+    }
+
+    function convertCoordinates(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude; 
+
+        var apiKey = 'AsUxyaV0r7t7AUCbg7Np-o9B0rCI9YF6t9__7BI0Twj1cduK3ptOL_ZghnV3MmNf';
+
+        var apiUrl = `https://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${apiKey}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                var address = data.resourceSets[0].resources[0].address.formattedAddress;
+                document.getElementById('startLocation').value = address;
+            })
+            .catch(error => console.log(error));
+    }
+
+   
+</script>
+

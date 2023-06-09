@@ -1,11 +1,58 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    //ViewData["Title"] = "Register";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+
+    <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+
+    <style>
+
+        #main {
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="active"> Register </h2>
+        <!--<h2 class="inactive underlineHover">Sign Up </h2>--->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />--->
+        </div>
+
+        <!-- Login Form -->
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="text" asp-for="Input.Email" id="login" class="fadeIn second" name="Email" placeholder="email">
+            <input type="text" asp-for="Input.Username" id="username" class="fadeIn third" name="Username" placeholder="username">
+            <input type="password" asp-for="Input.Password" id="password" class="fadeIn second" name="Password" placeholder="password">
+            <input type="password" asp-for="Input.ConfirmPassword" id="password" class="fadeIn third" name="ConfirmPassword" placeholder="confirm password">
+            <input type="submit" class="fadeIn fourth" value="Sign up">
+        </form>
+
+        <!-- Remind Passowrd-->
+        <div id="formFooter">
+          <a class="underlineHover" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already registered?</a>
+        </div>
+
+    </div>
+</div>
+<!--
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -40,7 +87,7 @@
             </div>
         </form>
     </div>
-</div>
+</div>-->
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

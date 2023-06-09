@@ -1,0 +1,53 @@
+﻿.filter-box {
+    display: flex;
+    width: 250px;
+    height: 400px;
+    background-color: rgb(187, 159, 244);
+    margin-top: 75px;
+    border-radius: 10px;
+    flex-direction: column;
+    color: rgb(248, 251, 201);
+    padding-left: 15px;
+    padding-top: 10px;
+}
+    .filter-box .title
+
+{
+    font-size: 25px;
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+.filter-box .parametar {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.filter-box .price {
+    margin-left:30px;
+}
+.filter-box form {
+  margin-left:20px;
+}
+
+.filter-box .price input
+
+{
+    margin-left: 20px;
+    width: 60px;
+    height: 18px;
+}
+
+
+
+.filter-box  .apply {
+    width: 50%;
+    height: 30px;
+    background-color: bisque;
+    align-self: center;
+    border-radius: 8px;
+    border: 1px solid purple;
+   margin-top:50px;
+}
+
+
+

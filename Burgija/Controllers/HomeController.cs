@@ -16,6 +16,8 @@ namespace Burgija.Controllers
         private List<Store> stores;
         private List<ToolType> toolTypes;
         private List<Review> reviews;
+        private List<Tool> tools;
+        private List<Location> locations;
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
@@ -36,41 +38,141 @@ namespace Burgija.Controllers
         // GET: Home
         public async Task<IActionResult> Index()
         {
-            await InitializeLists();
-            var tools = await _context.Tools.ToListAsync();
-            foreach (var tool in tools)
-            {
-                tool.Store = stores.Find(store => store.Id == tool.StoreId);
-            }
-
-            return View(tools);
+            return View(await _context.ToolType.ToListAsync());
         }
 
         // GET: Home/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> ToolDetails(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tool = await _context.Tools
-                .Include(t => t.Store)
-                .Include(t => t.ToolType)
+            var toolType = await _context.ToolType
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (tool == null)
+            if (toolType == null)
             {
                 return NotFound();
             }
-            await InitializeLists();
-            tool.Store = stores.Find(store => store.Id == tool.Store.Id);
-            tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
-            return View(tool);
+            stores = await _context.Store.ToListAsync();
+            locations = await _context.Location.ToListAsync();
+            tools = await _context.Tool.ToListAsync();
+            ViewBag.Store = stores;
+            ViewBag.Location = locations;
+            ViewBag.Tool = tools;
+            return View(toolType);
         }
 
-        private bool ToolExists(int id)
+        // GET: Home/Create
+        public async Task<IActionResult> WhereYouCanFIndUs()
         {
-            return _context.Tools.Any(e => e.Id == id);
+            stores = await _context.Store.ToListAsync();
+            locations = await _context.Location.ToListAsync();
+            ViewBag.Store = stores;
+            ViewBag.Location = locations;
+            return View();
+        }
+
+        // POST: Home/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name,Category,Description,Price,Image")] ToolType toolType)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(toolType);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(toolType);
+        }
+
+        // GET: Home/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var toolType = await _context.ToolType.FindAsync(id);
+            if (toolType == null)
+            {
+                return NotFound();
+            }
+            return View(toolType);
+        }
+
+        // POST: Home/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Category,Description,Price,Image")] ToolType toolType)
+        {
+            if (id != toolType.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(toolType);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ToolTypeExists(toolType.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(toolType);
+        }
+
+        // GET: Home/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var toolType = await _context.ToolType
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (toolType == null)
+            {
+                return NotFound();
+            }
+
+            return View(toolType);
+        }
+
+        // POST: Home/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var toolType = await _context.ToolType.FindAsync(id);
+            _context.ToolType.Remove(toolType);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ToolTypeExists(int id)
+        {
+            return _context.ToolType.Any(e => e.Id == id);
         }
     }
 }

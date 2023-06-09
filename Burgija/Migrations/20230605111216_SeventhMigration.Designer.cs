@@ -4,14 +4,16 @@ using Burgija.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Burgija.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230605111216_SeventhMigration")]
+    partial class SeventhMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,9 +192,6 @@ namespace Burgija.Migrations
 
                     b.Property<DateTime>("EndOfRent")
                         .HasColumnType("datetime2");
-
-                    b.Property<double>("RentPrice")
-                        .HasColumnType("float");
 
                     b.Property<DateTime>("StartOfRent")
                         .HasColumnType("datetime2");

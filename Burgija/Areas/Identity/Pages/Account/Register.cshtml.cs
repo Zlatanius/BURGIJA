@@ -22,12 +22,14 @@ namespace Burgija.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser<int>> _signInManager;
         private readonly UserManager<IdentityUser<int>> _userManager;
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<IdentityUser<int>> userManager,
             SignInManager<IdentityUser<int>> signInManager,
+            RoleManager<IdentityRole<int>> roleManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -35,6 +37,7 @@ namespace Burgija.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -95,6 +98,12 @@ namespace Burgija.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var defaultrole = _roleManager.FindByNameAsync("Registered User").Result;
+
+                    if (defaultrole != null)
+                    {
+                        IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                    }
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

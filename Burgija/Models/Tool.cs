@@ -23,20 +23,16 @@ namespace Burgija.Models
         [DisplayName("Store")]
         [ForeignKey("Store")]
         public int StoreId{ get; set; }
-        public double Price { get; set; }
-        public string Image { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public Tool(int id, ToolType toolType, Store store, double price, string image)
+        public Tool(int id, ToolType toolType, Store store)
         {
             Id= id;
             ToolType = toolType;
             Store = store;
-            Price = price;
-            Image = image;
         }
 
         public Tool() { }

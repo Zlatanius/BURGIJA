@@ -38,7 +38,7 @@ namespace Burgija.Controllers
         public async Task<IActionResult> Index()
         {
             await InitializeLists();
-            var tools = await _context.Tools.ToListAsync();
+            var tools = await _context.Tool.ToListAsync();
             foreach(var tool in tools)
             {
                 tool.Store = stores.Find(store => store.Id == tool.StoreId);
@@ -55,7 +55,7 @@ namespace Burgija.Controllers
                 return NotFound();
             }
 
-            var tool = await _context.Tools
+            var tool = await _context.Tool
                 .Include(t => t.Store)
                 .Include(t => t.ToolType)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -106,7 +106,7 @@ namespace Burgija.Controllers
                 return NotFound();
             }
 
-            var tool = await _context.Tools.FindAsync(id);
+            var tool = await _context.Tool.FindAsync(id);
             if (tool == null)
             {
                 return NotFound();
@@ -162,7 +162,7 @@ namespace Burgija.Controllers
                 return NotFound();
             }
 
-            var tool = await _context.Tools
+            var tool = await _context.Tool
                 .Include(t => t.Store)
                 .Include(t => t.ToolType)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -181,15 +181,15 @@ namespace Burgija.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirmed(int id)
         {
-            var tool = await _context.Tools.FindAsync(id);
-            _context.Tools.Remove(tool);
+            var tool = await _context.Tool.FindAsync(id);
+            _context.Tool.Remove(tool);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ToolExists(int id)
         {
-            return _context.Tools.Any(e => e.Id == id);
+            return _context.Tool.Any(e => e.Id == id);
         }
     }
 }

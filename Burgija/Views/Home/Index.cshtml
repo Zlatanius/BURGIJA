@@ -1,43 +1,54 @@
-@model IEnumerable<Burgija.Models.Tool>
+@model IEnumerable<Burgija.Models.ToolType>
 
 @{
     ViewData["Title"] = "Home";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    
+    <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    
+    <style>
 
-<h1>BURGIJA</h1>
+        #main {
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ToolType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToolType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">See Details</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<body>
+    <div class="page-content">
+        <div class="left-section">
+            <partial name="~/Views/Home/_Filter.cshtml" />
+        </div>
+        <div class="right-section">
+            <div class="filters-bar" >
+                <p class="results">Results for: </p>
+                <div class="filter-tag">
+                    <p class="tag-name">Max-price: </p>
+                    <p class="tag-value"> 500 KM</p>
 
+                </div>
+                <div class="filter-tag">
+                    <p class="tag-name">Location: </p>
+                    <p class="tag-value"> Sarajevo</p>
+
+                </div>
+            </div>
+            <div class="tools-grid">
+                @foreach(var item in Model){
+                    @Html.Partial("_ToolTypeItem",item)
+                }
+
+            </div>
+        </div>
+    </div>
+    <!--<partial name="~/Views/Home/_Filter.cshtml" />-->
+</body>
+</html>
