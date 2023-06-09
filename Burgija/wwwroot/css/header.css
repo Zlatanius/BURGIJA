@@ -71,23 +71,38 @@ header .upper-container {
     }
 
     header .upper-container .login-container {
-        width: 180px;
+        width: 250px;
         height: 100%;
         //background-color: cadetblue;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
     }
-        header .upper-container .login-container a {
+        header .upper-container .login-container .user-field {
+            height:50px;
+            width:150px;
+            background-color:cadetblue;
+            align-items:center;
+            justify-content:center;
+                border-radius:9px;
+                border: 1px solid gray;
             
-            color:darkslateblue;
         }
+            header .upper-container .login-container .user-field p {
+                font-size:16px;
+            }
+            header .upper-container .login-container a {
+                color: darkslateblue;
+            }
         header .upper-container .login-container .sign-up {
             width: 120px;
             height: 35px;
             background-color: #bcbbf2;
             border-radius: 10px;
             border: 0px solid;
+            display:flex;
+            align-items:center;
+            justify-content:center;
         }
             header .upper-container .login-container .logout {
                 color:blue;
