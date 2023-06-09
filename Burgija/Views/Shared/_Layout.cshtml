@@ -60,11 +60,11 @@
             </a>
 
             <!--search bar-->
-            <form role="search" method="get" asp-controller="Home" asp-action="Index">
+            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="search">
             <div class="search-bar-container">
                 <div class="wrap">
                     <div class="search">
-                        <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                        <input type="text" name = "search" class="searchTerm" placeholder="What are you looking for?">
                         <button id="searching" type="submit" class="searchButton">
                             <i class="fa fa-search"></i>
                         </button>

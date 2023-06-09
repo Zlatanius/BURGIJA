@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Burgija.Data;
 using Burgija.Models;
 using Microsoft.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Burgija.Controllers
 {
@@ -37,9 +38,13 @@ namespace Burgija.Controllers
         }
 
         // GET: Home
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _context.ToolType.ToListAsync());
+            if(search == null)
+                return View(await _context.ToolType.ToListAsync());
+
+            List<ToolType> searchResults = await _context.ToolType.Where(t => t.Name==search).ToListAsync();
+            return View(searchResults);
         }
 
         // GET: Home/Details/5
