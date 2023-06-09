@@ -237,5 +237,8 @@ nav  .category-item {
     }
 
 .nav .is-active {
-    opacity:1;
+    overflow:visible;
+}
+.is-active {
+    overflow: visible;
 }

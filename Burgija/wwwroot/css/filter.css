@@ -1,7 +1,7 @@
 ﻿.filter-box {
     display: flex;
     width: 250px;
-    height: 400px;
+    height: 470px;
     background-color: rgb(187, 159, 244);
     margin-top: 75px;
     border-radius: 10px;
@@ -32,9 +32,10 @@
 .filter-box .price input
 
 {
-    margin-left: 20px;
-    width: 60px;
+    margin-left: 15px;
+    width: 85px;
     height: 18px;
+    margin-bottom:5px;
 }
 
 

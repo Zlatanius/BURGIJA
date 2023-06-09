@@ -55,16 +55,22 @@
                 </div>
             </div>
             </a>
+
+            <!--search bar-->
+            <form>
             <div class="search-bar-container">
                 <div class="wrap">
                     <div class="search">
                         <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                        <button type="submit" class="searchButton">
+                        <button id="searching" type="submit" class="searchButton">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
                 </div>
             </div>
+            </form>
+
+            <!---->
             <div class="login-container">
                 
                 <a asp-action="WhereYouCanFindUs"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
@@ -333,6 +339,7 @@
 </body>
 </html>
 
+@section scripts {
 <script>
     $(function() {
     $('body').addClass('js');
@@ -349,3 +356,12 @@
     })
 });
 </script>
+
+<script>
+    $(function () {
+        $("#searching").click( function () {
+            $("Form").submit();
+        })
+    });
+</script>
+}
