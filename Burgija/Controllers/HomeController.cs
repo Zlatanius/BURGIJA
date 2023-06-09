@@ -42,10 +42,11 @@ namespace Burgija.Controllers
         {
             if(search == null)
                 return View(await _context.ToolType.ToListAsync());
-
+            ViewBag.Search = search;
             List<ToolType> searchResults = await _context.ToolType.Where(t => t.Name.ToLower().Contains(search.ToLower())).ToListAsync();
             return View(searchResults);
         }
+
 
         // GET: Home/Details/5
         public async Task<IActionResult> ToolDetails(int? id)
