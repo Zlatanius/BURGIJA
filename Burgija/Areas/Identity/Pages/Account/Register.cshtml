@@ -36,17 +36,18 @@
         </div>
 
         <!-- Login Form -->
-        <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="username">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="password">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="confirm password">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="text" asp-for="Input.Email" id="login" class="fadeIn second" name="Email" placeholder="email">
+            <input type="text" asp-for="Input.Username" id="username" class="fadeIn third" name="Username" placeholder="username">
+            <input type="password" asp-for="Input.Password" id="password" class="fadeIn second" name="Password" placeholder="password">
+            <input type="password" asp-for="Input.ConfirmPassword" id="password" class="fadeIn third" name="ConfirmPassword" placeholder="confirm password">
             <input type="submit" class="fadeIn fourth" value="Sign up">
         </form>
 
         <!-- Remind Passowrd-->
         <div id="formFooter">
-          <a class="underlineHover" href="#">Already registered?</a>
+          <a class="underlineHover" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already registered?</a>
         </div>
 
     </div>
