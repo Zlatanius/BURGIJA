@@ -19,6 +19,22 @@
           }
       
     </style>
+    <script>
+    $(function() {
+    $('body').addClass('js');
+  
+    var $hamburger = $('.hamburger'),
+        $nav = $('#site-nav'),
+        
+  
+    $hamburger.click(function() {
+      $(this).toggleClass('is-active');
+      $nav.toggleClass('is-active');
+      
+      return false; 
+    })
+});
+</script>
 </head>
 <body>
     <header>
@@ -274,7 +290,22 @@
 <div class="lower-footer">
     <p>Copyright © 2023, All Right Reserved Burgija</p>
 </div>
-
+    <script>
+    $(function() {
+    $('body').addClass('js');
+  
+    var $hamburger = $('.hamburger'),
+        $nav = $('#site-nav'),
+        
+  
+    $hamburger.click(function() {
+      $(this).toggleClass('is-active');
+      $nav.toggleClass('is-active');
+      
+      return false; 
+    })
+});
+</script>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -282,20 +313,20 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-<!--
+
 <script>
     $(function() {
     $('body').addClass('js');
   
     var $hamburger = $('.hamburger'),
         $nav = $('#site-nav'),
-        $masthead = $('#masthead');
+        
   
     $hamburger.click(function() {
       $(this).toggleClass('is-active');
       $nav.toggleClass('is-active');
-      $masthead.toggleClass('is-active');
+      
       return false; 
     })
 });
-</script>-->
+</script>
