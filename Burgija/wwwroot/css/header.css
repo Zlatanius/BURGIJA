@@ -185,3 +185,28 @@ header .upper-container {
         header .upper-container .search-bar-container .wrap {
             width: 80%;
         }
+
+nav {
+    margin-left: 10%;
+    display: grid;
+    position: absolute;
+    //margin-top:150px;
+    width: 80%;
+    height: 400px;
+    background-color: white;
+    grid-template-columns: auto auto auto auto;
+    
+}
+nav  .category-item {
+    display:flex;
+    width:200px;
+    background-color:aqua;
+    height:50px;
+    align-self:center;
+    justify-self:center;
+    cursor: pointer;
+}
+    nav .category-item p {
+        color:black;
+        font-size: 16px;
+    }

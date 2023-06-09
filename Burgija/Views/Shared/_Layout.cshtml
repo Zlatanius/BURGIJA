@@ -173,7 +173,61 @@
                 </div>
             </button>
         </div>
+        
     </header>
+    <nav id="site-nav" role="navigation">
+          <a class="category-item">
+              <p class="category-name">Fasteners</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">FloorCare</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">General Construction</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Ladders and scaffolding</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Lawn care</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Material handling</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Paint and dry walls</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Plumbing</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">PortablePower</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">PowerTools</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Pressure Washers</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Demolition</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Tile saws</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Trailers</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Tree care</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Trenchers</p>
+          </a>
+          <a class="category-item">
+              <p class="category-name">Welding</p>
+          </a>
+     </nav>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -228,3 +282,20 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<!--
+<script>
+    $(function() {
+    $('body').addClass('js');
+  
+    var $hamburger = $('.hamburger'),
+        $nav = $('#site-nav'),
+        $masthead = $('#masthead');
+  
+    $hamburger.click(function() {
+      $(this).toggleClass('is-active');
+      $nav.toggleClass('is-active');
+      $masthead.toggleClass('is-active');
+      return false; 
+    })
+});
+</script>-->
