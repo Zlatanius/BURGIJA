@@ -73,7 +73,10 @@
                         <i class="fa-regular fa-user fa-xl"></i>
                         <p>@User.Identity.Name!</p>
                     </div>
-                    <a asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>
+                    <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                        <button  type="submit" ><i class="fa-solid fa-right-from-bracket fa-2xl"></i></button>
+                    </form>
+                    <!--<a asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>-->
                 }
                 else {
                     <a asp-area="Identity" asp-page="/Account/Login" class="sign-up">Sign in</a>
