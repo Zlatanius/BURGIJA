@@ -25,20 +25,23 @@
       
     </style>
     <script>
-    $(function() {
-    $('body').addClass('js');
-  
-    var $hamburger = $('.hamburger'),
-        $nav = $('#site-nav'),
+        const nav = document.querySelector("#site-nav");
+        //const menuItems = document.querySelectorAll(".menuItem");
+        const hamburger= document.querySelector(".hamburger");
         
-  
-    $hamburger.click(function() {
-      $(this).toggleClass('is-active');
-      $nav.toggleClass('is-active');
-      
-      return false; 
-    })
-});
+
+        function toggleMenu() {
+            if (nav.classList.contains("showMenu")) {
+                nav.classList.remove("showMenu");
+                
+            } else {
+                nav.classList.add("showMenu");
+                
+            }
+        }
+
+        hamburger.addEventListener("click", toggleMenu);
+
 </script>
 </head>
 <body>
@@ -57,7 +60,7 @@
             </a>
 
             <!--search bar-->
-            <form>
+            <form role="search" method="get" asp-controller="Home" asp-action="Index">
             <div class="search-bar-container">
                 <div class="wrap">
                     <div class="search">
@@ -363,5 +366,24 @@
             $("Form").submit();
         })
     });
+</script>
+<script>
+        const nav = document.querySelector("#site-nav");
+        //const menuItems = document.querySelectorAll(".menuItem");
+        const hamburger= document.querySelector(".hamburger");
+        
+
+        function toggleMenu() {
+            if (nav.classList.contains("showMenu")) {
+                nav.classList.remove("showMenu");
+                
+            } else {
+                nav.classList.add("showMenu");
+                
+            }
+        }
+
+        hamburger.addEventListener("click", toggleMenu);
+
 </script>
 }
