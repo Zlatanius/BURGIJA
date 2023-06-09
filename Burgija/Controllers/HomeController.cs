@@ -43,7 +43,7 @@ namespace Burgija.Controllers
             if(search == null)
                 return View(await _context.ToolType.ToListAsync());
 
-            List<ToolType> searchResults = await _context.ToolType.Where(t => t.Name==search).ToListAsync();
+            List<ToolType> searchResults = await _context.ToolType.Where(t => t.Name.ToLower().Contains(search.ToLower())).ToListAsync();
             return View(searchResults);
         }
 
