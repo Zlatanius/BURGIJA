@@ -32,7 +32,10 @@
                 <p class="item-price">BAM <span id="price-value">@Model.Price</span>KM</p>
                 <div class="item-storage">
                     <i class="fa-solid fa-truck fa-lg"></i>
-                    <p>13 Kom, Sarajevo</p>
+                    @foreach(var item in ViewBag.ToolAndStore){
+                        <p>@item.Quantity items, @item.Address @item.StoreId</p><br>
+                    }
+                    
                 </div>
                 <div class="item-input-form">
                     <p>Kolicina: </p>
