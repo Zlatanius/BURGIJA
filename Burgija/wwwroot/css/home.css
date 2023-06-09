@@ -64,5 +64,5 @@
                             width: 90%;
                             display: grid;
                             grid-template-columns: 1fr 1fr 1fr 1fr;
-                            grid-template-rows: 250px 250px;
+                            grid-template-rows: repeat(auto-fit, 250px);
                         }

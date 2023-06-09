@@ -11,6 +11,7 @@ a .tool-type-box {
     justify-self: center;
     flex-direction: column;
     cursor:pointer;
+    margin-bottom:29px;
 }
 
     a .tool-type-box .item-img {
