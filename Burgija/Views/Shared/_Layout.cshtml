@@ -70,11 +70,13 @@
                 <a asp-action="WhereYouCanFindUs"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
                 @if (SignInManager.IsSignedIn(User)){
                     <p>Hello @User.Identity.Name!</p>
-                
+                    <a asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>
                 }
                 else {
                     <a asp-area="Identity" asp-page="/Account/Login" class="sign-up">Sign in</a>
+                    
                 }
+                
             </div>
         </div>
         <div class="nav-container">
