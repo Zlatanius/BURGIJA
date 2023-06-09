@@ -89,17 +89,20 @@ header .upper-container {
             border-radius: 10px;
             border: 0px solid;
         }
+            header .upper-container .login-container .logout {
+                color:blue;
+            }
 
 
 
 
-    header .nav-container {
-        width: 80%;
-        height: 65px;
-        display: flex;
-        //background-color: bisque;
-        align-items: center
-    }
+            header .nav-container {
+                width: 80%;
+                height: 65px;
+                display: flex;
+                //background-color: bisque;
+                align-items: center
+            }
         header .nav-container .hamburger {
             width: 60px;
             height: 60px;
