@@ -23,7 +23,8 @@
 <body>
     <header>
         <div class="upper-container">
-            <div class="logo-container">
+            <a asp-controller="Home" asp-action="Index">
+            <div  class="logo-container">
                 <div class="icon-container">
                     <img src="https://static.vecteezy.com/system/resources/previews/016/415/344/original/electric-drill-illustration-in-minimal-style-png.png" alt="">
 
@@ -32,6 +33,7 @@
                     <p>BURGIJA</p>
                 </div>
             </div>
+            </a>
             <div class="search-bar-container">
                 <div class="wrap">
                     <div class="search">
@@ -179,18 +181,45 @@
     </div>
 
     <footer >
-        <div class="footer-pages">
-            <p class="footer-title" >Pages</p>
-            <a href="#">Home</a>
+        <div class="upper-footer">
+    <div class="links-container">
+        <h3 class="title">PAGES</h3>
+        <a href="">Home</a>
+        <a href="">Stores</a>
+        <a href="">Register</a>   
+    </div>
+    <div class="social-container">
+        <h3 class="title">SOCIAL MEDIA</h3>
+        <div class="social-items">
+            <a href=""><i class="fa-brands fa-instagram fa-2xl"></i></a>
+            <a href=""><i class="fa-brands fa-twitter fa-2xl"></i></a>
+            <a href=""><i class="fa-brands fa-facebook fa-2xl"></i></a>
+            <a href=""><i class="fa-brands fa-linkedin fa-2xl"></i></a>
+            <a href=""><i class="fa-brands fa-github fa-2xl"></i></a>
         </div>
-        <div class="footer-media">
-            <p class="footer-title" >Pages</p>
-
+    </div>
+    <div class="contact-container">
+        <h3 class="title">CONTACT</h3>
+        <div class="contact-item">
+            <i class="fa-solid fa-location-dot fa-lg"></i>
+            <p class="contact-adress" >Kasindolska 6, Sarajevo</p>
         </div>
-        <div class="footer-contact">
-            <p class="footer-title" >Pages</p>
-
+        <div class="contact-item">
+            <i class="fa-solid fa-phone fa-lg"></i>
+            <p class="contact-phone" >062-634-818</p>
         </div>
+        <div class="contact-item">
+            <i class="fa-solid fa-envelope fa-lg"></i>
+            <p class="contact-mail">burgija387@etf.unsa.ba</p>
+        </div>
+        
+        
+    </div>
+    
+</div>
+<div class="lower-footer">
+    <p>Copyright © 2023, All Right Reserved Burgija</p>
+</div>
 
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
