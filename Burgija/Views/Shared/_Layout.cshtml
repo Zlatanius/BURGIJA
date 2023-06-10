@@ -14,49 +14,30 @@
     <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Burgija.styles.css" asp-append-version="true" />
-    
+
     <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
-      <style>
-          
-          #main {
-              margin-bottom: 60px;
-          }
-      
-    </style>
-    <script>
-        const nav = document.querySelector("#site-nav");
-        //const menuItems = document.querySelectorAll(".menuItem");
-        const hamburger= document.querySelector(".hamburger");
-        
+    <style>
 
-        function toggleMenu() {
-            if (nav.classList.contains("showMenu")) {
-                nav.classList.remove("showMenu");
-                
-            } else {
-                nav.classList.add("showMenu");
-                
-            }
+        #main {
+            margin-bottom: 60px;
         }
+    </style>
 
-        hamburger.addEventListener("click", toggleMenu);
-
-</script>
 </head>
 <body>
     <header>
         <div class="upper-container">
             <a asp-controller="Home" asp-action="Index">
-            <div  class="logo-container">
-                <div class="icon-container">
-                    <img src="https://static.vecteezy.com/system/resources/previews/016/415/344/original/electric-drill-illustration-in-minimal-style-png.png" alt="">
+                <div class="logo-container">
+                    <div class="icon-container">
+                        <img src="https://static.vecteezy.com/system/resources/previews/016/415/344/original/electric-drill-illustration-in-minimal-style-png.png" alt="">
 
+                    </div>
+                    <div class="name-container">
+                        <p>BURGIJA</p>
+                    </div>
                 </div>
-                <div class="name-container">
-                    <p>BURGIJA</p>
-                </div>
-            </div>
             </a>
 
             <!--search bar-->
@@ -76,27 +57,29 @@
 
             <!---->
             <div class="login-container">
-                
+
                 <a asp-action="WhereYouCanFindUs" asp-controller="Home"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
-                @if (SignInManager.IsSignedIn(User)){
+                @if (SignInManager.IsSignedIn(User))
+                {
                     <div class="user-dropdowns">
                         <i class="fa-regular fa-user fa-xl"></i>
                         <p>@User.Identity.Name!</p>
                     </div>
-                    <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
-                        <button  type="submit" ><i class="fa-solid fa-right-from-bracket fa-2xl"></i></button>
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                        <button type="submit"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></button>
                     </form>
                     <!--<a asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>-->
                 }
-                else {
+                else
+                {
                     <a asp-area="Identity" asp-page="/Account/Login" class="sign-up">Sign in</a>
-                    
+
                 }
-                
+
             </div>
         </div>
         <div class="nav-container">
-            <button class="hamburger">
+            <button class="hamburger" onclick="myFunction()" >
                 <i class="fa-solid fa-bars fa-2xl"></i>
             </button>
             <button class="nav-item">
@@ -218,173 +201,151 @@
                 </div>
             </button>
         </div>
-        
+
     </header>
-    <nav id="site-nav" role="navigation">
-          <a class="category-item">
-              <p class="category-name">Fasteners</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">FloorCare</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">General Construction</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Ladders and scaffolding</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Lawn care</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Material handling</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Paint and dry walls</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Plumbing</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">PortablePower</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">PowerTools</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Pressure Washers</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Demolition</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Tile saws</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Trailers</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Tree care</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Trenchers</p>
-          </a>
-          <a class="category-item">
-              <p class="category-name">Welding</p>
-          </a>
-     </nav>
+    <div class="cat-dropdown-container" id="cat-dropdown">
+        <nav id="site-nav" role="navigation">
+            <a class="category-item">
+                <p class="category-name">Fasteners</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">FloorCare</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">General Construction</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Ladders and scaffolding</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Lawn care</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Material handling</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Paint and dry walls</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Plumbing</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">PortablePower</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">PowerTools</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Pressure Washers</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Demolition</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Tile saws</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Trailers</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Tree care</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Trenchers</p>
+            </a>
+            <a class="category-item">
+                <p class="category-name">Welding</p>
+            </a>
+        </nav>
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer >
+    <footer>
         <div class="upper-footer">
-    <div class="links-container">
-        <h3 class="title">PAGES</h3>
-        <a href="">Home</a>
-        <a href="">Stores</a>
-        <a href="">Register</a>   
-    </div>
-    <div class="social-container">
-        <h3 class="title">SOCIAL MEDIA</h3>
-        <div class="social-items">
-            <a href=""><i class="fa-brands fa-instagram fa-2xl"></i></a>
-            <a href=""><i class="fa-brands fa-twitter fa-2xl"></i></a>
-            <a href=""><i class="fa-brands fa-facebook fa-2xl"></i></a>
-            <a href=""><i class="fa-brands fa-linkedin fa-2xl"></i></a>
-            <a href=""><i class="fa-brands fa-github fa-2xl"></i></a>
+            <div class="links-container">
+                <h3 class="title">PAGES</h3>
+                <a href="">Home</a>
+                <a href="">Stores</a>
+                <a href="">Register</a>
+            </div>
+            <div class="social-container">
+                <h3 class="title">SOCIAL MEDIA</h3>
+                <div class="social-items">
+                    <a href=""><i class="fa-brands fa-instagram fa-2xl"></i></a>
+                    <a href=""><i class="fa-brands fa-twitter fa-2xl"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook fa-2xl"></i></a>
+                    <a href=""><i class="fa-brands fa-linkedin fa-2xl"></i></a>
+                    <a href=""><i class="fa-brands fa-github fa-2xl"></i></a>
+                </div>
+            </div>
+            <div class="contact-container">
+                <h3 class="title">CONTACT</h3>
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot fa-lg"></i>
+                    <p class="contact-adress">Kasindolska 6, Sarajevo</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone fa-lg"></i>
+                    <p class="contact-phone">062-634-818</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope fa-lg"></i>
+                    <p class="contact-mail">burgija387@etf.unsa.ba</p>
+                </div>
+
+
+            </div>
+
         </div>
-    </div>
-    <div class="contact-container">
-        <h3 class="title">CONTACT</h3>
-        <div class="contact-item">
-            <i class="fa-solid fa-location-dot fa-lg"></i>
-            <p class="contact-adress" >Kasindolska 6, Sarajevo</p>
+        <div class="lower-footer">
+            <p>Copyright © 2023, All Right Reserved Burgija</p>
         </div>
-        <div class="contact-item">
-            <i class="fa-solid fa-phone fa-lg"></i>
-            <p class="contact-phone" >062-634-818</p>
-        </div>
-        <div class="contact-item">
-            <i class="fa-solid fa-envelope fa-lg"></i>
-            <p class="contact-mail">burgija387@etf.unsa.ba</p>
-        </div>
-        
-        
-    </div>
-    
-</div>
-<div class="lower-footer">
-    <p>Copyright © 2023, All Right Reserved Burgija</p>
-</div>
-    <script>
-    $(function() {
-    $('body').addClass('js');
-  
-    var $hamburger = $('.hamburger'),
-        $nav = $('#site-nav'),
-        
-  
-    $hamburger.click(function() {
-      $(this).toggleClass('is-active');
-      $nav.toggleClass('is-active');
-      
-      return false; 
-    })
-});
-</script>
+        <script>$(function () {
+                $('body').addClass('js');
+
+                var $hamburger = $('.hamburger'),
+                    $nav = $('#site-nav'),
+
+
+                    $hamburger.click(function () {
+                        $(this).toggleClass('is-active');
+                        $nav.toggleClass('is-active');
+
+                        return false;
+                    })
+            });</script>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("cat-dropdown").classList.toggle("show");
+  console.log("Test")
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.hamburger') && !event.target.matches('.fa-bars')) {
+    document.getElementById("cat-dropdown").classList.remove("show");
+  }
+}
+</script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 
 @section scripts {
-<script>
-    $(function() {
-    $('body').addClass('js');
-  
-    var $hamburger = $('.hamburger'),
-        $nav = $('#site-nav'),
-        
-  
-    $hamburger.click(function() {
-      $(this).toggleClass('is-active');
-      $nav.toggleClass('is-active');
-      
-      return false; 
-    })
-});
-</script>
 
-<script>
-    $(function () {
-        $("#searching").click( function () {
-            $("Form").submit();
-        })
-    });
-</script>
-<script>
-        const nav = document.querySelector("#site-nav");
-        //const menuItems = document.querySelectorAll(".menuItem");
-        const hamburger= document.querySelector(".hamburger");
-        
-
-        function toggleMenu() {
-            if (nav.classList.contains("showMenu")) {
-                nav.classList.remove("showMenu");
-                
-            } else {
-                nav.classList.add("showMenu");
-                
-            }
-        }
-
-        hamburger.addEventListener("click", toggleMenu);
-
-</script>
+    <script>$(function () {
+            $("#searching").click(function () {
+                $("Form").submit();
+            })
+        });</script>
 }
