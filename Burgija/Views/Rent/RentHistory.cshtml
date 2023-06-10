@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Burgija.Models.Rent>
+
+@{
+    ViewData["Title"] = "RentHistory";
+}
+<!--
+<h1>RentHistory</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tool)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartOfRent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndOfRent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tool.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartOfRent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndOfRent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentPrice)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>-->
+<div class="page-content">
+    <div class="rent-history-item">
+        <div class="left-section">
+            <img src="" />
+        </div>
+        <div class="right-section">
+            <p class="article id"></p>
+            <div class="row">
+                <p class="article-id">SI34562</p>
+                <a href="">See item!</a>
+            </div>
+            <div class="row">
+                <p class="article-name">Busilica Schrack 24 mm</p>
+            </div>
+            <div class="row">
+                <p class="start-date">Start of rent: 06/05/2023 </p>
+                <p class="end-date">End of rent: 06/05/2023 </p>
+                <p class="total-date">Number of days: 33 </p>
+
+            </div>
+            <div class="row">
+                <p class="article-price"></p>
+                <div class="active-status">Returned</div>
+            </div>
+
+        </div>
+    </div>
+</div>

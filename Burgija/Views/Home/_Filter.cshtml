@@ -26,7 +26,7 @@
 <p class="parametar">Price range</p>
 <form class="price">
     <label class="pushleft" for="fname">Lowest price:</label>
-    <input style="margin-left: 22px;" type="number" id="lowprice" name="fname"><br>
+    <input  type="number" id="lowprice" name="fname"><br>
     <label class="pushleft" for="lname">Highest price:</label>
     <input type="number" id="highprice" name="lname">
 </form>
@@ -45,6 +45,17 @@
   <label for="store-place">Bugojno</label><br>
   
 </form>
+<p class="parametar">Sort by: </p>
+
+<form>
+    
+  <select name="sort-options" id="sort-options">
+    <option value="lowerPrice">Lowest price first</option>
+    <option value="higherPrice">Highest price first</option>
+    
+  </select>
+</form>
+
 <button class="apply">Apply</button>
 </div>
 </html>

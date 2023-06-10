@@ -71,23 +71,60 @@ header .upper-container {
     }
 
     header .upper-container .login-container {
-        width: 180px;
+        width: 250px;
         height: 100%;
         //background-color: cadetblue;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
     }
-        header .upper-container .login-container a {
-            
-            color:darkslateblue;
+        header .upper-container .login-container .profile-dropdown .profile-dropdown-div {
+            display: none;
+            position: absolute;
+            background: var(--bg-color);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            border-top-right-radius: 0px;
+            width: 200px;
+            padding: 0px 10px;
+            top: 60px;
+            right: 10px;
+            z-index: 1000;
         }
+header .upper-container .login-container .profile-dropdown .user-dropdown {
+    height: 40px;
+    width: 150px;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+.profile-dropdown:hover ~ .profile-dropdown-div,
+.profile-dropdown-div:hover {
+    display: block;
+}
+            header .upper-container .login-container .user-dropdown i {
+                margin-left: 10px;
+                margin-right: 10px;
+                color: darkblue;
+            }
+            header .upper-container .login-container .user-dropdown p {
+               
+                font-size: 16px;
+            }
+            header .upper-container .login-container form button  {
+                color: darkslateblue;
+            }
         header .upper-container .login-container .sign-up {
             width: 120px;
             height: 35px;
             background-color: #bcbbf2;
             border-radius: 10px;
             border: 0px solid;
+            display:flex;
+            align-items:center;
+            justify-content:center;
         }
             header .upper-container .login-container .logout {
                 color:blue;
@@ -198,7 +235,14 @@ nav {
     height: 400px;
     background-color: white;
     grid-template-columns: auto auto auto auto;
-    opacity:0;
+    position: fixed;
+    transform: translateY(-100%);
+    transition: transform 0.2s;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
 }
 nav  .category-item {
     display:flex;
@@ -215,5 +259,11 @@ nav  .category-item {
     }
 
 .nav .is-active {
-    opacity:1;
+    overflow:visible;
+}
+.is-active {
+    overflow: visible;
+}
+nav .showMenu {
+    transform: translateY(0);
 }

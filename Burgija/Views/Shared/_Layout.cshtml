@@ -25,20 +25,23 @@
       
     </style>
     <script>
-    $(function() {
-    $('body').addClass('js');
-  
-    var $hamburger = $('.hamburger'),
-        $nav = $('#site-nav'),
+        const nav = document.querySelector("#site-nav");
+        //const menuItems = document.querySelectorAll(".menuItem");
+        const hamburger= document.querySelector(".hamburger");
         
-  
-    $hamburger.click(function() {
-      $(this).toggleClass('is-active');
-      $nav.toggleClass('is-active');
-      
-      return false; 
-    })
-});
+
+        function toggleMenu() {
+            if (nav.classList.contains("showMenu")) {
+                nav.classList.remove("showMenu");
+                
+            } else {
+                nav.classList.add("showMenu");
+                
+            }
+        }
+
+        hamburger.addEventListener("click", toggleMenu);
+
 </script>
 </head>
 <body>
@@ -55,22 +58,35 @@
                 </div>
             </div>
             </a>
-            <div class="search-bar-container">
-                <div class="wrap">
-                    <div class="search">
-                        <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                        <button type="submit" class="searchButton">
-                            <i class="fa fa-search"></i>
-                        </button>
+
+            <!--search bar-->
+            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="search">
+                <div class="search-bar-container">
+                    <div class="wrap">
+                        <div class="search">
+                            <input type="text" name="search" class="searchTerm" placeholder="What are you looking for?">
+                            <button id="searching" type="submit" class="searchButton">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+
+
+            <!---->
             <div class="login-container">
                 
-                <a asp-action="WhereYouCanFindUs"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
+                <a asp-action="WhereYouCanFindUs" asp-controller="Home"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
                 @if (SignInManager.IsSignedIn(User)){
-                    <p>Hello @User.Identity.Name!</p>
-                    <a asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>
+                    <div class="user-dropdowns">
+                        <i class="fa-regular fa-user fa-xl"></i>
+                        <p>@User.Identity.Name!</p>
+                    </div>
+                    <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                        <button  type="submit" ><i class="fa-solid fa-right-from-bracket fa-2xl"></i></button>
+                    </form>
+                    <!--<a asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>-->
                 }
                 else {
                     <a asp-area="Identity" asp-page="/Account/Login" class="sign-up">Sign in</a>
@@ -327,6 +343,7 @@
 </body>
 </html>
 
+@section scripts {
 <script>
     $(function() {
     $('body').addClass('js');
@@ -343,3 +360,31 @@
     })
 });
 </script>
+
+<script>
+    $(function () {
+        $("#searching").click( function () {
+            $("Form").submit();
+        })
+    });
+</script>
+<script>
+        const nav = document.querySelector("#site-nav");
+        //const menuItems = document.querySelectorAll(".menuItem");
+        const hamburger= document.querySelector(".hamburger");
+        
+
+        function toggleMenu() {
+            if (nav.classList.contains("showMenu")) {
+                nav.classList.remove("showMenu");
+                
+            } else {
+                nav.classList.add("showMenu");
+                
+            }
+        }
+
+        hamburger.addEventListener("click", toggleMenu);
+
+</script>
+}

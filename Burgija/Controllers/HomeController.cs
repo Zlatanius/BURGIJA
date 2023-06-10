@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Burgija.Data;
 using Burgija.Models;
+using Microsoft.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace Burgija.Controllers
 {
@@ -36,10 +38,15 @@ namespace Burgija.Controllers
         }
 
         // GET: Home
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _context.ToolType.ToListAsync());
+            if(search == null)
+                return View(await _context.ToolType.ToListAsync());
+            ViewBag.Search = search;
+            List<ToolType> searchResults = await _context.ToolType.Where(t => t.Name.ToLower().Contains(search.ToLower())).ToListAsync();
+            return View(searchResults);
         }
+
 
         // GET: Home/Details/5
         public async Task<IActionResult> ToolDetails(int? id)
@@ -55,12 +62,19 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-            stores = await _context.Store.ToListAsync();
-            locations = await _context.Location.ToListAsync();
-            tools = await _context.Tool.ToListAsync();
-            ViewBag.Store = stores;
-            ViewBag.Location = locations;
-            ViewBag.Tool = tools;
+            var parameter = new SqlParameter("@id", toolType.Id);
+
+            var query = "select l.address as Address, s.id as StoreId, count(t.id) as Quantity from location l, store s, tool t, tooltype tt where l.id = s.locationid and s.id = t.storeid and t.tooltypeid = tt.id and  tt.id = @id group by l.address,s.id";
+
+            var results = await _context.ToolAndStore.FromSqlRaw(query,parameter).ToListAsync();
+
+            foreach (var result in results)
+            {
+                var address = result.Address;
+                var storeId = result.StoreId;
+                var quantity = result.Quantity;
+            }
+            ViewBag.ToolAndStore = results;
             return View(toolType);
         }
 
