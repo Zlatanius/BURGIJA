@@ -78,17 +78,32 @@ header .upper-container {
         align-items: center;
         justify-content: space-evenly;
     }
-        header .upper-container .login-container .user-dropdown {
-            height:40px;
-            width:150px;
-            background-color:lightblue;
-            display:flex;
-            align-items:center;
-            
-                border-radius:8px;
-                border: 1px solid gray;
-            
+        header .upper-container .login-container .profile-dropdown .profile-dropdown-div {
+            display: none;
+            position: absolute;
+            background: var(--bg-color);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            border-top-right-radius: 0px;
+            width: 200px;
+            padding: 0px 10px;
+            top: 60px;
+            right: 10px;
+            z-index: 1000;
         }
+header .upper-container .login-container .profile-dropdown .user-dropdown {
+    height: 40px;
+    width: 150px;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+.profile-dropdown:hover ~ .profile-dropdown-div,
+.profile-dropdown-div:hover {
+    display: block;
+}
             header .upper-container .login-container .user-dropdown i {
                 margin-left: 10px;
                 margin-right: 10px;
