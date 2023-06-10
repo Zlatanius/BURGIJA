@@ -78,7 +78,7 @@ header .upper-container {
         align-items: center;
         justify-content: space-evenly;
     }
-        header .upper-container .login-container .user-field {
+        header .upper-container .login-container .user-dropdown {
             height:40px;
             width:150px;
             background-color:lightblue;
@@ -89,12 +89,12 @@ header .upper-container {
                 border: 1px solid gray;
             
         }
-            header .upper-container .login-container .user-field i {
+            header .upper-container .login-container .user-dropdown i {
                 margin-left: 10px;
                 margin-right: 10px;
                 color: darkblue;
             }
-            header .upper-container .login-container .user-field p {
+            header .upper-container .login-container .user-dropdown p {
                
                 font-size: 16px;
             }
