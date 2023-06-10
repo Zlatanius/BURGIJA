@@ -62,18 +62,27 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-            var parameter = new SqlParameter("@id", toolType.Id);
+            /*var parameter = new SqlParameter("@id", toolType.Id);
 
             var query = "select l.address as Address, s.id as StoreId, count(t.id) as Quantity from location l, store s, tool t, tooltype tt where l.id = s.locationid and s.id = t.storeid and t.tooltypeid = tt.id and  tt.id = @id group by l.address,s.id";
 
-            var results = await _context.ToolAndStore.FromSqlRaw(query,parameter).ToListAsync();
+            var results = await _context.ToolAndStore.FromSqlRaw(query,parameter).ToListAsync();*/
 
-            foreach (var result in results)
-            {
-                var address = result.Address;
-                var storeId = result.StoreId;
-                var quantity = result.Quantity;
-            }
+
+            var results = await _context.Tool
+            .Join(_context.Store, t => t.StoreId, s => s.Id, (t, s) => new { Tool = t, Store = s })
+            .Join(_context.Location, ts => ts.Store.LocationId, l => l.Id, (ts, l) => new { ts.Tool, ts.Store, Location = l })
+            .Join(_context.ToolType, tsl => tsl.Tool.ToolTypeId, tt => tt.Id, (tsl, tt) => new { tsl.Tool, tsl.Store, tsl.Location, ToolType = tt })
+            .Where(result => result.ToolType.Id == toolType.Id)
+            .GroupBy(result => new { result.Location.Address, result.Store.Id })
+            .Select(group => new ToolAndStore
+            (
+                group.Key.Address,
+                group.Key.Id,
+                group.Count()
+            ))
+            .ToListAsync();
+
             ViewBag.ToolAndStore = results;
             return View(toolType);
         }
