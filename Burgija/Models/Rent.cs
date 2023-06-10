@@ -24,7 +24,7 @@ namespace Burgija.Models
         public Discount Discount { get; set; }
 
         [ForeignKey("Discount")]
-        public int DiscountId { get; set; }
+        public int? DiscountId { get; set; }
         public double RentPrice { get; set; }
 
         #endregion
