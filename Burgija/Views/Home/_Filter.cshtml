@@ -23,39 +23,29 @@
 <div class="filter-box" >
 <p class="title" >Filters</p>
 
+<form>
 <p class="parametar">Price range</p>
-<form class="price">
+<div class="price">
     <label class="pushleft" for="fname">Lowest price:</label>
     <input  type="number" id="lowprice" name="fname"><br>
     <label class="pushleft" for="lname">Highest price:</label>
     <input type="number" id="highprice" name="lname">
-</form>
+</div>
 
 <p class="parametar">Location</p>
-<form class="location" >
-  <input type="radio" id="store-place" name="store" value="">
-  <label for="store-place">Sarajevo</label><br>
-  <input type="radio" id="store-place" name="store" value="">
-  <label for="store-place">Sjenica</label><br>
-  <input type="radio" id="store-place" name="store" value="">
-  <label for="store-place">Travnik</label><br>
-  <input type="radio" id="store-place" name="store" value="">
-  <label for="store-place">Velika Kladusa</label><br>
-  <input type="radio" id="store-place" name="store" value="">
-  <label for="store-place">Bugojno</label><br>
-  
-</form>
+
 <p class="parametar">Sort by: </p>
 
-<form>
+<div class="sort">
     
   <select name="sort-options" id="sort-options">
     <option value="lowerPrice">Lowest price first</option>
     <option value="higherPrice">Highest price first</option>
     
   </select>
-</form>
+</div>
 
 <button class="apply">Apply</button>
+</form>
 </div>
 </html>
