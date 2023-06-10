@@ -229,7 +229,8 @@ header .upper-container .login-container .profile-dropdown .user-dropdown {
 .cat-dropdown-container {
     visibility: hidden;
     position: absolute;
-    width: 100%;
+    width: 95%;
+    margin-left: 2.5%;
 }
 
 .show{
@@ -238,19 +239,25 @@ header .upper-container .login-container .profile-dropdown .user-dropdown {
 
 nav {
     display: grid;
-    height: 400px;
+    height: 350px;
     background-color: white;
     grid-template-columns: auto auto auto auto;
     z-index: 99;
+    border-bottom-left-radius: 20px 20px;
+    border-bottom-right-radius: 20px 20px;
+    border-bottom: #bebebe 2px solid;
 }
 nav  .category-item {
     display:flex;
     width:200px;
-    background-color:aqua;
+    background-color:rgb(185, 225, 237);
     height:50px;
     align-self:center;
     justify-self:center;
+    justify-content: center;
     cursor: pointer;
+    border-radius: 10px 10px;
+    border: rgb(136, 166, 175) 1px solid;
 }
     nav .category-item p {
         color:black;

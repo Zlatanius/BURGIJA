@@ -61,7 +61,7 @@
                 <a asp-action="WhereYouCanFindUs" asp-controller="Home"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <div class="user-dropdowns">
+                    <div class="user-dropdown">
                         <i class="fa-regular fa-user fa-xl"></i>
                         <p>@User.Identity.Name!</p>
                     </div>
