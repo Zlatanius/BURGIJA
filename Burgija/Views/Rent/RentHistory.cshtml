@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Burgija.Models.Rent>
+﻿@model IEnumerable<Burgija.Models.RentAndToolType>
 
 @{
     ViewData["Title"] = "RentHistory";
@@ -7,97 +7,38 @@
 <head>
     <link rel="stylesheet" href="~/css/renthistory.css" asp-append-version="true" />
 </head>
-<!--
-<h1>RentHistory</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tool)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartOfRent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndOfRent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RentPrice)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tool.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartOfRent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndOfRent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discount.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RentPrice)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>-->
 <div class="page-content">
     <div class="rent-header"></div>
     
 
-
+    @foreach(var item in Model){
     <div class="rent-history-item">
         <div class="left-section">
             <img src="" />
         </div>
         <div class="right-section">
-
+           
             <div id="first-row" class="row">
-                <p class="article-id">SI34562</p>
+                <p class="article-id">@item.Rent.ToolId</p>
                 <a class="item-link" href="">See item!</a>
             </div>
             <div class="row">
-                <p class="article-name">Busilica Schrack 24 mm</p>
+                <p class="article-name">@item.ToolType.Name</p>
             </div>
             <div id="third-row" class="row">
-                <p class="start-date">Start of rent: 06/05/2023 </p>
-                <p class="end-date">End of rent: 06/05/2023 </p>
-                <p class="total-date">Number of days: 33 </p>
+                <p class="start-date">Start of rent: @item.Rent.StartOfRent </p>
+                <p class="end-date">End of rent: @item.Rent.EndOfRent </p>
+                <p class="total-date">Number of days: </p>
 
             </div>
             <div id="fourth-row" class="row">
-                <p class="article-price">Price of rent: 450 KM</p>
+                <p class="article-price">Price of rent: @item.Rent.RentPrice</p>
                 <div class="active-status">Returned</div>
             </div>
-
+            
         </div>
     </div>
-
     
+    }
 </div>
