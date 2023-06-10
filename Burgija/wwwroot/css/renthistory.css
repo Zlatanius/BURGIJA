@@ -1,0 +1,131 @@
+﻿/*
+    <div class="page-content">
+    <div class="rent-history-item">
+        <div class="left-section">
+            <img src="" />
+        </div>
+        <div class="right-section">
+            
+            <div class="row">
+                <p class="article-id">SI34562</p>
+                <a  href="">See item!</a>
+            </div>
+            <div class="row">
+                <p class="article-name">Busilica Schrack 24 mm</p>
+            </div>
+            <div class="row">
+                <p class="start-date">Start of rent: 06/05/2023 </p>
+                <p class="end-date">End of rent: 06/05/2023 </p>
+                <p class="total-date">Number of days: 33 </p>
+
+            </div>
+            <div class="row">
+                <p class="article-price"></p>
+                <div class="active-status">Returned</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+*/
+.page-content {
+    width: 100%;
+    min-height:86vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(232, 235, 235);
+    align-items: center;
+}
+.page-content .rent-header {
+    width:60%;
+    height:80px;
+    display:flex;
+    background-color:white;
+    margin-top:30px;
+    margin-bottom:20px;
+}
+.page-content .rent-history-item {
+    margin-bottom: 30px;
+    width:60%;
+    height:250px;
+    display:flex;
+    background-color:white;
+
+}
+.page-content .rent-history-item .left-section {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:250px;
+}
+    .page-content .rent-history-item .left-section img {
+        width:90%;
+        height:90%;
+    }
+.page-content .rent-history-item .right-section {
+    width:calc(100% - 250px);
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    
+
+}
+    .page-content .rent-history-item .right-section .row  {
+        width:90%;
+        height:45px;
+        display:flex;
+        //background-color:red;
+        margin-top:8px;
+        align-items:center;
+    }
+.page-content .rent-history-item .right-section #first-row {
+    justify-content:space-between;
+}
+    .page-content .rent-history-item .right-section #third-row {
+        justify-content: space-between;
+    }
+    .page-content .rent-history-item .right-section #fourth-row {
+        justify-content: space-between;
+    }
+
+
+
+.page-content .rent-history-item .right-section .row .article-id {
+    font-size: 18px;
+}
+    .page-content .rent-history-item .right-section .row  .item-link {
+        font-size:18px;
+        text-decoration:none;
+        margin-left: 450px;
+        
+    }
+    .page-content .rent-history-item .right-section .row .article-name {
+        font-size:25px;
+
+    }
+    .page-content .rent-history-item .right-section .row .start-date{
+        color:darkcyan;
+    }
+    .page-content .rent-history-item .right-section .row .end-date {
+        color: darkcyan;
+    }
+    .page-content .rent-history-item .right-section .row .total-date {
+        color: darkcyan;
+    }
+    .page-content .rent-history-item .right-section .row .article-price {
+        font-size:25px;
+    }
+    .page-content .rent-history-item .right-section .row .active-status {
+        width: 100px;
+        height:35px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:8px;
+        background-color:lightskyblue;
+    }
+
+
+
+
