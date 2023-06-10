@@ -61,13 +61,26 @@
                 <a asp-action="WhereYouCanFindUs" asp-controller="Home"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <div class="user-dropdown">
-                        <i class="fa-regular fa-user fa-xl"></i>
-                        <p>@User.Identity.Name!</p>
+                    <div class="user-dropdown-container" onclick="toggleUserDropdown()">
+                        <div class="user">
+                            <i class="fa-regular fa-user fa-xl"></i>
+                            <p>@User.Identity.Name!</p>
+                        </div>
+                        <div class="user-dropdown" id="user-dropdown">
+                            <div class="user-dropwdown-item has-bottom-border">
+                                <p>My Orders</p>
+                            </div>
+                            <div class="user-dropwdown-item has-bottom-border">
+                                <p>Settings</p>
+                            </div>
+                            <div class="user-dropwdown-item">
+                                <p>Logout</p>
+                            </div>
+                        </div>
                     </div>
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                    <!-- <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
                         <button type="submit"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></button>
-                    </form>
+                    </form> -->
                     <!--<a asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>-->
                 }
                 else
@@ -79,7 +92,7 @@
             </div>
         </div>
         <div class="nav-container">
-            <button class="hamburger" onclick="myFunction()" >
+            <button class="hamburger" onclick="toggleCatDropdown()">
                 <i class="fa-solid fa-bars fa-2xl"></i>
             </button>
             <button class="nav-item">
@@ -322,21 +335,31 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("cat-dropdown").classList.toggle("show");
-  console.log("Test")
-}
+    <script>/* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function toggleCatDropdown() {
+            document.getElementById("cat-dropdown").classList.toggle("show");
+        }
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.hamburger') && !event.target.matches('.fa-bars')) {
-    document.getElementById("cat-dropdown").classList.remove("show");
-  }
-}
-</script>
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.hamburger') && !event.target.matches('.fa-bars')) {
+                document.getElementById("cat-dropdown").classList.remove("show");
+            }
+        }
+
+        function toggleUserDropdown() {
+            console.log("Test")
+            document.getElementById("user-dropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            console.log(event.target)
+            if (!event.target.matches('.user-dropdown-container') && !event.target.matches('.user-dropdown-container *')) {
+                document.getElementById("user-dropdown").classList.remove("show");
+            }
+        }</script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

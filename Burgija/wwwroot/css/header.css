@@ -91,31 +91,33 @@ header .upper-container {
             right: 10px;
             z-index: 1000;
         }
-header .upper-container .login-container .profile-dropdown .user-dropdown {
+
+ .user {
     height: 40px;
-    width: 150px;
-    background-color: lightblue;
+    padding-right: 10px;
+    background-color: #b2e2f2;
     display: flex;
     align-items: center;
     border-radius: 8px;
     border: 1px solid gray;
+    &:hover{
+        background-color: #98c2cf;
+    }
 }
-.profile-dropdown:hover ~ .profile-dropdown-div,
-.profile-dropdown-div:hover {
-    display: block;
-}
-            header .upper-container .login-container .user-dropdown i {
+
+            .user i {
                 margin-left: 10px;
                 margin-right: 10px;
                 color: darkblue;
             }
-            header .upper-container .login-container .user-dropdown p {
-               
+            .user p {
                 font-size: 16px;
             }
+
             header .upper-container .login-container form button  {
                 color: darkslateblue;
             }
+            
         header .upper-container .login-container .sign-up {
             width: 120px;
             height: 35px;
@@ -130,16 +132,40 @@ header .upper-container .login-container .profile-dropdown .user-dropdown {
                 color:blue;
             }
 
-
-
-
-            header .nav-container {
-                width: 80%;
-                height: 65px;
-                display: flex;
-                //background-color: bisque;
-                align-items: center
+            .user-dropdown-container{
+                position: relative;
+                display: inline-block;
             }
+
+            .user-dropdown{
+                visibility: hidden;
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                background-color: white;
+                border: gray 1px solid;
+                border-radius: 5px 5px;
+                width: 150%;
+                margin-top: 5px;
+            }
+
+            .user-dropwdown-item{
+                padding-left: 10px;
+                &.has-bottom-border{
+                    border-bottom: gray 1px solid;
+                }
+                &:hover{
+                    background-color: rgb(245, 245, 245);
+                }
+            }
+
+        header .nav-container {
+            width: 80%;
+            height: 65px;
+            display: flex;
+            //background-color: bisque;
+            align-items: center
+        }
         header .nav-container .hamburger {
             width: 60px;
             height: 60px;
