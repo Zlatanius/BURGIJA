@@ -77,22 +77,12 @@
             <!---->
             <div class="login-container">
                 
-                <a asp-action="WhereYouCanFindUs"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
+                <a asp-action="WhereYouCanFindUs" asp-controller="Home"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
                 @if (SignInManager.IsSignedIn(User)){
-                    <input type="checkbox" name="profile-dropdown" id="profile-dropdown">
-                    <label for="profile-dropdown" class="profile-dropdown">
-                    <div class="user-dropdown">
+                    <div class="user-dropdowns">
                         <i class="fa-regular fa-user fa-xl"></i>
                         <p>@User.Identity.Name!</p>
                     </div>
-                    <div class="profile-dropdown-div">
-                        <a class="dropdown-link">Your rents</a>
-                        <a class="dropdown-link">Settings</a>
-                        <a class="dropdown-link">Logout</a>
-
-                    </div
-                   </label>
-                    
                     <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
                         <button  type="submit" ><i class="fa-solid fa-right-from-bracket fa-2xl"></i></button>
                     </form>

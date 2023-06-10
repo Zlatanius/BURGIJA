@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Burgija.Data;
 using Burgija.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Burgija.Controllers
 {
     public class RentController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser<int>> _userManager;
 
-        public RentController(ApplicationDbContext context)
+        public RentController(ApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Rent
@@ -26,9 +31,12 @@ namespace Burgija.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        [Authorize]
         public async Task<IActionResult> RentHistory()
         {
-            return View(await _context.Rent.ToListAsync());
+            var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            List<Rent> rentHistory= await _context.Rent.Where(rent => rent.UserId == userId).ToListAsync();
+            return View(rentHistory);
         }
 
         // GET: Rent/Details/5
