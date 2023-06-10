@@ -21,7 +21,7 @@
            
             <div id="first-row" class="row">
                 <p class="article-id">@item.Rent.ToolId</p>
-                <a class="item-link" href="">See item!</a>
+                <a class="item-link" asp-controller="Home" asp-action="ToolDetails" asp-route-id="@item.ToolType.Id">See item!</a>
             </div>
             <div class="row">
                 <p class="article-name">@item.ToolType.Name</p>
@@ -29,16 +29,28 @@
             <div id="third-row" class="row">
                 <p class="start-date">Start of rent: @item.Rent.StartOfRent </p>
                 <p class="end-date">End of rent: @item.Rent.EndOfRent </p>
-                <p class="total-date">Number of days: </p>
+                <p class="total-date">Number of days: @{
+                            @item.Rent.EndOfRent.Subtract(@item.Rent.StartOfRent).TotalDays
+                        }
+                </p>
 
             </div>
             <div id="fourth-row" class="row">
                 <p class="article-price">Price of rent: @item.Rent.RentPrice</p>
-                <div class="active-status">Returned</div>
+                <div class="active-status">
+                    @{
+                        if(item.Rent.EndOfRent > DateTime.Now && item.Rent.StartOfRent < DateTime.Now){
+                                <p>Currently rented</p>
+                            }
+                        else
+                            {
+                                <p>Returned</p>
+                            }
+                        }
+                </div>
             </div>
             
         </div>
     </div>
-    
     }
 </div>
