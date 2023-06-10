@@ -20,6 +20,9 @@ namespace Burgija.Controllers
         private List<Review> reviews;
         private List<Tool> tools;
         private List<Location> locations;
+
+
+        
         public HomeController(ApplicationDbContext context)
         {
             _context = context;

@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "RentHistory";
 }
+
+<head>
+    <link rel="stylesheet" href="~/css/renthistory.css" asp-append-version="true" />
+</head>
 <!--
 <h1>RentHistory</h1>
 
@@ -64,30 +68,36 @@
     </tbody>
 </table>-->
 <div class="page-content">
+    <div class="rent-header"></div>
+    
+
+
     <div class="rent-history-item">
         <div class="left-section">
             <img src="" />
         </div>
         <div class="right-section">
-            <p class="article id"></p>
-            <div class="row">
+
+            <div id="first-row" class="row">
                 <p class="article-id">SI34562</p>
-                <a href="">See item!</a>
+                <a class="item-link" href="">See item!</a>
             </div>
             <div class="row">
                 <p class="article-name">Busilica Schrack 24 mm</p>
             </div>
-            <div class="row">
+            <div id="third-row" class="row">
                 <p class="start-date">Start of rent: 06/05/2023 </p>
                 <p class="end-date">End of rent: 06/05/2023 </p>
                 <p class="total-date">Number of days: 33 </p>
 
             </div>
-            <div class="row">
-                <p class="article-price"></p>
+            <div id="fourth-row" class="row">
+                <p class="article-price">Price of rent: 450 KM</p>
                 <div class="active-status">Returned</div>
             </div>
 
         </div>
     </div>
+
+    
 </div>
