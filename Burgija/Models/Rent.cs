@@ -31,17 +31,22 @@ namespace Burgija.Models
 
         #region Constructors
 
-        public Rent(int id, IdentityUser<int> user, Tool tool, DateTime startOfRent, DateTime endOfRent, Discount discount)
+        
+        public Rent() { }
+
+        public Rent(int id, IdentityUser<int> user, int userId, Tool tool, int toolId, DateTime startOfRent, DateTime endOfRent, Discount discount, int? discountId, double rentPrice)
         {
             Id = id;
             User = user;
+            UserId = userId;
             Tool = tool;
+            ToolId = toolId;
             StartOfRent = startOfRent;
             EndOfRent = endOfRent;
             Discount = discount;
+            DiscountId = discountId;
+            RentPrice = rentPrice;
         }
-
-        public Rent() { }
 
         #endregion
 

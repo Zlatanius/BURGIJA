@@ -35,7 +35,10 @@ namespace Burgija.Controllers
         public async Task<IActionResult> RentHistory()
         {
             var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            List<Rent> rentHistory= await _context.Rent.Where(rent => rent.UserId == userId).ToListAsync();
+            var rentHistory = await _context.Rent
+            .Join(_context.Tool, rent => rent.ToolId, tool => tool.Id, (rent, tool) => new { Rent = rent, Tool = tool })
+            .Join(_context.ToolType, rt => rt.Tool.ToolTypeId, toolType => toolType.Id, (rt, toolType) => new RentAndToolType(rt.Rent, toolType))
+            .ToListAsync();
             return View(rentHistory);
         }
 
