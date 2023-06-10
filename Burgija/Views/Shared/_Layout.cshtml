@@ -68,13 +68,13 @@
                         </div>
                         <div class="user-dropdown" id="user-dropdown">
                             <div class="user-dropwdown-item has-bottom-border">
-                                <p>My Orders</p>
+                                <a asp-controller="Rent" asp-action="RentHistory">My Rent History</a>
                             </div>
                             <div class="user-dropwdown-item has-bottom-border">
-                                <p>Settings</p>
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a>
                             </div>
                             <div class="user-dropwdown-item">
-                                <p>Logout</p>
+                                    <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Logout</a>
                             </div>
                         </div>
                     </div>

@@ -100,6 +100,7 @@ header .upper-container {
     align-items: center;
     border-radius: 8px;
     border: 1px solid gray;
+    cursor: pointer;
     &:hover{
         background-color: #98c2cf;
     }
@@ -151,6 +152,7 @@ header .upper-container {
 
             .user-dropwdown-item{
                 padding-left: 10px;
+                cursor: pointer;
                 &.has-bottom-border{
                     border-bottom: gray 1px solid;
                 }
@@ -173,6 +175,11 @@ header .upper-container {
             background: rgb(237, 238, 238);
             margin-right: 30px;
             border-radius: 50%;
+            cursor: pointer;
+            &:hover
+{
+    background: rgb(220, 220, 220);
+}
         }
 
         header .nav-container .nav-item {
@@ -284,6 +291,7 @@ nav  .category-item {
     cursor: pointer;
     border-radius: 10px 10px;
     border: rgb(136, 166, 175) 1px solid;
+    cursor: pointer;
 }
     nav .category-item p {
         color:black;
