@@ -42,7 +42,11 @@
                         if(item.Rent.EndOfRent > DateTime.Now && item.Rent.StartOfRent < DateTime.Now){
                                 <p>Currently rented</p>
                             }
-                        else
+                            else if(item.Rent.StartOfRent > DateTime.Now)
+                            {
+                                <p>Reserved</p>
+                            }
+                            else
                             {
                                 <p>Returned</p>
                             }
