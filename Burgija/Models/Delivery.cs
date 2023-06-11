@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Burgija.Models
 {
-    public class Delivery
+    public class Delivery : IComparable<Delivery>
     {
         #region Properties
 
@@ -43,7 +43,10 @@ namespace Burgija.Models
 
         #region Methods
 
-        //TODO
+        public int CompareTo(Delivery other)
+        {
+            return Rent.StartOfRent.CompareTo(other.Rent.StartOfRent);
+        }
 
         #endregion
     }
