@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Burgija.Models
 {
-    public class Rent
+    public class Rent : IComparable<Rent>
     {
         #region Properties
 
@@ -52,7 +52,10 @@ namespace Burgija.Models
 
         #region Methods
 
-        //TODO
+        int IComparable<Rent>.CompareTo(Rent other)
+        {
+            return RentPrice.CompareTo(other.RentPrice);
+        }
 
         #endregion
     }

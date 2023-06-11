@@ -1,0 +1,261 @@
+﻿/*
+    <div class="review-container">
+            <div class="review">
+                <div class="review-header">
+                    <p class="review-username">Ahmed Ljubuncic</p>
+                    <div class="review-value">
+                        <!--ikonica za zvijezdu-->
+                        <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
+                        <p class="review-number">8/10</p>
+                    </div>
+                </div>
+                <div class="review-content">Great stuff to rent here!</div>
+                
+            </div>
+        </div>
+*/
+.review-container {
+    width:80%;
+    background-color:white;
+    display:flex;
+    flex-direction:column;
+    margin-bottom:150px;
+    align-items:center;
+    padding-top:100px;
+}
+.review-container .review-title {
+    width:calc(100% - 80px);
+    height:50px;
+    background-color:lavenderblush;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+}
+.review-container .review-title {
+    font-size:25px;
+}
+.review-container .review{
+    height:120px;
+    width: calc(100% - 120px);
+    border-radius:10px;
+    background-color:linen;
+    display:flex;
+    flex-direction:column;
+    margin-bottom:10px;
+    align-items:center;
+    padding-left:20px;
+    padding-right:20px;
+}
+.review-container .review-header {
+    width:100%;
+    height:40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.review-container .review-header .review-value {
+    display:flex;
+    //background-color:black;
+    width:50px;
+    height:20px;
+    align-items:center;
+    justify-content:space-evenly;
+}
+.review-container .review-content {
+    width:100%;
+    height:75px;
+    display:flex;
+    border-radius:4px;
+    //border: 1px solid lightblue;
+    //background-color:white;
+    padding-left:5px;
+    padding-top:5px;
+
+}
+.review-container .review-upper {
+    width:80%;
+    height:500px;
+    display:flex;
+    //background-color:blanchedalmond;
+    margin-bottom:50px;
+    margin-top:100px;
+}
+.review-container .review-upper .left-section {
+    width:50%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    //background-color:grey;
+
+}
+    .review-container .review-upper .left-section .rating-histogram {
+        height:300px;
+        width:360px;
+        display:flex;
+        background-color:#b6f3fc;
+        border-radius:7px;
+    }
+    .review-container .review-upper .right-section {
+        width: 50%;
+        height: 100%;
+        align-items: center;
+        justify-content:center;
+        
+    }
+        .review-container .review-upper .right-section .give-a-review {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            //background-color: blue;
+            flex-direction: column;
+            background-color:#fff4cc;
+            padding-left:30px;
+            border-radius: 7px;
+        }
+
+.review-container .review-upper .left-section .rating-histogram {
+    display:flex;
+}
+    .review-container .review-upper .left-section .rating-histogram .rating-overview {
+        width:100%;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+    }
+    .review-container .review-upper .left-section .rating-histogram .rating-overview .rating-overview-value{
+        height:70%;
+        width:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+        .review-container .review-upper .left-section .rating-histogram .rating-overview .rating-overview-value i {
+            font-size:70px;
+        }
+        .review-container .review-upper .left-section .rating-histogram .rating-overview .rating-overview-value p {
+            font-size:70px;
+        }
+        .review-container .review-upper .left-section .rating-histogram .rating-overview .rating-overview-members {
+            align-items:center;
+        }
+        .review-container .review-upper .left-section .rating-histogram .rating-overview .rating-overview-members i {
+            font-size: 20px;
+        }
+        .review-container .review-upper .left-section .rating-histogram .rating-overview .rating-overview-members p {
+            font-size:20px;
+        }
+
+        .review-container .review-upper .left-section .rating-histogram .rating-overview .rating-overview-members {
+            height: 30%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    .review-container .review-upper .left-section .rating-histogram .rating-by-mark {
+        width:50%;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+    }
+        .review-container .review-upper .left-section .rating-histogram .rating-by-mark ul {
+            list-style-type:none;
+        }
+            .review-container .review-upper .left-section .rating-histogram .rating-by-mark ul li {
+                display:flex;
+                height:40px;
+                width:120px;
+                align-items:center;
+                margin-bottom:10px;
+            }
+/*
+    <div class="rating-histogram">
+                        <div class="rating-overview">
+                            <div class="rating-overview-value">
+                                <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
+                                <p>4.0</p>
+                            </div>
+                            <div class="rating-overview-members">
+                                <i class="fa-solid fa-user fa-lg"></i>
+
+                                <p>74 total</p>
+                            </div>
+
+                        </div>
+                        <div class="rating-by-mark">
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
+
+                                    <p>5    3</p>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
+
+                                    <p>4    3</p>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
+
+                                    <p>3    3</p>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
+
+                                    <p>2    3</p>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
+
+                                    <p>1    3</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+    <div class="right-section">
+                    <form class="give-a-review">
+                        <p>Ahmed Ljubuncic</p>
+                        <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                        </div>
+                        <input type="text" />
+                        <input type="submit" value="Send review" />
+                    </form>
+                </div>
+*/
+
+    .review-container .review-upper .right-section .give-a-review .rating {
+        height:50px;
+        width:150px;
+        background-color:lightblue;
+        display:flex;
+        margin-bottom:20px;
+    }
+        .review-container .review-upper .right-section .give-a-review .comment {
+            width:90%;
+            height:270px;
+            //align-self:center;
+            //justify-content:center;
+        }
+        .review-container .review-upper .right-section .give-a-review .apply-button {
+            width:100px;
+            height:40px;
+            border-radius:10px;
+            background-color:lightblue;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            align-self:center;
+            margin-top:20px;
+        }

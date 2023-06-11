@@ -44,7 +44,13 @@
     margin-top:30px;
     margin-bottom:20px;
 }
-.page-content .rent-history-item {
+    .page-content .rent-header p {
+        font-size:25px;
+        margin-left:20px;
+        align-items:center;
+    
+    }
+        .page-content .rent-history-item {
     margin-bottom: 30px;
     width:60%;
     height:250px;
