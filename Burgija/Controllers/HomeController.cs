@@ -10,11 +10,17 @@ using Burgija.Models;
 using Microsoft.Data.SqlClient;
 using System.Text.RegularExpressions;
 
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+
 namespace Burgija.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        
+
+
         private List<Store> stores;
         private List<ToolType> toolTypes;
         private List<Review> reviews;
@@ -26,6 +32,7 @@ namespace Burgija.Controllers
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
+            
         }
 
         private async Task InitializeLists()
@@ -200,5 +207,37 @@ namespace Burgija.Controllers
         {
             return _context.ToolType.Any(e => e.Id == id);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+        public async Task<IEnumerable<ToolType>> GetToolTypesFromIds(List<int> ids)
+        {
+            var tooltypes = new List<ToolType>();
+            foreach (var id in ids)
+            {
+                tooltypes.Add(await _context.ToolType.FirstAsync(t => t.Id == id));
+            }
+            return tooltypes;
+        }
+
+        
     }
 }

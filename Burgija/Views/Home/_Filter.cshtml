@@ -23,13 +23,13 @@
 <div class="filter-box" >
 <p class="title" >Filters</p>
 
-    <form method="post" asp-action="FilterProducts">
+    <form method="post" asp-action="FilterTools">
 <p class="parametar">Price range</p>
 <div class="price">
     <label class="pushleft" for="fname">Lowest price:</label>
-    <input  type="number" id="lowprice" name="fname"><br>
+    <input class="form-control"  type="number" id="lowprice" name="priceFrom" min="0" max="10000"><br>
     <label class="pushleft" for="lname">Highest price:</label>
-    <input type="number" id="highprice" name="lname">
+    <input class="form-control" type="number" id="highprice" name="priceTo" min="1" max="10000">
 </div>
 
 
@@ -37,16 +37,16 @@
 
 <div class="sort">
     
-  <select name="sort-options" id="sort-options">
-    <option value="lowestPrice">Lowest price first</option>
-    <option value="highestPrice">Highest price first</option>
+  <select class="form-control" name="sort-options" id="sort-options">
+    <option value="lowestPrice">LowestFirst</option>
+    <option value="highestPrice">HighestFirst</option>
     <option value="alphabetical">Alphabetical</option>
 
     
   </select>
 </div>
 
-<button class="apply">Apply</button>
+<button type="submit" class="apply">Apply</button>
 </form>
 </div>
 </html>
