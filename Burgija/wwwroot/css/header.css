@@ -91,31 +91,34 @@ header .upper-container {
             right: 10px;
             z-index: 1000;
         }
-header .upper-container .login-container .profile-dropdown .user-dropdown {
+
+ .user {
     height: 40px;
-    width: 150px;
-    background-color: lightblue;
+    padding-right: 10px;
+    background-color: #b2e2f2;
     display: flex;
     align-items: center;
     border-radius: 8px;
     border: 1px solid gray;
+    cursor: pointer;
+    &:hover{
+        background-color: #98c2cf;
+    }
 }
-.profile-dropdown:hover ~ .profile-dropdown-div,
-.profile-dropdown-div:hover {
-    display: block;
-}
-            header .upper-container .login-container .user-dropdown i {
+
+            .user i {
                 margin-left: 10px;
                 margin-right: 10px;
                 color: darkblue;
             }
-            header .upper-container .login-container .user-dropdown p {
-               
+            .user p {
                 font-size: 16px;
             }
+
             header .upper-container .login-container form button  {
                 color: darkslateblue;
             }
+            
         header .upper-container .login-container .sign-up {
             width: 120px;
             height: 35px;
@@ -130,16 +133,41 @@ header .upper-container .login-container .profile-dropdown .user-dropdown {
                 color:blue;
             }
 
-
-
-
-            header .nav-container {
-                width: 80%;
-                height: 65px;
-                display: flex;
-                //background-color: bisque;
-                align-items: center
+            .user-dropdown-container{
+                position: relative;
+                display: inline-block;
             }
+
+            .user-dropdown{
+                visibility: hidden;
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                background-color: white;
+                border: gray 1px solid;
+                border-radius: 5px 5px;
+                width: 150%;
+                margin-top: 5px;
+            }
+
+            .user-dropwdown-item{
+                padding-left: 10px;
+                cursor: pointer;
+                &.has-bottom-border{
+                    border-bottom: gray 1px solid;
+                }
+                &:hover{
+                    background-color: rgb(245, 245, 245);
+                }
+            }
+
+        header .nav-container {
+            width: 80%;
+            height: 65px;
+            display: flex;
+            //background-color: bisque;
+            align-items: center
+        }
         header .nav-container .hamburger {
             width: 60px;
             height: 60px;
@@ -147,6 +175,11 @@ header .upper-container .login-container .profile-dropdown .user-dropdown {
             background: rgb(237, 238, 238);
             margin-right: 30px;
             border-radius: 50%;
+            cursor: pointer;
+            &:hover
+{
+    background: rgb(220, 220, 220);
+}
         }
 
         header .nav-container .nav-item {
@@ -226,31 +259,38 @@ header .upper-container .login-container .profile-dropdown .user-dropdown {
             width: 80%;
         }
 
-nav {
-    margin-left: 10%;
-    display: grid;
+.cat-dropdown-container {
+    visibility: hidden;
     position: absolute;
-    //margin-top:150px;
-    width: 80%;
-    height: 400px;
+    width: 95%;
+    margin-left: 2.5%;
+}
+
+.show{
+    visibility: visible;
+}
+
+nav {
+    display: grid;
+    height: 350px;
     background-color: white;
     grid-template-columns: auto auto auto auto;
-    position: fixed;
-    transform: translateY(-100%);
-    transition: transform 0.2s;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     z-index: 99;
+    border-bottom-left-radius: 20px 20px;
+    border-bottom-right-radius: 20px 20px;
+    border-bottom: #bebebe 2px solid;
 }
 nav  .category-item {
     display:flex;
     width:200px;
-    background-color:aqua;
+    background-color:rgb(185, 225, 237);
     height:50px;
     align-self:center;
     justify-self:center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px 10px;
+    border: rgb(136, 166, 175) 1px solid;
     cursor: pointer;
 }
     nav .category-item p {
