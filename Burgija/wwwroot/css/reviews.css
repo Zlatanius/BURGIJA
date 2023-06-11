@@ -171,7 +171,7 @@
                 align-items:center;
                 margin-bottom:10px;
             }
-            /*
+/*
     <div class="rating-histogram">
                         <div class="rating-overview">
                             <div class="rating-overview-value">
@@ -235,7 +235,7 @@
                 </div>
 */
 
-            .review-container .review-upper .right-section .give-a-review .rating {
+    .review-container .review-upper .right-section .give-a-review .rating {
         height:50px;
         width:150px;
         background-color:lightblue;
