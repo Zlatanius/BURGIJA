@@ -25,9 +25,7 @@
 .filter-box .price {
     margin-left:30px;
 }
-.filter-box form {
-  margin-left:20px;
-}
+
 
 .filter-box .price input
 
@@ -38,7 +36,11 @@
     margin-bottom:5px;
 }
 
-
+.filter-box select {
+    margin-left:30px;
+    height:30px;
+    width:170px;
+}
 
 .filter-box  .apply {
     width: 50%;
@@ -47,7 +49,8 @@
     align-self: center;
     border-radius: 8px;
     border: 1px solid purple;
-   margin-top:50px;
+   margin-top:70px;
+   margin-left:60px;
 }
 
 
