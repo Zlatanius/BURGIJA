@@ -28,7 +28,7 @@ namespace Burgija.Controllers
         private List<Location> locations;
 
 
-        
+
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
@@ -50,7 +50,7 @@ namespace Burgija.Controllers
         // GET: Home
         public async Task<IActionResult> Index(string search)
         {
-            if(search == null)
+            if (search == null)
                 return View(await _context.ToolType.ToListAsync());
             ViewBag.Search = search;
             List<ToolType> searchResults = await _context.ToolType.Where(t => t.Name.ToLower().Contains(search.ToLower())).ToListAsync();
@@ -78,8 +78,30 @@ namespace Burgija.Controllers
 
             var results = await _context.ToolAndStore.FromSqlRaw(query,parameter).ToListAsync();*/
 
+            var reviews = await _context.Review
+            .Join(
+                _context.Tool,
+                review => review.ToolId,
+                tool => tool.Id,
+                (review, tool) => new { Review = review, Tool = tool }
+            )
+            .Join(
+                _context.Users,
+                reviewAndTool => reviewAndTool.Review.UserId,
+                user => user.Id,
+                (reviewAndTool, user) => new { ReviewAndTool = reviewAndTool, User = user }
+            )
+            .Where(result => result.ReviewAndTool.Tool.ToolTypeId == id)
+            .Select(result => new ReviewAndUser(
+                result.ReviewAndTool.Review.RatingId,
+                result.ReviewAndTool.Review.Text,
+                result.User.UserName
+            )
+            )
+            .ToListAsync();
 
-            var results = await _context.Tool
+
+            var toolAndStores = await _context.Tool
             .Join(_context.Store, t => t.StoreId, s => s.Id, (t, s) => new { Tool = t, Store = s })
             .Join(_context.Location, ts => ts.Store.LocationId, l => l.Id, (ts, l) => new { ts.Tool, ts.Store, Location = l })
             .Join(_context.ToolType, tsl => tsl.Tool.ToolTypeId, tt => tt.Id, (tsl, tt) => new { tsl.Tool, tsl.Store, tsl.Location, ToolType = tt })
@@ -93,7 +115,8 @@ namespace Burgija.Controllers
             ))
             .ToListAsync();
 
-            ViewBag.ToolAndStore = results;
+            ViewBag.ToolAndStore = toolAndStores;
+            ViewBag.Review = reviews;
             return View(toolType);
         }
 

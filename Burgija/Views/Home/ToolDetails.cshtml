@@ -1,7 +1,7 @@
 @model Burgija.Models.ToolType
 
 @{
-    ViewData["Title"] = "ToolDetails";
+    
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -13,27 +13,27 @@
     <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
     <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
     <link rel="stylesheet" href="~/css/toolpage.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/reviews.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/reviews.css" asp-append-version="true" />
 
 </head>
 
 <body>
     <div class="page-content">
         <div class="path-container">
-            <p>@Model.Category - - > @Model.Name.Substring(0,Model.Name.IndexOf("-"))</p>
+            <p>@Model.Category - - > @Model.Name.Substring(0, Model.Name.IndexOf("-"))</p>
         </div>
         <div class="item-container">
             <div class="item-img">
-            <img src="@Model.Image" />
-                
+            <img src="@Model.Image" 
             </div>
             <div class="item-details">
-                
+
                 <p class="item-title">@Model.Name</p>
                 <p class="item-price">BAM <span id="price-value">@Model.Price</span>KM</p>
                 <div class="item-storage">
                     <i class="fa-solid fa-truck fa-lg"></i>
-                    @foreach(var item in ViewBag.ToolAndStore){
+                    @foreach (var item in ViewBag.ToolAndStore)
+                    {
                         <p>@item.Quantity items, @item.Address @item.StoreId</p><br>
                     }
                 </div>
@@ -44,7 +44,6 @@
                         <input type="submit" value ="Rent" class="rent-button"/>
                     </form>
                 }
-
             </div>
         </div>
 
@@ -64,63 +63,42 @@
                             </div>
 
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="right-section">
                     <form class="give-a-review">
                         <p>Ahmed Ljubuncic</p>
                         <div class="rating">
-                        
+
                         </div>
                         <textarea class="comment" autofocus name="textbox" cols="128" rows="10" class="textbox" placeholder="Give us a comment"></textarea>
                         <input class="apply-button" type="submit" value="Send review" />
                     </form>
                 </div>
             </div>
-            
+
             <div class="review-title">
                 <p>Comments</p>
             </div>
-            <div class="review">
-                <div class="review-header">
-                    <p class="review-username">Ahmed Ljubuncic</p>
-                    <div class="review-value">
-                        <!--ikonica za zvijezdu-->
-                        <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
-                        <p class="review-number">8/10</p>
+
+            @foreach (var item in ViewBag.Review)
+                {
+                <div class="review">
+                    <div class="review-header">
+                        <p class="review-username">@item.UserName</p>
+                        <div class="review-value">
+                            <!--ikonica za zvijezdu-->
+                            <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
+                            <p class="review-number">@item.Rating/5</p>
+                        </div>
                     </div>
+                    @if (item.Text != null) {
+                    <div class="review-content">@item.Text</div>
+                        }
                 </div>
-                <div class="review-content">Great stuff to rent here!</div>               
-            </div>
+            }
 
-            <div class="review">
-                <div class="review-header">
-                    <p class="review-username">Ahmed Ljubuncic</p>
-                    <div class="review-value">
-                        <!--ikonica za zvijezdu-->
-                        <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
-                        <p class="review-number">8/10</p>
-                    </div>
-                </div>
-                <div class="review-content">Great stuff to rent here!</div>
-            </div>
-
-            <div class="review">
-                <div class="review-header">
-                    <p class="review-username">Ahmed Ljubuncic</p>
-                    <div class="review-value">
-                        <!--ikonica za zvijezdu-->
-                        <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
-                        <p class="review-number">8/10</p>
-                    </div>
-                </div>
-                <div class="review-content">Great stuff to rent here!</div>
-            </div>
-
-            
-
-            
         </div>
 
     </div>
