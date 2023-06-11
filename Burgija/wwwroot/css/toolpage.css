@@ -56,9 +56,8 @@
                 display: flex;
                 margin-top: 20px;
                 width: 80%;
-                height: 480px;
                 background-color: rgb(255, 255, 255);
-                //margin-bottom: 150px;
+                flex-direction: column;
             }
 
              .page-content .item-container .item-img {
