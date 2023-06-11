@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Burgija.Models
 {
-    public class ToolType
+    public class ToolType : IComparable<ToolType>
     {
         #region Properties
 
@@ -38,7 +38,10 @@ namespace Burgija.Models
 
         #region Methods
 
-        //TODO
+        public int CompareTo(ToolType other)
+        {
+            return Price.CompareTo(other.Price);
+        }
 
         #endregion
     }
