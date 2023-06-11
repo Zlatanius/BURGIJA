@@ -4,45 +4,52 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<h4>Rent</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+
+    <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
+    <link rel="stylesheet" href="~/css/rent.css" asp-append-version="true" />
+
+</head>
+
+<body>
+    <div class="page-content">
+        <div class="path-container"></div>
+        <div class="item-container">
+            <div class="item-img">
+                <img src="https://c4.wallpaperflare.com/wallpaper/384/997/106/bosch-drill-tools-brand-wallpaper-preview.jpg" alt="">
             </div>
-            <div class="form-group">
-                <label asp-for="ToolId" class="control-label"></label>
-                <select asp-for="ToolId" class ="form-control" asp-items="ViewBag.ToolId"></select>
+            <div class="rent-details">
+
+                <p class="item-title">@ViewBag.ToolType.Name</p>
+                <form class="rent-form" asp-action="Create">
+                    <label for="rent-start">Start of rent:</label>
+                    <input asp-for="StartOfRent" type="date" id="rent-start" name="StartOfRent"><br>
+                    <span asp-validation-for="StartOfRent" class="text-danger"></span>
+                    <label for="rent-start">End of rent:</label>
+                    <input asp-for="EndOfRent" type="date" id="rent-end" name="EndOfRent"><br>
+                    <span asp-validation-for="EndOfRent" class="text-danger"></span>
+                    <input type="checkbox" id="delivery-bool" name="delivery-bool" value="delivery-option">
+                    <label for="delivery-bool"> Do you want delivery?</label><br>
+                    <label for="adress">Your adress: </label>
+                    <input type="text" id="adress" name="adress" value="">
+                    <input type = "submit" value="Rent" class="rent-button">
+                </form>
+                
             </div>
-            <div class="form-group">
-                <label asp-for="StartOfRent" class="control-label"></label>
-                <input asp-for="StartOfRent" class="form-control" />
-                <span asp-validation-for="StartOfRent" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndOfRent" class="control-label"></label>
-                <input asp-for="EndOfRent" class="form-control" />
-                <span asp-validation-for="EndOfRent" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiscountId" class="control-label"></label>
-                <select asp-for="DiscountId" class ="form-control" asp-items="ViewBag.DiscountId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+    <!--<partial name="~/Views/Home/_Filter.cshtml" />-->
+</body>
+</html>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Home" asp-action="ToolDetails" asp-route-id="@ViewBag.ToolType.Id">Back to Tool</a>
 </div>
 
 @section Scripts {

@@ -17,6 +17,7 @@ namespace Burgija.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser<int>> _userManager;
+        private ToolType toolType;
 
         public RentController(ApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
         {
@@ -62,13 +63,39 @@ namespace Burgija.Controllers
 
             return View(rent);
         }
+        [HttpPost]
+        public IActionResult GetToolType(int? toolTypeId)
+        {
+            if (toolTypeId == null)
+            {
+                return NotFound();
+            }
+
+            // Redirect to the Create action with the tool type ID
+            return RedirectToAction("Create", new { toolTypeId });
+        }
 
         // GET: Rent/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int? toolTypeId)
         {
+            if (toolTypeId == null)
+            {
+                return NotFound();
+            }
+
+            // Retrieve the tool type using the provided ID
+            var toolType = await _context.ToolType.FirstOrDefaultAsync(m => m.Id == toolTypeId);
+
+            if (toolType == null)
+            {
+                return NotFound();
+            }
+
             ViewData["DiscountId"] = new SelectList(_context.Discount, "Id", "Id");
             ViewData["ToolId"] = new SelectList(_context.Tool, "Id", "Id");
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewBag.ToolType = toolType;
+            // Pass the tool type to the view
             return View();
         }
 

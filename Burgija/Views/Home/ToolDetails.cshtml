@@ -35,10 +35,15 @@
                     @foreach(var item in ViewBag.ToolAndStore){
                         <p>@item.Quantity items, @item.Address @item.StoreId</p><br>
                     }
-                    
                 </div>
-                
-                <button class="rent-button">Rent</button>
+                @if (User.IsInRole("RegisteredUser"))
+                {
+                    <form action="/Rent/GetToolType" method="post">
+                        <input type="hidden" name="toolTypeId" value="@Model.Id" />
+                        <input type="submit" value ="Rent" class="rent-button"/>
+                    </form>
+                }
+
             </div>
         </div>
 <<<<<<< Updated upstream

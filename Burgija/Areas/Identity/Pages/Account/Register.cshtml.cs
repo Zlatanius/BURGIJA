@@ -98,7 +98,7 @@ namespace Burgija.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                    var defaultrole = _roleManager.FindByNameAsync("Registered User").Result;
+                    var defaultrole = _roleManager.FindByNameAsync("RegisteredUser").Result;
 
                     if (defaultrole != null)
                     {
