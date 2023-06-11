@@ -106,6 +106,9 @@ namespace Burgija.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserId,ToolId,StartOfRent,EndOfRent,DiscountId")] Rent rent)
         {
+            rent.UserId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            rent.ToolId = 1;
+            rent.DiscountId = null;
             if (ModelState.IsValid)
             {
                 _context.Add(rent);
