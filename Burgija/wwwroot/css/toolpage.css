@@ -60,6 +60,10 @@
                 flex-direction: column;
             }
 
+            .rent-form{
+              z-index: 10000;
+            }
+
              .page-content .item-container .item-img {
                 width: 480px;
                 height: 480px;

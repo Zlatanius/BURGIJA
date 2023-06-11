@@ -39,7 +39,7 @@
                 </div>
                 @if (User.IsInRole("RegisteredUser"))
                 {
-                    <form action="/Rent/GetToolType" method="post">
+                    <form action="/Rent/GetToolType" method="post" class="rent-form">
                         <input type="hidden" name="toolTypeId" value="@Model.Id" />
                         <input type="submit" value ="Rent" class="rent-button"/>
                     </form>
