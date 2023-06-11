@@ -307,3 +307,22 @@ nav  .category-item {
 nav .showMenu {
     transform: translateY(0);
 }
+
+
+
+header .upper-container .login-container .user-dropdown {
+    height:90px;
+}
+    header .upper-container .login-container .user-dropdown .user-dropwdown-item a {
+        text-decoration:none;
+        font-size:16px;
+        color:black;
+    }
+
+    header .upper-container .login-container .user-dropdown .user-dropwdown-item  {
+        padding-left:10px;
+        display:flex;
+        height:30px;
+        align-items:center;
+        //justify-content:center;
+    }
