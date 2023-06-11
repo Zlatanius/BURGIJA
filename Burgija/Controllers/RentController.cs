@@ -10,6 +10,8 @@ using Burgija.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections;
+using Microsoft.AspNetCore.Http;
 
 namespace Burgija.Controllers
 {
@@ -17,7 +19,6 @@ namespace Burgija.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser<int>> _userManager;
-        private ToolType toolType;
 
         public RentController(ApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
         {
@@ -70,7 +71,8 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-
+            // Store the toolType value in session
+            HttpContext.Session.SetInt32("ToolType", (int)toolTypeId);
             // Redirect to the Create action with the tool type ID
             return RedirectToAction("Create", new { toolTypeId });
         }
@@ -91,11 +93,13 @@ namespace Burgija.Controllers
                 return NotFound();
             }
 
+            ViewBag.ToolTypeImage = toolType.Image;
+
             ViewData["DiscountId"] = new SelectList(_context.Discount, "Id", "Id");
             ViewData["ToolId"] = new SelectList(_context.Tool, "Id", "Id");
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             ViewBag.ToolType = toolType;
-            // Pass the tool type to the view
+
             return View();
         }
 
@@ -104,21 +108,38 @@ namespace Burgija.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,ToolId,StartOfRent,EndOfRent,DiscountId")] Rent rent)
+        public async Task<IActionResult> Create([Bind("StartOfRent,EndOfRent,DiscountId")] Rent r)
         {
-            rent.UserId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            rent.ToolId = 1;
-            rent.DiscountId = null;
+            if(r.EndOfRent<r.StartOfRent)
+                throw new Exception("Merso 1");
+            if (r.StartOfRent<DateTime.Now || r.EndOfRent < DateTime.Now)
+                throw new Exception("Merso 2");
+            r.UserId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var toolTypeId = HttpContext.Session.GetInt32("ToolType");
+            var toolIds = await _context.Tool
+            .Where(tool => tool.ToolType.Id == toolTypeId)
+            .Where(tool => !_context.Rent.Any(rent =>
+                rent.ToolId == tool.Id &&
+                (r.EndOfRent < rent.StartOfRent || r.StartOfRent > rent.EndOfRent)))
+            .Select(tool => tool.Id)
+            .ToListAsync();
+            if (toolIds.Count > 0)
+                r.ToolId = toolIds[0];
+            else
+                throw new Exception("Merso 3");
+            r.DiscountId = null;
+            var toolType = await _context.ToolType.FindAsync(toolTypeId);
+            r.RentPrice = toolType.Price * r.EndOfRent.Subtract(r.StartOfRent).TotalDays;
             if (ModelState.IsValid)
             {
-                _context.Add(rent);
+                _context.Add(r);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DiscountId"] = new SelectList(_context.Discount, "Id", "Id", rent.DiscountId);
-            ViewData["ToolId"] = new SelectList(_context.Tool, "Id", "Id", rent.ToolId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", rent.UserId);
-            return View(rent);
+            ViewData["DiscountId"] = new SelectList(_context.Discount, "Id", "Id", r.DiscountId);
+            ViewData["ToolId"] = new SelectList(_context.Tool, "Id", "Id", r.ToolId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", r.UserId);
+            return View(r);
         }
 
         // GET: Rent/Edit/5
