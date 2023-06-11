@@ -19,7 +19,25 @@ namespace Burgija.Controllers
     {
         private readonly ApplicationDbContext _context;
         
-
+        private string[] categories = {
+        "Fasteners",
+        "FloorCare",
+        "GeneralConstruction",
+        "LaddersAndScaffolding",
+        "LawnCare",
+        "MaterialHandling",
+        "PaintAndDryWall",
+        "PlumbingAndPumps",
+        "PortablePower",
+        "PowerTools",
+        "PressureWashers",
+        "RotaryOrDemolition",
+        "TileSaws",
+        "Trailers",
+        "TreeCare",
+        "Trenchers",
+        "Welding"
+        };
 
         private List<Store> stores;
         private List<ToolType> toolTypes;
@@ -50,10 +68,13 @@ namespace Burgija.Controllers
         // GET: Home
         public async Task<IActionResult> Index(string search)
         {
-            if(search == null)
+            if (search == null)
                 return View(await _context.ToolType.ToListAsync());
             ViewBag.Search = search;
             List<ToolType> searchResults = await _context.ToolType.Where(t => t.Name.ToLower().Contains(search.ToLower())).ToListAsync();
+            List<ToolType> searchCategoryResults = await _context.ToolType.Where(p => p.Category == Category.Fasteners).ToListAsync();
+            searchResults.AddRange(searchCategoryResults);
+
             return View(searchResults);
         }
 
