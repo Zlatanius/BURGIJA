@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Burgija.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230603212610_SixthMigration")]
-    partial class SixthMigration
+    [Migration("20230930164308_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -187,11 +187,14 @@ namespace Burgija.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DiscountId")
+                    b.Property<int?>("DiscountId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndOfRent")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("RentPrice")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("StartOfRent")
                         .HasColumnType("datetime2");
@@ -275,12 +278,6 @@ namespace Burgija.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.Property<int>("StoreId")
                         .HasColumnType("int");
 
@@ -309,9 +306,15 @@ namespace Burgija.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -540,9 +543,7 @@ namespace Burgija.Migrations
                 {
                     b.HasOne("Burgija.Models.Discount", "Discount")
                         .WithMany()
-                        .HasForeignKey("DiscountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DiscountId");
 
                     b.HasOne("Burgija.Models.Tool", "Tool")
                         .WithMany()
