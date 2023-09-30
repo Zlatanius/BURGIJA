@@ -12,6 +12,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections;
 using Microsoft.AspNetCore.Http;
+using Burgija.ViewModels;
 
 namespace Burgija.Controllers
 {

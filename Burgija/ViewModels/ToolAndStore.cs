@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Burgija.Models
+namespace Burgija.ViewModels
 {
     [NotMapped]
     public class ToolAndStore

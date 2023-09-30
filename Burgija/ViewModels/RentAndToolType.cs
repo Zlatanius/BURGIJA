@@ -1,4 +1,6 @@
-﻿namespace Burgija.Models
+﻿using Burgija.Models;
+
+namespace Burgija.ViewModels
 {
     public class RentAndToolType
     {
