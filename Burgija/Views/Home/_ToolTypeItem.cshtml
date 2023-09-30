@@ -32,12 +32,12 @@
         </div>
         <div class="middle-part">
             <div class="item-tag">
-                    <P>@Model.Category.ToString().Substring(Array.FindLastIndex<char>((@Model.Category.ToString()).ToCharArray(), Char.IsUpper))</P>
+                    <P>@Model.Category.ToString()</P>
                 
             </div>
         </div>
         <div class="lower-part">
-            <p class="invisible">a</p>
+            <p class="invisible"></p>
             <p class="price">@Model.Price KM</p>
         </div>
     </div>
