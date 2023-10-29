@@ -27,13 +27,6 @@ namespace Burgija.Controllers
             _userManager = userManager;
         }
 
-        // GET: Rent
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Rent.Include(r => r.Discount).Include(r => r.Tool).Include(r => r.User);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
         [Authorize]
         public async Task<IActionResult> RentHistory()
         {
@@ -46,26 +39,6 @@ namespace Burgija.Controllers
             return View(rentHistory);
         }
 
-        // GET: Rent/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var rent = await _context.Rent
-                .Include(r => r.Discount)
-                .Include(r => r.Tool)
-                .Include(r => r.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (rent == null)
-            {
-                return NotFound();
-            }
-
-            return View(rent);
-        }
         [HttpPost]
         public IActionResult GetToolType(int? toolTypeId)
         {
@@ -136,12 +109,12 @@ namespace Burgija.Controllers
             {
                 _context.Add(r);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("RentHistory");
             }
             ViewData["DiscountId"] = new SelectList(_context.Discount, "Id", "Id", r.DiscountId);
             ViewData["ToolId"] = new SelectList(_context.Tool, "Id", "Id", r.ToolId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", r.UserId);
-            return View(r);
+            return RedirectToAction("Create", new {toolTypeId});
         }
 
     }

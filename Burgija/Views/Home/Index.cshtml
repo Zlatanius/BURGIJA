@@ -11,7 +11,6 @@
    
     
     <script src="https://kit.fontawesome.com/680ff5430a.js" crossorigin="anonymous"></script>
-    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />--->
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
     
     <style>
@@ -30,29 +29,14 @@
         <div class="right-section">
             <div class="filters-bar" >
                 <p class="results">Items: </p>
-                <!--
-                <div class="filter-tag">
-                    <p class="tag-name">Min-price: </p>
-                    <p class="tag-value"> 500 KM</p>
-                </div>
-                <div class="filter-tag">
-                    <p class="tag-name">Max-price: </p>
-                    <p class="tag-value"> 500 KM</p>
-                </div>
-                <div class="filter-tag">
-                    <p class="tag-name">OrderType: </p>
-                    <p class="tag-value"> Alphabetical</p>
-                </div>-->
             </div>
             <div class="tools-grid">
                 @foreach(var item in Model){
-                    
                     @Html.Partial("_ToolTypeItem",item)
                 }
 
             </div>
         </div>
     </div>
-    <!--<partial name="~/Views/Home/_Filter.cshtml" />-->
 </body>
 </html>

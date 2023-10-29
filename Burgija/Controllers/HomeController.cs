@@ -42,8 +42,6 @@ namespace Burgija.Controllers
         "Welding"
         };
 
-        private List<Store> stores;
-        private List<Location> locations;
         private readonly UserManager<IdentityUser<int>> _userManager;
         public HomeController(ApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
         {
@@ -51,27 +49,74 @@ namespace Burgija.Controllers
             _userManager = userManager;
         }
 
-        private async Task InitializeLists()
+        // GET: Home
+        public async Task<IActionResult> Index(string search, double? priceFrom, double? priceTo, string sortOptions)
         {
-            stores = await _context.Store.ToListAsync();
-            List<Location> locations = await _context.Location.ToListAsync();
-            foreach (Store store in stores)
+            if (search == null && priceFrom == null && priceTo == null && sortOptions == null)
             {
-                store.StoreLocation = locations.Find(location => location.Id == store.LocationId);
+                return View(await _context.ToolType.ToListAsync());
             }
+
+            var query = _context.ToolType.AsQueryable();
+
+            if (search != null)
+            {
+                query = query.Where(t => t.Name.ToLower().Contains(search.ToLower()));
+            }
+
+            if (priceFrom != null && priceTo != null)
+            {
+                query = query.Where(t => t.Price >= priceFrom && t.Price <= priceTo);
+            }
+
+            if (!string.IsNullOrEmpty(sortOptions))
+            {
+                switch (sortOptions)
+                {
+                    case "lowestPrice":
+                        query = query.OrderBy(t => t.Price);
+                        break;
+                    case "highestPrice":
+                        query = query.OrderByDescending(t => t.Price);
+                        break;
+                    case "alphabetical":
+                        query = query.OrderBy(t => t.Name);
+                        break;
+                }
+            }
+
+            var filterResults = await query.ToListAsync();
+
+            return View(filterResults);
         }
 
-        // GET: Home
-        public async Task<IActionResult> Index(string search)
-        {
-            if (search == null)
-                return View(await _context.ToolType.ToListAsync());
-            ViewBag.Search = search;
-            List<ToolType> searchResults = await _context.ToolType.Where(t => t.Name.ToLower().Contains(search.ToLower())).ToListAsync();
-            List<ToolType> searchCategoryResults = await _context.ToolType.Where(p => p.Category == Category.Fasteners).ToListAsync();
-            searchResults.AddRange(searchCategoryResults);
 
-            return View(searchResults);
+        public async Task<IActionResult> FilterTools(double? priceFrom, double? priceTo, string sortOptions)
+        {
+            List<ToolType>? filterResults;
+            priceFrom ??= 0;
+            priceTo ??= 10000;
+            switch(sortOptions) {
+                case "lowestPrice":
+                    filterResults = await _context.ToolType.Where(t => t.Price>=priceFrom).Where(t=>t.Price<=priceTo).OrderBy(t=>t.Price).ToListAsync();
+                    break;
+                case "highestPrice":
+                    filterResults = await _context.ToolType.Where(t => t.Price >= priceFrom).Where(t => t.Price <= priceTo).OrderByDescending(t => t.Price).ToListAsync();
+                    break;
+                case "alphabetical":
+                    filterResults = await _context.ToolType.Where(t => t.Price >= priceFrom).Where(t => t.Price <= priceTo).OrderBy(t => t.Name).ToListAsync();
+                    break;
+                default:
+                    filterResults = null; 
+                    break;
+            }
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "priceFrom", priceFrom.ToString() },
+                { "priceTo", priceTo.ToString() },
+                { "sortOptions", sortOptions }
+            };
+            return RedirectToAction("Index",queryParameters);
         }
 
 
@@ -144,11 +189,10 @@ namespace Burgija.Controllers
             return View(toolType);
         }
 
-        // GET: Home/Create
         public async Task<IActionResult> WhereYouCanFIndUs()
         {
-            stores = await _context.Store.ToListAsync();
-            locations = await _context.Location.ToListAsync();
+            List<Store> stores = await _context.Store.ToListAsync();
+            List<Location> locations = await _context.Location.ToListAsync();
             ViewBag.Store = stores;
             ViewBag.Location = locations;
             return View();

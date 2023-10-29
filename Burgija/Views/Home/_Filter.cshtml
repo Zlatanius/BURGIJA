@@ -27,9 +27,9 @@
 <p class="parametar">Price range</p>
 <div class="price">
     <label class="pushleft" for="fname">Lowest price:</label>
-    <input class="form-control"  type="number" id="lowprice" name="priceFrom" min="0" max="10000"><br>
+    <input class="form-control"  type="number" id="lowprice" name="priceFrom" min="0" max="10000" step="0.01"><br>
     <label class="pushleft" for="lname">Highest price:</label>
-    <input class="form-control" type="number" id="highprice" name="priceTo" min="1" max="10000">
+    <input class="form-control" type="number" id="highprice" name="priceTo" min="1" max="10000" step="0.01">
 </div>
 
 
@@ -37,7 +37,7 @@
 
 <div class="sort">
     
-  <select class="form-control" name="sort-options" id="sort-options">
+  <select class="form-control" name="sortOptions" id="sort-options">
     <option value="lowestPrice">LowestFirst</option>
     <option value="highestPrice">HighestFirst</option>
     <option value="alphabetical">Alphabetical</option>
