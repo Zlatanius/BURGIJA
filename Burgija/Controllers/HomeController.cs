@@ -42,23 +42,11 @@ namespace Burgija.Controllers
         "Welding"
         };
 
-        private List<Store> stores;
-        private List<Location> locations;
         private readonly UserManager<IdentityUser<int>> _userManager;
         public HomeController(ApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
         {
             _context = context;
             _userManager = userManager;
-        }
-
-        private async Task InitializeLists()
-        {
-            stores = await _context.Store.ToListAsync();
-            List<Location> locations = await _context.Location.ToListAsync();
-            foreach (Store store in stores)
-            {
-                store.StoreLocation = locations.Find(location => location.Id == store.LocationId);
-            }
         }
 
         // GET: Home
@@ -201,11 +189,10 @@ namespace Burgija.Controllers
             return View(toolType);
         }
 
-        // GET: Home/Create
         public async Task<IActionResult> WhereYouCanFIndUs()
         {
-            stores = await _context.Store.ToListAsync();
-            locations = await _context.Location.ToListAsync();
+            List<Store> stores = await _context.Store.ToListAsync();
+            List<Location> locations = await _context.Location.ToListAsync();
             ViewBag.Store = stores;
             ViewBag.Location = locations;
             return View();
