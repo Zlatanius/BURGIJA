@@ -12,6 +12,9 @@ using System.Text.RegularExpressions;
 
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Burgija.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Burgija.Controllers
 {
@@ -41,11 +44,11 @@ namespace Burgija.Controllers
 
         private List<Store> stores;
         private List<Location> locations;
-
-        public HomeController(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser<int>> _userManager;
+        public HomeController(ApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
         {
             _context = context;
-
+            _userManager = userManager;
         }
 
         private async Task InitializeLists()
@@ -86,13 +89,8 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-            /*var parameter = new SqlParameter("@id", toolType.Id);
 
-            var query = "select l.address as Address, s.id as StoreId, count(t.id) as Quantity from location l, store s, tool t, tooltype tt where l.id = s.locationid and s.id = t.storeid and t.tooltypeid = tt.id and  tt.id = @id group by l.address,s.id";
-
-            var results = await _context.ToolAndStore.FromSqlRaw(query,parameter).ToListAsync();*/
-
-            var reviews = await _context.Review
+            var reviewsAndUsers = await _context.Review
             .Join(
                 _context.Tool,
                 review => review.ToolId,
@@ -107,7 +105,7 @@ namespace Burgija.Controllers
             )
             .Where(result => result.ReviewAndTool.Tool.ToolTypeId == id)
             .Select(result => new ReviewAndUser(
-                result.ReviewAndTool.Review.RatingId,
+                result.ReviewAndTool.Review.Rating,
                 result.ReviewAndTool.Review.Text,
                 result.User.UserName
             )
@@ -130,7 +128,19 @@ namespace Burgija.Controllers
             .ToListAsync();
 
             ViewBag.ToolAndStore = toolAndStores;
-            ViewBag.Review = reviews;
+            ViewBag.ReviewAndUser = reviewsAndUsers;
+            ViewBag.NumberOfReviews = reviewsAndUsers.Count();
+
+            if (reviewsAndUsers.Count != 0)
+                ViewBag.AverageRating = reviewsAndUsers.Average<ReviewAndUser>(reviewAndUser => reviewAndUser.Rating);
+            else ViewBag.AverageRating = 0;
+            if (User.IsInRole("RegisteredUser"))
+            {
+                var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (user != null)
+                    ViewBag.Username = user.UserName;
+            }
             return View(toolType);
         }
 
@@ -143,6 +153,39 @@ namespace Burgija.Controllers
             ViewBag.Location = locations;
             return View();
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendReview([Bind("Id")] Review review, int toolTypeId, string textbox, double rating)
+        {
+            var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var rents = await _context.Rent
+            .Join(_context.Users, r => r.UserId, u => u.Id, (rent, user) => new { Rent = rent, User = user })
+            .Join(_context.Tool, ru => ru.Rent.ToolId, t => t.Id, (ru, tool) => new { ru.Rent, ru.User, Tool = tool })
+            .Join(_context.ToolType, rt => rt.Tool.ToolTypeId, tt => tt.Id, (rt, toolType) => new { rt.Rent, rt.User, rt.Tool, ToolType = toolType })
+            .Where(result => result.ToolType.Id == toolTypeId && result.User.Id == userId)
+            .Select(result => result.Rent).ToListAsync();
+            if (rents.Count == 0)
+            {
+                return BadRequest("You have not rented this tool before!");
+            }
+            review.UserId = userId;
+            review.ToolId = rents[0].ToolId;
+            review.RentId = rents[0].Id;
+            review.Timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
+            review.Text = textbox;
+            review.Rating = rating;
+            if (ModelState.IsValid)
+            {
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("ToolDetails", new { id = toolTypeId });
+            }
+            else
+            {
+                return RedirectToAction("ToolDetails", new { id = toolTypeId });
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections;
 using Microsoft.AspNetCore.Http;
+using Burgija.ViewModels;
 
 namespace Burgija.Controllers
 {
@@ -38,6 +39,7 @@ namespace Burgija.Controllers
         {
             var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var rentHistory = await _context.Rent
+            .Where(r => r.UserId == userId)
             .Join(_context.Tool, rent => rent.ToolId, tool => tool.Id, (rent, tool) => new { Rent = rent, Tool = tool })
             .Join(_context.ToolType, rt => rt.Tool.ToolTypeId, toolType => toolType.Id, (rt, toolType) => new RentAndToolType(rt.Rent, toolType))
             .ToListAsync();
@@ -110,10 +112,10 @@ namespace Burgija.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("StartOfRent,EndOfRent,DiscountId")] Rent r)
         {
-            if(r.EndOfRent<r.StartOfRent)
-                throw new Exception("Merso 1");
+            if (r.EndOfRent < r.StartOfRent)
+                return BadRequest("Date of return is earlier than date of taking");
             if (r.StartOfRent<DateTime.Now || r.EndOfRent < DateTime.Now)
-                throw new Exception("Merso 2");
+                return BadRequest("Date of taking or date of return is earlier than today");
             r.UserId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var toolTypeId = HttpContext.Session.GetInt32("ToolType");
             var toolIds = await _context.Tool
@@ -126,7 +128,7 @@ namespace Burgija.Controllers
             if (toolIds.Count > 0)
                 r.ToolId = toolIds[0];
             else
-                throw new Exception("Merso 3");
+                return BadRequest("There are no tools available in this period");
             r.DiscountId = null;
             var toolType = await _context.ToolType.FindAsync(toolTypeId);
             r.RentPrice = toolType.Price * r.EndOfRent.Subtract(r.StartOfRent).TotalDays;

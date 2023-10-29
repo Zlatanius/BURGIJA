@@ -20,8 +20,7 @@ namespace Burgija.Data
         public DbSet<Courier> Courier { get; set; }
         public DbSet<Delivery> Delivery { get; set; }
         public DbSet<Discount> Discount { get; set; }
-        public DbSet<Location> Location { get; set; } 
-        public DbSet<Rating> Rating { get; set; }
+        public DbSet<Location> Location { get; set; }
         public DbSet<RegisteredUser> RegisteredUser { get; set; }
         public DbSet<Rent> Rent { get; set; }
         public DbSet<Review> Review { get; set; }
@@ -36,7 +35,6 @@ namespace Burgija.Data
             builder.Entity<Delivery>().ToTable(nameof(Delivery));
             builder.Entity<Discount>().ToTable(nameof(Discount));
             builder.Entity<Location>().ToTable(nameof(Location));
-            builder.Entity<Rating>().ToTable(nameof(Rating));
             builder.Entity<RegisteredUser>().ToTable(nameof(RegisteredUser));
             builder.Entity<Rent>().ToTable(nameof(Rent));
             builder.Entity<Review>().ToTable(nameof(Review));

@@ -1,7 +1,7 @@
 @model Burgija.Models.ToolType
 
 @{
-    
+   
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@
         </div>
         <div class="item-container">
             <div class="item-img">
-            <img src="@Model.Image" 
+            <img src="@Model.Image" /> 
             </div>
             <div class="item-details">
 
@@ -54,35 +54,39 @@
                         <div class="rating-overview">
                             <div class="rating-overview-value">
                                 <i class="fa-solid fa-star fa-xl" style="color: #eed372;"></i>
-                                <p>4.0</p>
+                                <p>@ViewBag.AverageRating</p>
                             </div>
                             <div class="rating-overview-members">
                                 <i class="fa-solid fa-user fa-lg"></i>
 
-                                <p>74 total</p>
+                                <p>@ViewBag.NumberOfReviews total</p>
                             </div>
 
                         </div>
 
                     </div>
                 </div>
-                <div class="right-section">
-                    <form class="give-a-review">
-                        <p>Ahmed Ljubuncic</p>
-                        <div class="rating">
-
-                        </div>
-                        <textarea class="comment" autofocus name="textbox" cols="128" rows="10" class="textbox" placeholder="Give us a comment"></textarea>
-                        <input class="apply-button" type="submit" value="Send review" />
-                    </form>
-                </div>
+                @if (User.IsInRole("RegisteredUser"))
+                {
+                    <div class="right-section">
+                        <form class="give-a-review" asp-action="SendReview" method="post">
+                            <p>@ViewBag.Username</p>
+                            <div class="rating">
+                                <input type="number" name="rating" min="1" max="5" step="0.01" required/>
+                            </div>
+                            <textarea class="comment" autofocus name="textbox" cols="128" rows="10" class="textbox" placeholder="Give us a comment"></textarea>
+                            <input type="hidden" name="toolTypeId" value="@Model.Id" />
+                            <input class="apply-button" type="submit" value="Send review" />
+                        </form>
+                    </div>
+                }
             </div>
 
             <div class="review-title">
                 <p>Comments</p>
             </div>
 
-            @foreach (var item in ViewBag.Review)
+            @foreach (var item in ViewBag.ReviewAndUser)
                 {
                 <div class="review">
                     <div class="review-header">

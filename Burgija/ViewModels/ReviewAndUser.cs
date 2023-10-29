@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace Burgija.Models
+namespace Burgija.ViewModels
 {
     public class ReviewAndUser
     {
