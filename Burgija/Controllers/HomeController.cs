@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using Burgija.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using static Humanizer.On;
 
 namespace Burgija.Controllers
 {
@@ -57,16 +58,18 @@ namespace Burgija.Controllers
                 return View(await _context.ToolType.ToListAsync());
             }
 
-            var query = _context.ToolType.AsQueryable();
-
             if (search != null)
             {
-                query = query.Where(t => t.Name.ToLower().Contains(search.ToLower()));
+                var toolTypes = await _context.ToolType.ToListAsync();
+                var searchResults = LinearSearch(toolTypes, search);
+                return View(searchResults);
             }
+
+            List<ToolType> filterResults = await _context.ToolType.ToListAsync();
 
             if (priceFrom != null && priceTo != null)
             {
-                query = query.Where(t => t.Price >= priceFrom && t.Price <= priceTo);
+                filterResults = LinearSearchByPrice(filterResults, (double)priceFrom, (double)priceTo);
             }
 
             if (!string.IsNullOrEmpty(sortOptions))
@@ -74,49 +77,176 @@ namespace Burgija.Controllers
                 switch (sortOptions)
                 {
                     case "lowestPrice":
-                        query = query.OrderBy(t => t.Price);
+                        QuickSort(filterResults);
                         break;
                     case "highestPrice":
-                        query = query.OrderByDescending(t => t.Price);
+                        SelectionSortDescending(filterResults);
                         break;
                     case "alphabetical":
-                        query = query.OrderBy(t => t.Name);
+                        filterResults = MergeSort(filterResults);
                         break;
                 }
             }
-
-            var filterResults = await query.ToListAsync();
 
             return View(filterResults);
         }
 
 
-        public async Task<IActionResult> FilterTools(double? priceFrom, double? priceTo, string sortOptions)
+        public Task<IActionResult> FilterTools(double? priceFrom, double? priceTo, string sortOptions)
         {
-            List<ToolType>? filterResults;
             priceFrom ??= 0;
             priceTo ??= 10000;
-            switch(sortOptions) {
-                case "lowestPrice":
-                    filterResults = await _context.ToolType.Where(t => t.Price>=priceFrom).Where(t=>t.Price<=priceTo).OrderBy(t=>t.Price).ToListAsync();
-                    break;
-                case "highestPrice":
-                    filterResults = await _context.ToolType.Where(t => t.Price >= priceFrom).Where(t => t.Price <= priceTo).OrderByDescending(t => t.Price).ToListAsync();
-                    break;
-                case "alphabetical":
-                    filterResults = await _context.ToolType.Where(t => t.Price >= priceFrom).Where(t => t.Price <= priceTo).OrderBy(t => t.Name).ToListAsync();
-                    break;
-                default:
-                    filterResults = null; 
-                    break;
-            }
             var queryParameters = new Dictionary<string, string>
             {
                 { "priceFrom", priceFrom.ToString() },
                 { "priceTo", priceTo.ToString() },
                 { "sortOptions", sortOptions }
             };
-            return RedirectToAction("Index",queryParameters);
+            return Task.FromResult<IActionResult>(RedirectToAction("Index", queryParameters));
+        }
+
+        private static List<ToolType> LinearSearch(List<ToolType> toolTypes, string search)
+        {
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                return new List<ToolType>();
+            }
+
+            search = search.ToLower(); // Convert search to lowercase for case-insensitive search
+
+            List<ToolType> results = new List<ToolType>();
+
+            foreach (var toolType in toolTypes)
+            {
+                if (toolType.Name.ToLower().Contains(search))
+                {
+                    results.Add(toolType);
+                }
+            }
+
+            return results;
+        }
+        private static List<ToolType> LinearSearchByPrice(List<ToolType> toolTypes, double priceFrom, double priceTo)
+        { 
+            List<ToolType> results = new List<ToolType>();
+
+            foreach (var toolType in toolTypes)
+            {
+                if (toolType.Price>=priceFrom && toolType.Price<=priceTo)
+                {
+                    results.Add(toolType);
+                }
+            }
+
+            return results;
+        }
+
+        private static List<ToolType> MergeSort(List<ToolType> list)
+        {
+            if (list.Count <= 1)
+                return list;
+
+            int middle = list.Count / 2;
+            List<ToolType> left = list.GetRange(0, middle);
+            List<ToolType> right = list.GetRange(middle, list.Count - middle);
+
+            left = MergeSort(left);
+            right = MergeSort(right);
+
+            return Merge(left, right);
+        }
+
+        private static List<ToolType> Merge(List<ToolType> left, List<ToolType> right)
+        {
+            List<ToolType> result = new List<ToolType>();
+            int leftIndex = 0;
+            int rightIndex = 0;
+
+            while (leftIndex < left.Count && rightIndex < right.Count)
+            {
+                if (string.Compare(left[leftIndex].Name, right[rightIndex].Name, StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    result.Add(left[leftIndex]);
+                    leftIndex++;
+                }
+                else
+                {
+                    result.Add(right[rightIndex]);
+                    rightIndex++;
+                }
+            }
+
+            result.AddRange(left.GetRange(leftIndex, left.Count - leftIndex));
+            result.AddRange(right.GetRange(rightIndex, right.Count - rightIndex));
+
+            return result;
+        }
+
+        private static void QuickSort(List<ToolType> toolTypes)
+        {
+            QuickSort(toolTypes, 0, toolTypes.Count - 1);
+        }
+
+        private static void QuickSort(List<ToolType> toolTypes, int low, int high)
+        {
+            if (low < high)
+            {
+                int partitionIndex = Partition(toolTypes, low, high);
+
+                QuickSort(toolTypes, low, partitionIndex - 1);
+                QuickSort(toolTypes, partitionIndex + 1, high);
+            }
+        }
+
+        private static int Partition(List<ToolType> toolTypes, int low, int high)
+        {
+            double pivot = toolTypes[high].Price;
+            int i = (low - 1);
+
+            for (int j = low; j < high; j++)
+            {
+                if (toolTypes[j].Price < pivot)
+                {
+                    i++;
+                    Swap(toolTypes, i, j);
+                }
+            }
+
+            Swap(toolTypes, i + 1, high);
+            return i + 1;
+        }
+
+        private static void Swap(List<ToolType> toolTypes, int i, int j)
+        {
+            ToolType temp = toolTypes[i];
+            toolTypes[i] = toolTypes[j];
+            toolTypes[j] = temp;
+        }
+
+        private static void SelectionSortDescending(List<ToolType> toolTypes)
+        {
+            int n = toolTypes.Count;
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                int maxIndex = i;
+
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (toolTypes[j].Price > toolTypes[maxIndex].Price)
+                    {
+                        maxIndex = j;
+                    }
+                }
+
+                if (maxIndex != i)
+                {
+                    // Swap toolTypes[i] and toolTypes[maxIndex]
+                    ToolType temp = toolTypes[i];
+                    toolTypes[i] = toolTypes[maxIndex];
+                    toolTypes[maxIndex] = temp;
+                }
+            }
         }
 
 
