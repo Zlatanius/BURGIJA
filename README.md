@@ -1,7 +1,5 @@
 # BURGIJA
 
-Web server: http://edie2003-001-site1.etempurl.com/
-
 
 Aplikacija je namjenjena za iznajmljivanje uobicajenih alata putem interneta.<br />
 Osnovne funkcionalnosti:
