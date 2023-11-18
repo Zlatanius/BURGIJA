@@ -42,8 +42,8 @@
 
             <!--search bar-->
             <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="search">
-                <div class="search-bar-container">
-                    <div class="wrap">
+                
+                    <div class="search-wrap">
                         <div class="search">
                             <input type="text" name="search" class="searchTerm" placeholder="What are you looking for?">
                             <button id="searching" type="submit" class="searchButton">
@@ -51,11 +51,11 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                
             </form>
 
 
-            <!---->
+            
             <div class="login-container">
 
                 <a asp-action="WhereYouCanFindUs" asp-controller="Home"><i class="fa-solid fa-map-location-dot fa-2xl"></i></a>
@@ -90,233 +90,236 @@
 
             </div>
         </div>
-        <div class="nav-container">
-            <button class="hamburger" onclick="toggleCatDropdown()">
-                <i class="fa-solid fa-bars fa-2xl"></i>
-            </button>
+        
+         <!--
+                 <div class="nav-container">
+                <button class="hamburger" onclick="toggleCatDropdown()">
+                    <i class="fa-solid fa-bars fa-2xl"></i>
+                </button>
 
 
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="axe">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/809/809037.png" alt="">
-                </div>
-                <div class="nav-item-name">
-                    <p>AXES</p>
-                </div>
-            </button>
-            </form>
-
-
-
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="saw">
-                <input type="hidden" name="search" class="searchTerm" value="saws">
-            <button type="submit" class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2458/2458446.png" alt="">
-                </div>
-                <div class="nav-item-name">
-                    <p>SAWS</p>
-                </div>
-            </button>
-            </form>
-
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="drill">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
-
-                </div>
-                <div class="nav-item-name">
-                    <p>DRILLS</p>
-                </div>
-            </button>
-            </form>
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="axe">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/809/809037.png" alt="">
+                    </div>
+                    <div class="nav-item-name">
+                        <p>AXES</p>
+                    </div>
+                </button>
+                </form>
 
 
 
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="saw">
+                    <input type="hidden" name="search" class="searchTerm" value="saws">
+                <button type="submit" class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2458/2458446.png" alt="">
+                    </div>
+                    <div class="nav-item-name">
+                        <p>SAWS</p>
+                    </div>
+                </button>
+                </form>
 
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="hammer">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6788/6788572.png" alt="">
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="drill">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/7964/7964326.png" alt="">
 
-                </div>
-                <div class="nav-item-name">
-                    <p>HAMMERS</p>
-                </div>
-            </button>
-            </form>
-
-
-
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="mallet">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1422/1422205.png" alt="">
-
-                </div>
-                <div class="nav-item-name">
-                    <p>MALLET</p>
-                </div>
-            </button>
-            </form>
-
-
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="scissor">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2769/2769646.png" alt="">
-
-                </div>
-                <div class="nav-item-name">
-                    <p>SCISSORS</p>
-                </div>
-            </button>
-            </form>
-
-
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="chisel">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2933/2933560.png" alt="">
-
-                </div>
-                <div class="nav-item-name">
-                    <p>CHISEL</p>
-                </div>
-            </button>
-            </form>
+                    </div>
+                    <div class="nav-item-name">
+                        <p>DRILLS</p>
+                    </div>
+                </button>
+                </form>
 
 
 
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="plier">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/971/971912.png" alt="">
 
-                </div>
-                <div class="nav-item-name">
-                    <p>PLIERS</p>
-                </div>
-            </button>
-            </form>
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="hammer">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/6788/6788572.png" alt="">
 
-
-
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="screwdriver">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="data:image/png;base64,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" alt="">
-
-                </div>
-                <div class="nav-item-name">
-                    <p>SCREWDRIVER</p>
-                </div>
-            </button>
-            </form>
+                    </div>
+                    <div class="nav-item-name">
+                        <p>HAMMERS</p>
+                    </div>
+                </button>
+                </form>
 
 
 
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="measure">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1085/1085010.png" alt="">
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="mallet">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1422/1422205.png" alt="">
 
-                </div>
-                <div class="nav-item-name">
-                    <p>MEASURE</p>
-                </div>
-            </button>
-            </form>
-
-
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="shovel">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/4360/4360026.png" alt="">
-
-                </div>
-                <div class="nav-item-name">
-                    <p>SHOVELS</p>
-                </div>
-            </button>
-            </form>
+                    </div>
+                    <div class="nav-item-name">
+                        <p>MALLET</p>
+                    </div>
+                </button>
+                </form>
 
 
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="scissor">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2769/2769646.png" alt="">
 
-            <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="toolbox">
-            <button class="nav-item">
-                <div class="nav-item-img">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5133/5133626.png" alt="">
+                    </div>
+                    <div class="nav-item-name">
+                        <p>SCISSORS</p>
+                    </div>
+                </button>
+                </form>
 
-                </div>
-                <div class="nav-item-name">
-                    <p>TOOLBOX</p>
-                </div>
-            </button>
-            </form>
-        </div>
 
-    </header>
-    <div class="cat-dropdown-container" id="cat-dropdown">
-        <nav id="site-nav" role="navigation">
-            <!--<form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-categoryId="1">-->
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="chisel">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2933/2933560.png" alt="">
 
-            <button type="submit" class="category-item">
-                <p class="category-name">Fasteners</p>
-            </button>
-            
-            <a class="category-item">
-                <p class="category-name">FloorCare</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">General Construction</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Ladders and scaffolding</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Lawn care</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Material handling</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Paint and dry walls</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Plumbing</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">PortablePower</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">PowerTools</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Pressure Washers</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Demolition</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Tile saws</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Trailers</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Tree care</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Trenchers</p>
-            </a>
-            <a class="category-item">
-                <p class="category-name">Welding</p>
-            </a>
+                    </div>
+                    <div class="nav-item-name">
+                        <p>CHISEL</p>
+                    </div>
+                </button>
+                </form>
+
+
+
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="plier">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/971/971912.png" alt="">
+
+                    </div>
+                    <div class="nav-item-name">
+                        <p>PLIERS</p>
+                    </div>
+                </button>
+                </form>
+
+
+
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="screwdriver">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="data:image/png;base64,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" alt="">
+
+                    </div>
+                    <div class="nav-item-name">
+                        <p>SCREWDRIVER</p>
+                    </div>
+                </button>
+                </form>
+
+
+
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="measure">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1085/1085010.png" alt="">
+
+                    </div>
+                    <div class="nav-item-name">
+                        <p>MEASURE</p>
+                    </div>
+                </button>
+                </form>
+
+
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="shovel">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4360/4360026.png" alt="">
+
+                    </div>
+                    <div class="nav-item-name">
+                        <p>SHOVELS</p>
+                    </div>
+                </button>
+                </form>
+
+
+
+                <form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-search="toolbox">
+                <button class="nav-item">
+                    <div class="nav-item-img">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5133/5133626.png" alt="">
+
+                    </div>
+                    <div class="nav-item-name">
+                        <p>TOOLBOX</p>
+                    </div>
+                </button>
+                </form>
+            </div>-->
+
+        </header>
+        
+        <!-- <div class="cat-dropdown-container" id="cat-dropdown">
+            <nav id="site-nav" role="navigation">-->
+                <!--<form role="search" method="post" asp-controller="Home" asp-action="Index" asp-route-categoryId="1">-->
+        <!-- <button type="submit" class="category-item">
+            <p class="category-name">Fasteners</p>
+        </button>
+
+        <a class="category-item">
+            <p class="category-name">FloorCare</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">General Construction</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Ladders and scaffolding</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Lawn care</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Material handling</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Paint and dry walls</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Plumbing</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">PortablePower</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">PowerTools</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Pressure Washers</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Demolition</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Tile saws</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Trailers</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Tree care</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Trenchers</p>
+        </a>
+        <a class="category-item">
+            <p class="category-name">Welding</p>
+        </a>
         </nav>
-    </div>
+        </div >-->
+         
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
