@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Register\" />
-    <Folder Include="Models\Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>
