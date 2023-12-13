@@ -19,7 +19,16 @@ namespace Burgija.Models
         #region Constructors
 
         public Store(int id, Location storeLocation) 
-        { 
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "Id mora biti veæi od 0.");
+            }
+
+            if (storeLocation == null)
+            {
+                throw new ArgumentNullException(nameof(storeLocation), "Lokacija trgovine ne može biti null.");
+            }
             Id = id;
             StoreLocation = storeLocation;
         }

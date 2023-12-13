@@ -19,7 +19,20 @@ namespace Burgija.Models
 
         public Discount(int id, DateTime startOfDiscount, DateTime endOfDiscount, double percent)
         {
-            Id=id;
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "Id mora biti veæi od 0.");
+            }
+
+            if (startOfDiscount >= endOfDiscount)
+            {
+                throw new ArgumentException("Datum poèetka popusta mora biti prije datuma kraja popusta.");
+            }
+            if (percent < 0 || percent>100)
+            {
+                throw new ArgumentOutOfRangeException(nameof(percent), "Procenat mora biti izmeðu 0 i 100.");
+            }
+            Id =id;
             StartOfDiscount=startOfDiscount;
             EndOfDiscount=endOfDiscount;
             Percent=percent;
