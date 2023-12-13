@@ -36,6 +36,30 @@ namespace Burgija.Models
 
         public Rent(int id, IdentityUser<int> user, int userId, Tool tool, int toolId, DateTime startOfRent, DateTime endOfRent, Discount discount, int? discountId, double rentPrice)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "Id mora biti veæi od 0.");
+            }
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User ne može biti null.");
+            }
+
+            if (tool == null)
+            {
+                throw new ArgumentNullException(nameof(tool), "Tool ne može biti null.");
+            }
+
+            if (startOfRent >= endOfRent)
+            {
+                throw new ArgumentException("Datum poèetka renta mora biti prije datuma kraja.");
+            }
+
+            if (rentPrice < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rentPrice), "Cijena renta ne može biti negativna.");
+            }
             Id = id;
             User = user;
             UserId = userId;

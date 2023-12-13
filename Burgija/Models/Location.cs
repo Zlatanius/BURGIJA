@@ -23,6 +23,10 @@ namespace Burgija.Models
 
         public Location(int id, double xCoordinate, double yCoordinate, string address)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "Id mora biti veæi od 0.");
+            }
             Id = id;
             XCoordinate = xCoordinate;
             YCoordinate = yCoordinate;

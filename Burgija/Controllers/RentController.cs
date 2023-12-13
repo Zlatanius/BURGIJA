@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,15 +16,27 @@ using Burgija.ViewModels;
 
 namespace Burgija.Controllers
 {
+    /// <summary>
+    /// Controller responsible for handling rental-related actions.
+    /// </summary>
     public class RentController : Controller
     {
+        ///Application database context
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RentController"/> class.
+        /// </summary>
+        /// <param name="context">The application database context.</param>
         public RentController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Displays the rental history for the registered user.
+        /// </summary>
+        /// <returns>The rental history view.</returns>
         [Authorize(Roles ="RegisteredUser")]
         public async Task<IActionResult> RentHistory()
         {
@@ -46,45 +58,69 @@ namespace Burgija.Controllers
             return View(rentHistory);
         }
 
+        /// <summary>
+        /// Handles the HTTP POST request for obtaining a tool type.
+        /// </summary>
+        /// <param name="toolTypeId">The ID of the selected tool type.</param>
+        /// <returns>A redirect to the 'Create' action with the tool type ID.</returns>
         [HttpPost]
         public IActionResult GetToolType(int? toolTypeId)
         {
+  
             if (toolTypeId == null)
             {
                 return NotFound();
             }
-            // Store the toolType value in session
+
+            //Store the toolType value in session
             HttpContext.Session.SetInt32("ToolType", (int)toolTypeId);
-            // Redirect to the Create action with the tool type ID
+
+            //Redirect to the Create action with the tool type ID
             return RedirectToAction("Create", new { toolTypeId });
         }
 
-        // GET: Rent/Create
+        /// <summary>
+        /// Displays a view for creating a new rental with details related to a specific tool type.
+        /// </summary>
+        /// <param name="toolTypeId">The ID of the tool type for which the rental is being created.</param>
+        /// <returns>
+        /// - If the tool type ID is null, returns a "NotFound" result.
+        /// - If the tool type with the specified ID is not found, returns a "NotFound" result.
+        /// - Otherwise, returns a view for creating a new rental with details related to the specified tool type.
+        /// </returns>
         public async Task<IActionResult> Create(int? toolTypeId)
         {
+            // Check if the tool type ID is null
             if (toolTypeId == null)
             {
+                // If tool type ID is null, return a "NotFound" result
                 return NotFound();
             }
 
-            // Retrieve the tool type using the provided ID
+            // Retrieve the tool type with the specified ID from the database
             var toolType = await _context.ToolType.FirstOrDefaultAsync(m => m.Id == toolTypeId);
 
+            // Check if the tool type with the specified ID is not found
             if (toolType == null)
             {
+                // If tool type is not found, return a "NotFound" result
                 return NotFound();
             }
 
+            // Set ViewBag properties for the view
             ViewBag.ToolTypeImage = toolType.Image;
-
             ViewBag.ToolType = toolType;
 
+            // Return the view for creating a new rental with details related to the specified tool type
             return View();
         }
 
-        // POST: Rent/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        /// <summary>
+        /// Handles the HTTP POST request for creating a new rental.
+        /// </summary>
+        /// <param name="r">The rental information to be created.</param>
+        /// <returns>A redirect to the 'RentHistory' action if the creation is successful; otherwise, a validation error.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("StartOfRent,EndOfRent,DiscountId")] Rent r)
@@ -106,7 +142,7 @@ namespace Burgija.Controllers
 
             // Retrieve the tool type ID from the session
             var toolTypeId = HttpContext.Session.GetInt32("ToolType");
-
+            
             // Query the database to find available tools based on the tool type and date range
             var toolIds = await _context.Tool
                 .Where(tool => tool.ToolType.Id == toolTypeId)
@@ -153,3 +189,4 @@ namespace Burgija.Controllers
         }
     }
 }
+

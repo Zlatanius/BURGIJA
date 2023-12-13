@@ -30,6 +30,30 @@ namespace Burgija.Models
 
         public Delivery(int id, Rent rent, IdentityUser<int> courier, string address, string userPhoneNumber)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "Id mora biti veæi od 0.");
+            }
+
+            if (rent == null)
+            {
+                throw new ArgumentNullException(nameof(rent), "Rent ne može biti null.");
+            }
+
+            if (courier == null)
+            {
+                throw new ArgumentNullException(nameof(courier), "Kurir ne može biti null.");
+            }
+
+            if (string.IsNullOrEmpty(address))
+            {
+                throw new ArgumentException("Addresa ne može biti null ili prazna.", nameof(address));
+            }
+            if (string.IsNullOrEmpty(userPhoneNumber))
+            {
+                throw new ArgumentException("Broj telefona ne može biti null ili prazna.", nameof(userPhoneNumber));
+            }
+
             Id = id;
             Rent = rent;
             Courier = courier;
