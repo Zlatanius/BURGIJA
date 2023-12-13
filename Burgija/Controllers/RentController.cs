@@ -42,10 +42,9 @@ namespace Burgija.Controllers
         [Authorize]
         public async Task<IActionResult> RentHistory()
         {
-            // Retrieve the user ID from claims
+
             var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-            // Retrieve the rental history and associated tool information
             var rentHistory = await _context.Rent
                 .Where(r => r.UserId == userId)
                 .Join(_context.Tool, rent => rent.ToolId, tool => tool.Id, (rent, tool) => new { Rent = rent, Tool = tool })
@@ -69,10 +68,10 @@ namespace Burgija.Controllers
                 return NotFound();
             }
 
-     
+            //Store the toolType value in session
             HttpContext.Session.SetInt32("ToolType", (int)toolTypeId);
 
-            
+            //Redirect to the Create action with the tool type ID
             return RedirectToAction("Create", new { toolTypeId });
         }
 
