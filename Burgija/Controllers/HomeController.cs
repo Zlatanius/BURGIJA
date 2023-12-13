@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +26,25 @@ namespace Burgija.Controllers
         private readonly ApplicationDbContext _context;
 
         // Pre-defined categories of tools.
-        private string[] categories = { /*...list of categories...*/ };
+        private string[] categories = {
+          "Fasteners",
+          "FloorCare",
+          "GeneralConstruction",
+          "LaddersAndScaffolding",
+          "LawnCare",
+          "MaterialHandling",
+          "PaintAndDryWall",
+          "PlumbingAndPumps",
+          "PortablePower",
+          "PowerTools",
+          "PressureWashers",
+          "RotaryOrDemolition",
+          "TileSaws",
+          "Trailers",
+          "TreeCare",
+          "Trenchers",
+          "Welding"
+        };
 
         // User manager for managing user-related operations.
         private readonly UserManager<IdentityUser<int>> _userManager;
@@ -48,17 +66,16 @@ namespace Burgija.Controllers
             {
                 return View(await _context.ToolType.ToListAsync());
             }
+            
+            List<ToolType> filterResults = await _context.ToolType.ToListAsync();
 
             // Search by tool type name.
             if (search != null)
             {
-                var toolTypes = await _context.ToolType.ToListAsync();
-                var searchResults = LinearSearch(toolTypes, search);
-                return View(searchResults);
+                filterResults = LinearSearch(filterResults, search);
             }
 
             // Filter by price range.
-            List<ToolType> filterResults = await _context.ToolType.ToListAsync();
             if (priceFrom != null && priceTo != null)
             {
                 filterResults = LinearSearchByPrice(filterResults, (double)priceFrom, (double)priceTo);
@@ -453,7 +470,5 @@ namespace Burgija.Controllers
                 return RedirectToAction("ToolDetails", new { id = toolTypeId });
             }
         }
-
-
     }
 }
