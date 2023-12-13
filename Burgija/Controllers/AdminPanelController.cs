@@ -180,22 +180,20 @@ namespace Burgija.Controllers
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
-               {
-                  {
-           {
-                // Check if the tool exists in the database
-                if (!ToolExists(tool.Id))
                 {
-                    return NotFound();
+                    // Check if the tool exists in the database
+                    if (!ToolExists(tool.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        // Propagate the exception if there is a concurrency issue
+                        throw;
+                    }
                 }
-                else
-                {
-                    // Propagate the exception if there is a concurrency issue
-                    throw;
-                }
-
-                // Redirect to the index action after successful edit
-                return RedirectToAction(nameof(Index));
+                    // Redirect to the index action after successful edit
+                    return RedirectToAction(nameof(Index));
             }
 
             // Set ViewData properties for stores and tool types
@@ -204,60 +202,58 @@ namespace Burgija.Controllers
 
             // Return the view with the form for editing a tool
             return View(tool);
-
-
-
-            /// <summary>
-            /// Displays details of a specific tool for removal in the admin panel.
-            /// </summary>
-            public async Task<IActionResult> Remove(int? id)
+        }
+        /// <summary>
+        /// Displays details of a specific tool for removal in the admin panel.
+        /// </summary>
+        public async Task<IActionResult> Remove(int? id)
+        {
+            // Check if the tool ID is null
+            if (id == null)
             {
-                // Check if the tool ID is null
-                if (id == null)
-                {
-                    return NotFound();
-                }
-                // Retrieve the tool details from the database, including store and tool type information
-                var tool = await _context.Tool
-                    .Include(t => t.Store)
-                    .Include(t => t.ToolType)
-                    .FirstOrDefaultAsync(m => m.Id == id);
-                // Check if the tool is not found
-                if (tool == null)
-                {
-                    return NotFound();
-                }
-                // Initialize lists of stores and tool types
-                await InitializeListsAsync();
-                // Assign store and tool type information to the tool
-                tool.Store = stores.Find(store => store.Id == tool.Store.Id);
-                tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
-                // Return the view with tool details for removal confirmation
-                return View(tool);
+                return NotFound();
             }
-
-            /// <summary>
-            /// Handles the confirmation of removing a specific tool.
-            /// </summary>
-            [HttpPost, ActionName("Remove")]
-            [ValidateAntiForgeryToken]
-            public async Task<IActionResult> RemoveConfirmed(int id)
+            // Retrieve the tool details from the database, including store and tool type information
+            var tool = await _context.Tool
+                .Include(t => t.Store)
+                .Include(t => t.ToolType)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            // Check if the tool is not found
+            if (tool == null)
             {
-                // Retrieve the tool from the database
-                var tool = await _context.Tool.FindAsync(id);
-                // Remove the tool from the database
-                _context.Tool.Remove(tool);
-                await _context.SaveChangesAsync();
-                // Redirect to the index action after successful removal
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
+            // Initialize lists of stores and tool types
+            await InitializeListsAsync();
+            // Assign store and tool type information to the tool
+            tool.Store = stores.Find(store => store.Id == tool.Store.Id);
+            tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
+            // Return the view with tool details for removal confirmation
+            return View(tool);
+        }
 
-            /// <summary>
-            /// Checks if a tool with the specified ID exists.
-            /// </summary>
-            private bool ToolExists(int id)
-            {
-                return _context.Tool.Any(e => e.Id == id);
-            }
+        /// <summary>
+        /// Handles the confirmation of removing a specific tool.
+        /// </summary>
+        [HttpPost, ActionName("Remove")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveConfirmed(int id)
+        {
+            // Retrieve the tool from the database
+            var tool = await _context.Tool.FindAsync(id);
+            // Remove the tool from the database
+            _context.Tool.Remove(tool);
+            await _context.SaveChangesAsync();
+            // Redirect to the index action after successful removal
+            return RedirectToAction(nameof(Index));
+        }
+
+        /// <summary>
+        /// Checks if a tool with the specified ID exists.
+        /// </summary>
+        private bool ToolExists(int id)
+        {
+            return _context.Tool.Any(e => e.Id == id);
+        }
     }
 }
