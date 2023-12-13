@@ -19,23 +19,30 @@ namespace Burgija.Controllers
     public class RentController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser<int>> _userManager;
 
-        public RentController(ApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
+        public RentController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        [Authorize]
+        [Authorize(Roles ="RegisteredUser")]
         public async Task<IActionResult> RentHistory()
         {
+            // Extract the user ID from the claims associated with the current user
             var userId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            // Query the database to retrieve rent history information
             var rentHistory = await _context.Rent
-            .Where(r => r.UserId == userId)
-            .Join(_context.Tool, rent => rent.ToolId, tool => tool.Id, (rent, tool) => new { Rent = rent, Tool = tool })
-            .Join(_context.ToolType, rt => rt.Tool.ToolTypeId, toolType => toolType.Id, (rt, toolType) => new RentAndToolType(rt.Rent, toolType))
-            .ToListAsync();
+                // Filter by the current user's ID
+                .Where(r => r.UserId == userId)
+                // Join the Rent table with the Tool table using the ToolId
+                .Join(_context.Tool, rent => rent.ToolId, tool => tool.Id, (rent, tool) => new { Rent = rent, Tool = tool })
+                // Join the result with the ToolType table using the ToolTypeId from the Tool table
+                .Join(_context.ToolType, rt => rt.Tool.ToolTypeId, toolType => toolType.Id, (rt, toolType) => new RentAndToolType(rt.Rent, toolType))
+                // Convert the result to a List asynchronously
+                .ToListAsync();
+
+            // Return the rent history to the corresponding view
             return View(rentHistory);
         }
 
@@ -70,9 +77,6 @@ namespace Burgija.Controllers
 
             ViewBag.ToolTypeImage = toolType.Image;
 
-            ViewData["DiscountId"] = new SelectList(_context.Discount, "Id", "Id");
-            ViewData["ToolId"] = new SelectList(_context.Tool, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             ViewBag.ToolType = toolType;
 
             return View();
@@ -85,37 +89,67 @@ namespace Burgija.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("StartOfRent,EndOfRent,DiscountId")] Rent r)
         {
+            // Check if the return date is earlier than the start date
             if (r.EndOfRent < r.StartOfRent)
+            {
                 return BadRequest("Date of return is earlier than date of taking");
-            if (r.StartOfRent<DateTime.Now || r.EndOfRent < DateTime.Now)
+            }
+
+            // Check if the start date or return date is earlier than today
+            if (r.StartOfRent < DateTime.Now || r.EndOfRent < DateTime.Now)
+            {
                 return BadRequest("Date of taking or date of return is earlier than today");
+            }
+
+            // Set the user ID from the claims associated with the current user
             r.UserId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            // Retrieve the tool type ID from the session
             var toolTypeId = HttpContext.Session.GetInt32("ToolType");
+
+            // Query the database to find available tools based on the tool type and date range
             var toolIds = await _context.Tool
-            .Where(tool => tool.ToolType.Id == toolTypeId)
-            .Where(tool => !_context.Rent.Any(rent =>
-                rent.ToolId == tool.Id &&
-                (r.EndOfRent < rent.StartOfRent || r.StartOfRent > rent.EndOfRent)))
-            .Select(tool => tool.Id)
-            .ToListAsync();
+                .Where(tool => tool.ToolType.Id == toolTypeId)
+                .Where(tool => !_context.Rent.Any(rent =>
+                    rent.ToolId == tool.Id &&
+                    (r.EndOfRent < rent.StartOfRent || r.StartOfRent > rent.EndOfRent)))
+                .Select(tool => tool.Id)
+                .ToListAsync();
+
+            // Check if available tools were found
             if (toolIds.Count > 0)
+            {
+                // Set the tool ID to the first available tool
                 r.ToolId = toolIds[0];
+            }
             else
+            {
+                // Return a BadRequest response if no tools are available in the specified period
                 return BadRequest("There are no tools available in this period");
+            }
+
+            // To be implemented: Set the DiscountId (currently set to null as a placeholder)
             r.DiscountId = null;
+
+            // Retrieve the tool type from the database
             var toolType = await _context.ToolType.FindAsync(toolTypeId);
+
+            // Calculate the rent price based on the tool type's price and the rental duration
             r.RentPrice = toolType.Price * r.EndOfRent.Subtract(r.StartOfRent).TotalDays;
+
+            // Check if the model state is valid
             if (ModelState.IsValid)
             {
+                // Add the rent to the context and save changes
                 _context.Add(r);
                 await _context.SaveChangesAsync();
+
+                // Redirect to the RentHistory action if successful
                 return RedirectToAction("RentHistory");
             }
-            ViewData["DiscountId"] = new SelectList(_context.Discount, "Id", "Id", r.DiscountId);
-            ViewData["ToolId"] = new SelectList(_context.Tool, "Id", "Id", r.ToolId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", r.UserId);
-            return RedirectToAction("Create", new {toolTypeId});
-        }
 
+            // Redirect to the Create action with the tool type ID if the model state is not valid
+            return RedirectToAction("Create", new { toolTypeId });
+        }
     }
 }
