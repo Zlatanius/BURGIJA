@@ -34,7 +34,37 @@ namespace Burgija.Models
 
         public Review(int id, IdentityUser<int> user, Tool tool, Rent rent, long timestamp, string text, double rating)
         {
-            Id=id;
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "Id mora biti veæi od 0.");
+            }
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user), "User ne može biti null.");
+            }
+
+            if (tool == null)
+            {
+                throw new ArgumentNullException(nameof(tool), "Tool ne može biti null.");
+            }
+            if (rent == null)
+            {
+                throw new ArgumentNullException(nameof(rent), "Rent ne može biti null.");
+            }
+
+            if (string.IsNullOrEmpty(text))
+            {
+                throw new ArgumentException("Text ne može biti null ili prazan.", nameof(text));
+            }
+
+            if (rating < 0 || rating > 5)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rating), "Rating mora biti izmeðu 0 i 5.");
+            }
+
+
+            Id = id;
             User=user;
             Tool=tool;
             Rent=rent;
