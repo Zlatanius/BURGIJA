@@ -58,18 +58,16 @@ namespace Burgija.Controllers
                 return View(await _context.ToolType.ToListAsync());
             }
 
-            if (search != null)
-            {
-                var toolTypes = await _context.ToolType.ToListAsync();
-                var searchResults = LinearSearch(toolTypes, search);
-                return View(searchResults);
-            }
-
             List<ToolType> filterResults = await _context.ToolType.ToListAsync();
 
             if (priceFrom != null && priceTo != null)
             {
                 filterResults = LinearSearchByPrice(filterResults, (double)priceFrom, (double)priceTo);
+            }
+
+            if (search != null)
+            {
+                filterResults = LinearSearch(filterResults, search);
             }
 
             if (!string.IsNullOrEmpty(sortOptions))
