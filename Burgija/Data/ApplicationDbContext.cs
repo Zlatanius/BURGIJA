@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Burgija.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -27,7 +27,13 @@ namespace Burgija.Data
         public DbSet<Store> Store { get; set; }
         public DbSet<Tool> Tool { get; set; }
         public DbSet<ToolType> ToolType { get; set; }
-        
+        public DbSet<ToolType> ToolTypes { get; set ; }
+
+        public async Task<List<ToolType>> GetToolTypesAsync()
+        {
+            return await ToolTypes.ToListAsync();
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Administrator>().ToTable(nameof(Administrator));

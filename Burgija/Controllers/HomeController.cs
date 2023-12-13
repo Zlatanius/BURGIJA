@@ -22,6 +22,7 @@ namespace Burgija.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context2;
 
         private string[] categories = {
         "Fasteners",
@@ -49,27 +50,28 @@ namespace Burgija.Controllers
             _context = context;
             _userManager = userManager;
         }
-
+        public HomeController(IApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
+        {
+            _context2 = context;
+            _userManager = userManager;
+        }
         // GET: Home
-        public async Task<IActionResult> Index(string search, double? priceFrom, double? priceTo, string sortOptions)
+        public async Task<IActionResult> Index(string? search, double? priceFrom, double? priceTo, string? sortOptions)
         {
             if (search == null && priceFrom == null && priceTo == null && sortOptions == null)
             {
-                return View(await _context.ToolType.ToListAsync());
+                return View(await _context2.ToolTypes.ToListAsync());
             }
 
-            if (search != null)
-            {
-                var toolTypes = await _context.ToolType.ToListAsync();
-                var searchResults = LinearSearch(toolTypes, search);
-                return View(searchResults);
-            }
-
-            List<ToolType> filterResults = await _context.ToolType.ToListAsync();
+            List<ToolType> filterResults = await _context2.ToolTypes.ToListAsync();
 
             if (priceFrom != null && priceTo != null)
             {
                 filterResults = LinearSearchByPrice(filterResults, (double)priceFrom, (double)priceTo);
+            }
+            if (search != null)
+            {
+                 filterResults = LinearSearch(filterResults, search);;
             }
 
             if (!string.IsNullOrEmpty(sortOptions))
@@ -127,12 +129,12 @@ namespace Burgija.Controllers
             return results;
         }
         private static List<ToolType> LinearSearchByPrice(List<ToolType> toolTypes, double priceFrom, double priceTo)
-        { 
+        {
             List<ToolType> results = new List<ToolType>();
 
             foreach (var toolType in toolTypes)
             {
-                if (toolType.Price>=priceFrom && toolType.Price<=priceTo)
+                if (toolType.Price >= priceFrom && toolType.Price <= priceTo)
                 {
                     results.Add(toolType);
                 }
@@ -141,7 +143,7 @@ namespace Burgija.Controllers
             return results;
         }
 
-        private static List<ToolType> MergeSort(List<ToolType> list)
+        public static List<ToolType> MergeSort(List<ToolType> list)
         {
             if (list.Count <= 1)
                 return list;
@@ -182,7 +184,7 @@ namespace Burgija.Controllers
             return result;
         }
 
-        private static void QuickSort(List<ToolType> toolTypes)
+        public static void QuickSort(List<ToolType> toolTypes)
         {
             QuickSort(toolTypes, 0, toolTypes.Count - 1);
         }
@@ -210,6 +212,7 @@ namespace Burgija.Controllers
                     i++;
                     Swap(toolTypes, i, j);
                 }
+
             }
 
             Swap(toolTypes, i + 1, high);
@@ -223,7 +226,7 @@ namespace Burgija.Controllers
             toolTypes[j] = temp;
         }
 
-        private static void SelectionSortDescending(List<ToolType> toolTypes)
+        public static void SelectionSortDescending(List<ToolType> toolTypes)
         {
             int n = toolTypes.Count;
 
