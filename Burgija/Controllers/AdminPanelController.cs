@@ -23,7 +23,7 @@ namespace Burgija.Controllers
             _context = context;
         }
 
-        private async Task InitializeLists()
+        private async Task InitializeListsAsync()
         {
             stores = await _context.Store.ToListAsync();
             List<Location> locations = await _context.Location.ToListAsync();
@@ -37,7 +37,7 @@ namespace Burgija.Controllers
         // GET: AdminPanel
         public async Task<IActionResult> Index()
         {
-            await InitializeLists();
+            await InitializeListsAsync();
             var tools = await _context.Tool.ToListAsync();
             foreach(var tool in tools)
             {
@@ -63,7 +63,7 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-            await InitializeLists();
+            await InitializeListsAsync();
             tool.Store = stores.Find(store => store.Id == tool.Store.Id);
             tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
             return View(tool);
@@ -72,7 +72,7 @@ namespace Burgija.Controllers
         // GET: AdminPanel/AddTool
         public async Task<IActionResult> AddTool()
         {
-            await InitializeLists();
+            await InitializeListsAsync();
             ViewBag.Store = stores;
             ViewBag.ToolType = toolTypes;
             return View();
@@ -111,7 +111,7 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-            await InitializeLists();
+            await InitializeListsAsync();
             ViewBag.Store = stores;
             ViewBag.ToolType = toolTypes;
             return View(tool);
@@ -170,7 +170,7 @@ namespace Burgija.Controllers
             {
                 return NotFound();
             }
-            await InitializeLists();
+            await InitializeListsAsync();
             tool.Store = stores.Find(store => store.Id == tool.Store.Id);
             tool.ToolType = toolTypes.Find(toolType => toolType.Id == tool.ToolTypeId);
             return View(tool);
