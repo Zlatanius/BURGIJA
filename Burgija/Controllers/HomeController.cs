@@ -16,6 +16,7 @@ using Burgija.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using static Humanizer.On;
+using Burgija.Interfaces;
 
 namespace Burgija.Controllers
 {
@@ -24,6 +25,7 @@ namespace Burgija.Controllers
     {
         // Application database context for interacting with the underlying data store.
         private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context2;
 
         // Pre-defined categories of tools.
         private string[] categories = {
@@ -55,6 +57,11 @@ namespace Burgija.Controllers
             _context = context;
             _userManager = userManager;
         }
+        public HomeController(IApplicationDbContext context, UserManager<IdentityUser<int>> userManager)
+        {
+            _context2 = context;
+            _userManager = userManager;
+        }
 
         /// <summary>
         /// Displays the home page with a list of tool types based on search, price range, and sorting options.
@@ -64,10 +71,10 @@ namespace Burgija.Controllers
             // Check if no filters are applied, return all tool types.
             if (search == null && priceFrom == null && priceTo == null && sortOptions == null)
             {
-                return View(await _context.ToolType.ToListAsync());
+                return View(await _context2.ToolTypes.ToListAsync());
             }
             
-            List<ToolType> filterResults = await _context.ToolType.ToListAsync();
+            List<ToolType> filterResults = await _context2.ToolTypes.ToListAsync();
 
             // Search by tool type name.
             if (search != null)

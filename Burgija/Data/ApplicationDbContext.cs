@@ -1,4 +1,5 @@
-﻿using Burgija.Models;
+﻿using Burgija.Interfaces;
+using Burgija.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace Burgija.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>,IApplicationDbContext
     {
         public ApplicationDbContext()
         {
@@ -31,7 +32,8 @@ namespace Burgija.Data
         public DbSet<Store> Store { get; set; }
         public DbSet<Tool> Tool { get; set; }
         public DbSet<ToolType> ToolType { get; set; }
-        
+        public DbSet<ToolType> ToolTypes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Administrator>().ToTable(nameof(Administrator));

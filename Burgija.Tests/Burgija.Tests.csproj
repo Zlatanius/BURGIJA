@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Burgija\Burgija.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="alati.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
