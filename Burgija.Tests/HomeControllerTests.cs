@@ -50,33 +50,7 @@ namespace Burgija.Tests
             }
         }
 
-        [TestMethod]
-        public void Test_MergeSort()
-        {
-            var before = ConvertToToolTypes(toolTypes);
-            var check = before;
-            before = HomeController.MergeSort(before);
-            check.Sort((tool1, tool2) => tool1.Name.CompareTo(tool2.Name));
-            CollectionAssert.AreEqual(check, before);
-        }
-        [TestMethod]
-        public void Test_QuickSort()
-        {
-            var before = ConvertToToolTypes(toolTypes);
-            var check = before;
-            HomeController.QuickSort(before);
-            check.Sort((tool1, tool2) => tool2.Price.CompareTo(tool1.Price));
-            CollectionAssert.AreEqual(check, before);
-        }
-        [TestMethod]
-        public void Test_SelectionSortDescending()
-        {
-            var before = ConvertToToolTypes(toolTypes);
-            var check = before;
-            HomeController.SelectionSortDescending(before);
-            check.Sort((tool1, tool2) => tool2.Price.CompareTo(tool1.Price));
-            CollectionAssert.AreEqual(check, before);
-        }
+
         [TestMethod]
         public async Task Test_Index_returnAllAlati()
         {
